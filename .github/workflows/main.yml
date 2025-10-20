@@ -1,0 +1,22 @@
+name: Run Grok Script
+
+on:
+  schedule:
+    - cron: '25 7 * * *'
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install requests python-dotenv
+      - name: Run script
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python main.py
