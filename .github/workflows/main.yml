@@ -1,4 +1,4 @@
-name: Run Grok Script
+name: Daily Workflow
 
 on:
   workflow_dispatch:
