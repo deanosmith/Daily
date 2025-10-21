@@ -16,9 +16,7 @@ Send me a random NKJV verse.
 The verse should be applicable to day to day life, and should not be apart of one of the narrative books as it will then be taken out of context.
 Proverbs, Ecclesiastes, James, Job, Corinthians, are a good place but are not mandatory.
 
-Provide a very short meaning of the original word, only if they are distinct from the English translations.
-
-Provide a very short explanation, if the verse is vague or highly metaphorical.
+Provide a brief translation of the original key words, only if they are distinct from the English translations.
 
 Response format:
 *{Book} : {Verse}*
@@ -26,7 +24,7 @@ Response format:
 
 \n[If applicable] Translation: {Original word and modern translation/simlarity}
 """
-
+print("Sending Request")
 # xAI API request
 url = "https://api.x.ai/v1/chat/completions"
 headers = {
@@ -41,9 +39,15 @@ data = {
 response = requests.post(url, headers=headers, json=data)
 response.raise_for_status()  # Raise error if request fails
 
+print("Request Received")
+
 content = response.json()["choices"][0]["message"]["content"]
+
+print(content)
 
 # Forward to Slack
 slack_data = {"text": content}
 slack_response = requests.post(SLACK_WEBHOOK_URL, json=slack_data)
 slack_response.raise_for_status()
+
+print("Sent")
