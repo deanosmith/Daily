@@ -12,17 +12,18 @@ SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 
 
 prompt = """
-Send me a random NKJV verse.
-The verse should be applicable to day to day life, and should not be apart of one of the narrative books as it will then be taken out of context.
-Proverbs, Ecclesiastes, James, Job, Corinthians, are a good place but are not mandatory.
 
-Provide a brief translation of the original key words, only if they are distinct from the English translations.
+Carefully select a verse at random from the NKJV Bible that is applicable to day-to-day life.
+Avoid verses that are heavily context/story dependent.
+
+Provide a brief translation of the original key words.
 
 Response format:
 *{Book} : {Verse}*
 \n{Verse Text}
+\nTranslation: {Original word and modern translation/simlarity}
+\n[Possible useful information]
 
-\n[If applicable] Translation: {Original word and modern translation/simlarity}
 """
 print("Sending Request")
 # xAI API request
