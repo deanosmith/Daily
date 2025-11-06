@@ -13,7 +13,7 @@ SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 
 prompt = """
 
-Carefully select a verse at random from the NKJV Bible that is applicable to day-to-day life.
+Select a random verse from both the New and Old Testaments ofthe NKJV Bible that is applicable to day-to-day life.
 Avoid verses that are heavily context/story dependent.
 
 Provide a brief translation of the original key words.
