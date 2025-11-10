@@ -12,20 +12,21 @@ SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 
 
 prompt = """
-
-Select a random verse from both the New and Old Testaments ofthe NKJV Bible that is applicable to day-to-day life.
-Avoid verses that are heavily context/story dependent.
+Select 3 random quotes from Jesus in the NKJV Bible.
+Ensure to cover the entire quote if it spans multiple verses.
 
 Provide a brief translation of the original key words.
 
-Response format:
-*{Book} : {Verse}*
-\n{Verse Text}
-\nTranslation: {Original word and modern translation/simlarity}
-\n[Possible useful information]
+Respond with only option 3, do not provide all your answers.
 
+Use the following format:
+*{Book} : {Verse}*
+\n*{Verse Text}*
+\n{Contextual information if applicable}
+\n_Translation: {Original word and modern translation/simlarity}_
 """
-print("Sending Request")
+
+# print("Sending Request")
 # xAI API request
 url = "https://api.x.ai/v1/chat/completions"
 headers = {
@@ -40,15 +41,15 @@ data = {
 response = requests.post(url, headers=headers, json=data)
 response.raise_for_status()  # Raise error if request fails
 
-print("Request Received")
+# print("Request Received")
 
 content = response.json()["choices"][0]["message"]["content"]
 
-print(content)
+# print(content)
 
 # Forward to Slack
 slack_data = {"text": content}
 slack_response = requests.post(SLACK_WEBHOOK_URL, json=slack_data)
 slack_response.raise_for_status()
 
-print("Sent")
+# print("Sent")
