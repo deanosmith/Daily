@@ -12,12 +12,12 @@ SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 
 
 prompt = """
-Select 3 random quotes from Jesus in the NKJV Bible.
-Ensure to cover the entire quote if it spans multiple verses.
+Select 5 random quotes from Jesus in the NKJV Bible.
+Ensure each quote covers the entire quote if it spans multiple verses.
 
 Provide a brief translation of the original key words.
 
-Respond with only option 3, do not provide all your answers.
+Respond with only option 4, do not provide all your answers.
 
 Use the following format:
 *{Book} : {Verse}*
