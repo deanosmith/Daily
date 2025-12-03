@@ -12,7 +12,7 @@ SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 
 
 prompt = """
-Using today's date as a selection model to ensure randomness, select 1 random quote from Jesus in the NKJV Bible.
+Using a combination of today's day and date as a deterministic selection technique to ensure randomness, select 1 random quote from Jesus in the NKJV Bible.
 Ensure the quote covers the entire quote if it spans multiple verses.
 
 Provide a brief translation of the original key words.
