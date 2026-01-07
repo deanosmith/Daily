@@ -59,10 +59,10 @@ def ask_for_verses():
         Ensure the entire quote is returned if it spans multiple verses.
         Provide the full reference: Book name, verse number(s).
         Include a concise context line explaining the surrounding narrative.
-        Provide a brief translation explaining the original key words.
+        Provide a brief translation explaining the original language's key words.
 
         Use the following JSON format example:
-        {{"book": "James", "reference": "1:12-15", "text": "Full verse text example here", "context": "James encourages believers to endure trials...", "translation": "Thief [kleptēs] a stealer or robber; Life [zōē] vital or eternal life;"}}
+        {{"book": "James", "reference": "1:12-15", "text": "Full verse text example here", "context": "James encourages believers to endure trials...", "translation": "Thief [kleptēs - Ancient Greek] a stealer or robber; Life [zōē - Ancient Greek] vital or eternal life;"}}
         """
     )
     payload = {
