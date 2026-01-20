@@ -102,14 +102,6 @@ def fetch_weather():
         logger.error(f"Error fetching weather: {e}")
         return None
 
-# ... (skip stocks to next function)
-
-def summarize_with_ai(text, prompt_prefix="Summarize this news item in one sentence:"):
-    """Summarize text using xAI API."""
-# ... (rest of summarize function is fine)
-
-# ... (world and space news fetched same way)
-
 def fetch_copenhagen_events():
     """Fetch and summarize Copenhagen events."""
     logger.info("Fetching Copenhagen events...")
@@ -175,7 +167,7 @@ def fetch_stocks():
             
     return stock_data
 
-def summarize_with_ai(text, prompt_prefix="Summarize this news item in one sentence:"):
+def summarize_with_ai(text, prompt_prefix="Summarize this news item:"):
     """Summarize text using xAI API."""
     if not XAI_API_KEY:
         # Mocking for testing if no key: always return text (not ideal for strict filtering but needed for testing)
@@ -186,15 +178,13 @@ def summarize_with_ai(text, prompt_prefix="Summarize this news item in one sente
             "Authorization": f"Bearer {XAI_API_KEY}",
             "Content-Type": "application/json",
         }
-        # Updated system prompt for filtering
+        # Updated system prompt for filtering - NO FILTERING
         system_prompt = (
-            "You are a strict news filter. Your goal is to identify MAJOR, UNIQUE news. "
-            "If the news item is generic, minor, or not globally significant (e.g. minor politics, sports, celebrity gossip), return the single word 'SKIP'. "
-            "If it is major (e.g. new wars, major disasters, breakthrough science), summarize it in 10-15 words. "
-            "Be extremely selective. I'd rather have no news than boring news."
+            "You are a helpful news assistant. "
+            "Summarize the news item in 10-15 words. Do not filter anything out."
         )
         payload = {
-            "model": "grok-2-latest", # Or appropriate model
+            "model": "grok-4-1-fast-reasoning",
             "messages": [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": f"{prompt_prefix}\n\n{text}"}
@@ -204,12 +194,11 @@ def summarize_with_ai(text, prompt_prefix="Summarize this news item in one sente
         response.raise_for_status()
         content = response.json()["choices"][0]["message"]["content"].strip()
         
-        if "skip" in content.lower():
-            return None
         return content
     except Exception as e:
         logger.error(f"AI summarization failed: {e}")
-        return None # Fail safe to 'no news' rather than bad news
+        # Fail safe to return original text so we always have content
+        return text[:200] + "..." if text else "Content unavailable"
 
 def fetch_world_news():
     """Fetch and summarize world news."""
@@ -221,7 +210,9 @@ def fetch_world_news():
         feed = feedparser.parse(feed_url)
         # Check top 5 items
         for entry in feed.entries[:5]:
-            summary = summarize_with_ai(entry.summary, "Is this major global news?")
+            # Robust content fetching
+            content_text = getattr(entry, 'summary', getattr(entry, 'description', entry.title))
+            summary = summarize_with_ai(content_text, "Summarize this news item:")
             if summary:
                 news_items.append({
                     "title": entry.title,
@@ -244,7 +235,8 @@ def fetch_space_news():
         feed = feedparser.parse(feed_url)
         # Check top 3 items
         for entry in feed.entries[:3]:
-            summary = summarize_with_ai(entry.summary, "Is this major space news? (Launches, discoveries)")
+            content_text = getattr(entry, 'summary', getattr(entry, 'description', entry.title))
+            summary = summarize_with_ai(content_text, "Summarize this space news item:")
             if summary:
                 news_items.append({
                     "title": entry.title,
@@ -256,6 +248,38 @@ def fetch_space_news():
         logger.error(f"Error fetching space news: {e}")
         
     return news_items
+
+    return news_items
+
+def fetch_quote():
+    """Fetch a Quote of the Day (Stoicism/Proverbs) using AI."""
+    logger.info("Fetching Quote of the Day...")
+    if not XAI_API_KEY:
+        return {"text": "The obstacle is the way.", "author": "Marcus Aurelius"}
+
+    try:
+        headers = {
+            "Authorization": f"Bearer {XAI_API_KEY}",
+            "Content-Type": "application/json",
+        }
+        prompt = "Generate a short, wise quote from Stoic philosophy or the Book of Proverbs. Return JSON format: {\"text\": \"Quote text\", \"author\": \"Author Name\"}."
+        
+        payload = {
+            "model": "grok-4-1-fast-reasoning",
+            "messages": [
+                {"role": "system", "content": "You are a wise assistant. Output JSON only."},
+                {"role": "user", "content": prompt}
+            ],
+            "response_format": {"type": "json_object"} # Ensure JSON
+        }
+        response = requests.post("https://api.x.ai/v1/chat/completions", headers=headers, json=payload, timeout=10)
+        response.raise_for_status()
+        content = response.json()["choices"][0]["message"]["content"].strip()
+        import json
+        return json.loads(content)
+    except Exception as e:
+        logger.error(f"Error fetching quote: {e}")
+        return {"text": "This too shall pass.", "author": "Ancient Wisdom (Fallback)"}
 
 def fetch_copenhagen_events():
     """Fetch and summarize Copenhagen events."""
@@ -270,7 +294,8 @@ def fetch_copenhagen_events():
             if count >= 3: break
             
             # Use AI to judge if it's "unique" or "special"
-            summary = summarize_with_ai(entry.description, "Is this a unique or special event in Copenhagen today?")
+            content_text = getattr(entry, 'description', getattr(entry, 'summary', entry.title))
+            summary = summarize_with_ai(content_text, "Summarize this event:")
             if summary:
                 news_items.append({
                     "title": entry.title,
@@ -342,14 +367,17 @@ def main():
     world_news = fetch_world_news()
     space_news = fetch_space_news()
     copenhagen = fetch_copenhagen_events()
+    quote = fetch_quote()
+    
     
     data = {
-        "date": date.today().strftime("%A, %B %d, %Y"),
+        "date": date.today().strftime("%A, %B %d"),
         "weather": weather,
         "stocks": stocks,
         "world_news": world_news,
         "space_news": space_news,
-        "copenhagen": copenhagen
+        "copenhagen": copenhagen,
+        "quote": quote
     }
     
     # 2. Generate PDF
