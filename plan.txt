@@ -1,0 +1,49 @@
+Daily PDF Plan
+
+A PDF generated daily and set to me via email/slack/or some other highly convenient method.
+A highly tailored layout with an emphasis on brevity and ease of consumption: Colours, markdown, icons, etc
+
+Weather
+- Icons with forecast of the day
+    - Rain/Snow
+    - Wind
+    - Temp
+
+- Exceptions
+    - Northern Lights
+    - etc
+
+Stocks
+- S&P 500 close
+- Tesla close
+- Nvidia close
+- Bitcoin close
+
+World News
+- Strictly only unique major news
+    - I'd rather miss something than receive too much
+    - Focusing on events like major and new wars
+    - Strange or unique economic events
+
+Space News
+- Strictly only unique news
+    - Expected behaviour is this to be mostly skipped
+- Rocket launches
+- Major deals/partnerships
+
+Unique in Copenhagen today
+- Any unique events or news in or concerning Copenhagen
+    - This should be left blank if there are none
+    - Expected behaviour is this to be mostly skipped
+
+
+
+PDF Priorities
+- Less is more, I'd rather miss news than receive too much
+- Consistency is key
+
+
+Examples Layout:
+        2-6 Word Headline
+
+↗
