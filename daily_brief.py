@@ -95,7 +95,8 @@ def fetch_weather():
             "afternoon": get_segment_data(12, 18),
             "evening": get_segment_data(18, 24),
             "sunrise": daily.get("sunrise", [""])[0],
-            "sunset": daily.get("sunset", [""])[0]
+            "sunset": daily.get("sunset", [""])[0],
+            "daily_precip": max(hourly["precipitation_probability"]) if hourly.get("precipitation_probability") else 0
         }
         return weather_data
     except Exception as e:
@@ -128,6 +129,11 @@ def fetch_copenhagen_events():
         logger.error(f"Error fetching Copenhagen news: {e}")
         
     return news_items
+
+# Fix SSL context for legacy environments/Mac
+import ssl
+if hasattr(ssl, '_create_unverified_context'):
+    ssl._create_default_https_context = ssl._create_unverified_context
 
 def fetch_stocks():
     """Fetch stock data using yfinance."""
@@ -165,6 +171,12 @@ def fetch_stocks():
             logger.error(f"Error fetching {name}: {e}")
             stock_data[name] = {"price": 0.0, "change": 0.0, "percent": 0.0, "color": "grey", "arrow": "-"}
             
+            
+    # Calculate average percent
+    total_percent = sum([d["percent"] for d in stock_data.values()])
+    avg_percent = total_percent / len(stock_data) if stock_data else 0.0
+    stock_data["average_percent"] = avg_percent
+
     return stock_data
 
 def summarize_with_ai(text, prompt_prefix="Summarize this news item:"):
@@ -178,10 +190,11 @@ def summarize_with_ai(text, prompt_prefix="Summarize this news item:"):
             "Authorization": f"Bearer {XAI_API_KEY}",
             "Content-Type": "application/json",
         }
-        # Updated system prompt for filtering - NO FILTERING
+        # Updated system prompt - MERGED HEADLINE
         system_prompt = (
             "You are a helpful news assistant. "
-            "Summarize the news item in 10-15 words. Do not filter anything out."
+            "Merge the news title and description into one single, helpful, engaging sentence (max 20 words). "
+            "Do not filter anything out. Be specific."
         )
         payload = {
             "model": "grok-4-1-fast-reasoning",
@@ -215,8 +228,7 @@ def fetch_world_news():
             summary = summarize_with_ai(content_text, "Summarize this news item:")
             if summary:
                 news_items.append({
-                    "title": entry.title,
-                    "summary": summary,
+                    "headline": summary,
                     "link": entry.link
                 })
                 if len(news_items) >= 3: break # Max 3 items
@@ -239,8 +251,7 @@ def fetch_space_news():
             summary = summarize_with_ai(content_text, "Summarize this space news item:")
             if summary:
                 news_items.append({
-                    "title": entry.title,
-                    "summary": summary,
+                    "headline": summary,
                     "link": entry.link
                 })
                 if len(news_items) >= 2: break
@@ -298,8 +309,7 @@ def fetch_copenhagen_events():
             summary = summarize_with_ai(content_text, "Summarize this event:")
             if summary:
                 news_items.append({
-                    "title": entry.title,
-                    "summary": summary,
+                    "headline": summary,
                     "link": entry.link
                 })
                 count += 1
@@ -370,8 +380,18 @@ def main():
     quote = fetch_quote()
     
     
+    # Calculate Year Percentage
+    today = date.today()
+    day_of_year = today.timetuple().tm_yday
+    # check for leap year roughly or use 365.25 logic, but simple 366/365 is fine. 
+    # using isocalendar or just 365/366 based on year.
+    import calendar
+    days_in_year = 366 if calendar.isleap(today.year) else 365
+    year_percent = (day_of_year / days_in_year) * 100
+
     data = {
-        "date": date.today().strftime("%A, %B %d"),
+        "date": today.strftime("%A, %B %d"),
+        "year_percent": year_percent,
         "weather": weather,
         "stocks": stocks,
         "world_news": world_news,

@@ -7,7 +7,7 @@
     <style>
         @page {
             size: A4;
-            margin: 1cm;
+            margin: 0.5cm;
             background-color: #1a1a1a;
         }
 
@@ -16,7 +16,8 @@
             color: #ffffff;
             background-color: #1a1a1a;
             margin: 0;
-            padding: 20px;
+            margin: 0;
+            padding: 10px;
         }
 
         h1 {
@@ -30,8 +31,8 @@
             font-size: 20px;
             border-bottom: 1px solid #444;
             padding-bottom: 5px;
-            margin-top: 30px;
-            margin-bottom: 15px;
+            margin-top: 15px;
+            margin-bottom: 10px;
             /* text-transform: uppercase; Removed */
             letter-spacing: 1px;
             color: #ddd;
@@ -136,7 +137,7 @@
 
         /* Footer */
         .footer {
-            margin-top: 40px;
+            margin-top: 20px;
             text-align: center;
             font-size: 10px;
             color: #555;
@@ -145,18 +146,8 @@
 </head>
 
 <body>
-    <h1>{{ date }}</h1>
-
-    <!-- Quote of the Day -->
-    {% if quote %}
-    <div
-        style="text-align: center; margin-bottom: 30px; padding: 10px; border-top: 1px solid #333; border-bottom: 1px solid #333;">
-        <div style="font-style: italic; font-size: 18px; margin-bottom: 5px; color: #aaa;">{{ quote.text }}</div>
-        <div style="font-style: italic; font-size: 14px; text-transform: uppercase; color: #888;">{{ quote.author }}
-        </div>
-    </div>
-    {% endif %}
-
+    <h1>{{ date }} <span style="font-size: 0.5em; color: #555; vertical-align: middle;">{{ "%.1f"|format(year_percent)
+            }}%</span></h1>
     <div class="container">
         <!-- TOP ROW: Weather & Stocks -->
         <div class="section">
@@ -196,7 +187,8 @@
                 </div>
                 <div class="weather-item full-width"
                     style="grid-column: span 3; margin-top: 10px; font-size: 16px; padding: 5px;">
-                    Sunrise: {{ weather.sunrise.split('T')[1] }} | Sunset: {{ weather.sunset.split('T')[1] }}
+                    Sunrise: {{ weather.sunrise.split('T')[1] }} | Sunset: {{ weather.sunset.split('T')[1] }} | Precip:
+                    {{ weather.daily_precip }}%
                 </div>
             </div>
             {% else %}
@@ -206,9 +198,13 @@
             {% endif %}
         </div>
 
+        <!-- MARKETS -->
         <div class="section">
-            <h2>Markets</h2>
+            <h2 style="display: flex; justify-content: space-between; align-items: baseline;">Markets <span
+                    style="font-size: 1em; color: {{ 'green' if stocks.average_percent >= 0 else 'red' }};">{{
+                    "%.2f"|format(stocks.average_percent) }}%</span></h2>
             {% for name, data in stocks.items() %}
+            {% if name != 'average_percent' %}
             <div class="stock-item">
                 <span class="stock-name">{{ name }}</span>
                 <span class="stock-price {{ data.color }}">
@@ -216,17 +212,18 @@
                         "%.2f"|format(data.percent) }}%</span>
                 </span>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
 
-    <!-- NEWS SECTIONS -->
+    <!-- WORLD NEWS-->
     <div class="full-width">
         <h2>World News</h2>
         {% for item in world_news %}
         <div class="news-item">
-            <div class="news-title"><a href="{{ item.link }}">{{ item.title }}</a> 🔗</div>
-            <div class="news-summary">{{ item.summary }}</div>
+            <div class="news-title" style="font-weight: normal; font-size: 14px;"><a href="{{ item.link }}"
+                    target="_blank" style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
         </div>
         {% else %}
         <div class="news-item">
@@ -234,14 +231,14 @@
         </div>
         {% endfor %}
     </div>
-
+    <!-- SPACE NEWS-->
     <div class="container">
         <div class="section">
             <h2>Space News</h2>
             {% for item in space_news %}
             <div class="news-item">
-                <div class="news-title"><a href="{{ item.link }}">{{ item.title }}</a> 🔗</div>
-                <div class="news-summary">{{ item.summary }}</div>
+                <div class="news-title" style="font-weight: normal; font-size: 14px;"><a href="{{ item.link }}"
+                        target="_blank" style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
             </div>
             {% else %}
             <div class="news-item">
@@ -254,8 +251,8 @@
             <h2>Copenhagen Today</h2>
             {% for item in copenhagen %}
             <div class="news-item">
-                <div class="news-title"><a href="{{ item.link }}">{{ item.title }}</a> 🔗</div>
-                <div class="news-summary">{{ item.summary }}</div>
+                <div class="news-title" style="font-weight: normal; font-size: 14px;"><a href="{{ item.link }}"
+                        target="_blank" style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
             </div>
             {% else %}
             <div class="news-item">
@@ -264,6 +261,16 @@
             {% endfor %}
         </div>
     </div>
+
+    <!-- Quote of the Day -->
+    {% if quote %}
+    <div
+        style="text-align: center; margin-bottom: 30px; padding: 10px; border-top: 1px solid #333; border-bottom: 1px solid #333;">
+        <div style="font-style: italic; font-size: 18px; margin-bottom: 5px; color: #aaa;">{{ quote.text }}</div>
+        <div style="font-style: italic; font-size: 14px; text-transform: uppercase; color: #888;">{{ quote.author }}
+        </div>
+    </div>
+    {% endif %}
 
 </body>
 
