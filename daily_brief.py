@@ -405,8 +405,8 @@ def main():
     
     # 3. Send to Slack
     if pdf_path:
-        print("Skipping Slack for now")
-        # send_to_slack(pdf_path)
+        # print("Skipping Slack for now")
+        send_to_slack(pdf_path)
     
     logger.info("Done.")
 
