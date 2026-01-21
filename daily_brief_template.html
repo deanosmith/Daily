@@ -13,8 +13,8 @@
 
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            color: #e0e0e0;
-            background-color: #1a1a1a;
+            color: #ffffff;
+            background-color: #000000;
             margin: 0;
             padding: 10px;
         }
@@ -28,14 +28,14 @@
 
         h2 {
             font-size: 18px;
-            border-bottom: 2px solid #00ADB5;
+            border-bottom: 2px solid #ffffff;
             /* Teal accent */
             padding-bottom: 8px;
             margin-top: 20px;
             margin-bottom: 15px;
             font-weight: 600;
             letter-spacing: 0.5px;
-            color: #00ADB5;
+            color: #00e5ff;
             text-transform: uppercase;
         }
 
@@ -165,40 +165,40 @@
     <h1>{{ date }} <span style="font-size: 0.5em; color: #555; vertical-align: middle;">{{ "%.1f"|format(year_percent)
             }}%</span></h1>
     <div class="container">
-        <!-- TOP ROW: Weather & Stocks -->
+        <!-- WEATHER -->
         <div class="section">
             <h2>Weather (Copenhagen)</h2>
             {% if weather %}
             <div class="weather-grid" style="grid-template-columns: 1fr 1fr 1fr;">
                 <div class="weather-item">
-                    <div style="font-style: italic; font-size: 18px; margin-bottom: 5px; color: #aaa;">Morning</div>
-                    <div class="weather-icon" style="font-size: 24px;">{{ weather.morning.icon }}</div>
+                    <div style="font-size: 18px; margin-bottom: 5px; color: white;">
+                        Morning</div>
                     <div class="weather-value">{{ weather.morning.temp }}°C</div>
                     <div class="weather-label">
                         <!-- Dynamic Size: 14px base + 0.8 * wind_speed. Max cap check not strictly needed for typical winds but keeps it sane -->
                         <span class="wind-arrow"
                             style="transform: rotate({{ weather.morning.wind_dir }}deg); font-size: {{ 14 + (weather.morning.wind * 0.8) }}px;">⬇</span>
-                        <span style="font-size: 18px; font-weight: bold;">{{ weather.morning.wind }}</span> km/h
+                        <!-- <span style="font-size: 18px; font-weight: bold;">{{ weather.morning.wind }}</span> km/h -->
                     </div>
                 </div>
                 <div class="weather-item">
-                    <div style="font-style: italic; font-size: 18px; margin-bottom: 5px; color: #aaa;">Afternoon</div>
-                    <div class="weather-icon" style="font-size: 24px;">{{ weather.afternoon.icon }}</div>
+                    <div style="font-size: 18px; margin-bottom: 5px; color: white;">
+                        Afternoon</div>
                     <div class="weather-value">{{ weather.afternoon.temp }}°C</div>
                     <div class="weather-label">
                         <span class="wind-arrow"
                             style="transform: rotate({{ weather.afternoon.wind_dir }}deg); font-size: {{ 14 + (weather.afternoon.wind * 0.8) }}px;">⬇</span>
-                        <span style="font-size: 18px; font-weight: bold;">{{ weather.afternoon.wind }}</span> km/h
+                        <!-- <span style="font-size: 18px; font-weight: bold;">{{ weather.afternoon.wind }}</span> km/h -->
                     </div>
                 </div>
                 <div class="weather-item">
-                    <div style="font-style: italic; font-size: 18px; margin-bottom: 5px; color: #aaa;">Evening</div>
-                    <div class="weather-icon" style="font-size: 24px;">{{ weather.evening.icon }}</div>
+                    <div style="font-size: 18px; margin-bottom: 5px; color: white;">
+                        Evening</div>
                     <div class="weather-value">{{ weather.evening.temp }}°C</div>
                     <div class="weather-label">
                         <span class="wind-arrow"
                             style="transform: rotate({{ weather.evening.wind_dir }}deg); font-size: {{ 14 + (weather.evening.wind * 0.8) }}px;">⬇</span>
-                        <span style="font-size: 18px; font-weight: bold;">{{ weather.evening.wind }}</span> km/h
+                        <!-- <span style="font-size: 18px; font-weight: bold;">{{ weather.evening.wind }}</span> km/h -->
                     </div>
                 </div>
                 <div class="weather-item full-width"
@@ -216,8 +216,9 @@
 
         <!-- MARKETS -->
         <div class="section">
-            <h2 style="display: flex; justify-content: space-between; align-items: baseline;">Markets <span
-                    style="font-size: 1em; color: {{ 'green' if stocks.average_percent >= 0 else 'red' }};">{{
+            <h2
+                style="border-bottom: 2px solid #ffffff; color: #ffffff; display: flex; justify-content: space-between; align-items: baseline;">
+                Markets <span style="font-size: 1em; color: {{ 'green' if stocks.average_percent >= 0 else 'red' }};">{{
                     "%.2f"|format(stocks.average_percent) }}%</span></h2>
             {% for name, data in stocks.items() %}
             {% if name != 'average_percent' %}
@@ -233,14 +234,20 @@
         </div>
     </div>
 
-    <!-- SPACE NEWS-->
     <div class="container">
+        <!-- X TRENDING -->
         <div class="section">
-            <h2>Space News</h2>
-            {% for item in space_news %}
-            <div class="news-item">
-                <div class="news-title" style="font-weight: normal; font-size: 14px;"><a href="{{ item.link }}"
-                        target="_blank" style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
+            <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff;">Trending on X</h2>
+            {% for item in x_trending %}
+            <div class="news-item" style="border-left: 3px solid #1da1f2;">
+                <div class="news-title" style="font-weight: 500; font-size: 14px;">
+                    <a href="{{ item.link }}" target="_blank" style="text-decoration: none; border: none;">{{
+                        item.headline }}</a>
+                </div>
+                <!-- Optional summary if available, usually handled by headline merger but good to have fallback -->
+                {% if item.summary and item.summary != item.headline %}
+                <div class="news-summary">{{ item.summary }}</div>
+                {% endif %}
             </div>
             {% else %}
             <div class="news-item">
@@ -249,8 +256,9 @@
             {% endfor %}
         </div>
 
+        <!-- COPENHAGEN -->
         <div class="section">
-            <h2>Copenhagen Today</h2>
+            <h2 style="border-bottom: 2px solid #f21d1d; color: #ff0000;">Copenhagen Today</h2>
             {% for item in copenhagen %}
             <div class="news-item">
                 <div class="news-title" style="font-weight: normal; font-size: 14px;"><a href="{{ item.link }}"
@@ -264,18 +272,36 @@
         </div>
     </div>
 
-    <!-- WORLD NEWS-->
-    <div class="full-width">
-        <h2>World News</h2>
-        {% for item in world_news %}
-        <div class="news-item">
-            <div class="news-title"><a href="{{ item.link }}" target="_blank">{{ item.headline }}</a></div>
+
+    <div class="container">
+        <!-- WORLD NEWS -->
+        <div class="section">
+            <h2 style="border-bottom: 2px solid #0048ff; color: #0048ff;">World News</h2>
+            {% for item in world_news %}
+            <div class="news-item">
+                <div class="news-title"><a href="{{ item.link }}" target="_blank">{{ item.headline }}</a></div>
+            </div>
+            {% else %}
+            <div class="news-item">
+                <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
+            </div>
+            {% endfor %}
         </div>
-        {% else %}
-        <div class="news-item">
-            <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
+
+        <!-- SPACE NEWS-->
+        <div class="section">
+            <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff;">Space News</h2>
+            {% for item in space_news %}
+            <div class="news-item">
+                <div class="news-title" style="font-weight: normal; font-size: 14px;"><a href="{{ item.link }}"
+                        target="_blank" style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
+            </div>
+            {% else %}
+            <div class="news-item">
+                <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 
     <!-- Quote of the Day -->

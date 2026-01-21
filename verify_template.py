@@ -3,18 +3,21 @@ from jinja2 import Environment, FileSystemLoader
 
 # Mock data
 date = "Monday, January 1, 2024"
-quote = "The obstacle is the way. - Marcus Aurelius"
+quote = {"text": "The obstacle is the way.", "author": "Marcus Aurelius"}
+year_percent = 0.27
+x_trending = [{"headline": "AI Breakthroughs", "summary": "New AI models show promise.", "link": "https://x.com/search?q=AI"}]
 weather_valid = {
-    "morning": {"icon": "☀️", "temp": 10, "wind": 20, "wind_dir": 180},
-    "afternoon": {"icon": "⛅", "temp": 12, "wind": 25, "wind_dir": 190},
-    "evening": {"icon": "🌙", "temp": 8, "wind": 15, "wind_dir": 170},
+    "morning": {"temp": 10, "wind": 20, "wind_dir": 180, "precip": 10, "color": "#FFD700"},
+    "afternoon": {"temp": 12, "wind": 25, "wind_dir": 190, "precip": 20, "color": "#87CEEB"},
+    "evening": {"temp": 8, "wind": 15, "wind_dir": 170, "precip": 5, "color": "#708090"},
     "sunrise": "2024-01-01T08:00",
-    "sunset": "2024-01-01T16:00"
+    "sunset": "2024-01-01T16:00",
+    "daily_precip": 20
 }
 weather_none = None
 
-stocks = {"Tesla": {"price": 200, "percent": 5, "color": "green"}}
-news = [{"title": "News 1", "link": "#", "summary": "Summary 1"}]
+stocks = {"Tesla": {"price": 200, "percent": 5, "color": "green"}, "average_percent": 5}
+news = [{"headline": "News 1", "link": "#"}]
 
 def test_template():
     env = Environment(loader=FileSystemLoader("."))
@@ -24,14 +27,16 @@ def test_template():
     print("--- Test 1: Full Data ---")
     out1 = template.render(
         date=date, 
+        year_percent=year_percent,
         weather=weather_valid, 
         stocks=stocks, 
         world_news=news, 
         space_news=news, 
         copenhagen=news,
+        x_trending=x_trending,
         quote=quote
     )
-    if quote in out1:
+    if quote["text"] in out1:
         print("✅ Quote found")
     else:
         print("❌ Quote missing")
@@ -49,11 +54,13 @@ def test_template():
     print("\n--- Test 2: Missing Weather ---")
     out2 = template.render(
         date=date, 
-        weather=None, # SIMULATE ERROR
+        year_percent=year_percent,
+        weather=None,
         stocks=stocks, 
         world_news=news, 
         space_news=news, 
         copenhagen=news,
+        x_trending=x_trending,
         quote=quote
     )
     if "ERROR: Weather data unavailable" in out2:
@@ -65,11 +72,13 @@ def test_template():
     print("\n--- Test 3: No Quote ---")
     out3 = template.render(
         date=date, 
+        year_percent=year_percent,
         weather=weather_valid, 
         stocks=stocks, 
         world_news=news, 
         space_news=news, 
         copenhagen=news,
+        x_trending=x_trending,
         quote=None
     )
     if "The obstacle is the way" not in out3:

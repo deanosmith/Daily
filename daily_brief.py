@@ -31,16 +31,22 @@ SLACK_CHANNEL_ID = os.getenv("SLACK_CHANNEL_ID") # Optional, or use a default
 if not XAI_API_KEY:
     logger.warning("XAI_API_KEY is missing. AI summarization will be skipped or mocked.")
 
-def get_weather_icon(code):
-    """Return an emoji icon for WMO weather code."""
-    if code == 0: return "☀️"
-    if code in [1, 2, 3]: return "⛅"
-    if code in [45, 48]: return "🌫️"
-    if code in [51, 53, 55, 61, 63, 65]: return "🌧️"
-    if code in [71, 73, 75, 77]: return "❄️"
-    if code in [80, 81, 82]: return "🌦️"
-    if code in [95, 96, 99]: return "⛈️"
-    return "❓"
+def get_weather_color(code):
+    """Return a hex color for WMO weather code."""
+    # Sun / Clear
+    if code == 0: return "#FFD700"  # Gold
+    # Partly Cloudy
+    if code in [1, 2, 3]: return "#87CEEB" # Sky Blue
+    # Fog
+    if code in [45, 48]: return "#708090" # Slate Gray
+    # Rain / Drizzle
+    if code in [51, 53, 55, 61, 63, 65, 80, 81, 82]: return "#4682B4" # Steel Blue
+    # Snow
+    if code in [71, 73, 75, 77]: return "#E0FFFF" # Light Cyan
+    # Thunderstorm
+    if code in [95, 96, 99]: return "#9370DB" # Medium Purple
+    
+    return "#AAAAAA" # Grey fallback
 
 def fetch_weather():
     """Fetch weather for Copenhagen using Open-Meteo API with hourly breakdown."""
@@ -87,7 +93,7 @@ def fetch_weather():
                 "precip": max_precip,
                 "wind": round(max_wind),
                 "wind_dir": round(avg_wind_dir),
-                "icon": get_weather_icon(code)
+                "color": get_weather_color(code)
             }
 
         weather_data = {
@@ -103,32 +109,7 @@ def fetch_weather():
         logger.error(f"Error fetching weather: {e}")
         return None
 
-def fetch_copenhagen_events():
-    """Fetch and summarize Copenhagen events."""
-    logger.info("Fetching Copenhagen events...")
-    feed_url = "https://cphpost.dk/feed/"
-    news_items = []
-    
-    try:
-        feed = feedparser.parse(feed_url)
-        count = 0
-        for entry in feed.entries:
-            if count >= 3: break
-            
-            # Broader prompt for events/upcoming
-            summary = summarize_with_ai(entry.description, "Is this a unique event, cultural happening, or major news in Copenhagen (upcoming or today)?")
-            if summary:
-                news_items.append({
-                    "title": entry.title,
-                    "summary": summary,
-                    "link": entry.link
-                })
-                count += 1
-            if len(news_items) >= 2: break
-    except Exception as e:
-        logger.error(f"Error fetching Copenhagen news: {e}")
-        
-    return news_items
+
 
 # Fix SSL context for legacy environments/Mac
 import ssl
@@ -183,7 +164,7 @@ def summarize_with_ai(text, prompt_prefix="Summarize this news item:"):
     """Summarize text using xAI API."""
     if not XAI_API_KEY:
         # Mocking for testing if no key: always return text (not ideal for strict filtering but needed for testing)
-        return text[:100] + "..." 
+        return text 
         
     try:
         headers = {
@@ -211,7 +192,7 @@ def summarize_with_ai(text, prompt_prefix="Summarize this news item:"):
     except Exception as e:
         logger.error(f"AI summarization failed: {e}")
         # Fail safe to return original text so we always have content
-        return text[:200] + "..." if text else "Content unavailable"
+        return text if text else "Content unavailable"
 
 def fetch_world_news():
     """Fetch and summarize world news."""
@@ -260,7 +241,91 @@ def fetch_space_news():
         
     return news_items
 
-    return news_items
+def fetch_x_trending():
+    """Fetch trending topics from X using xAI API."""
+    logger.info("Fetching X trending topics...")
+    if not XAI_API_KEY:
+        logger.warning("XAI_API_KEY missing - cannot fetch X trending topics")
+        return []  # Template will display 'Null'
+
+    headers = {
+        "Authorization": f"Bearer {XAI_API_KEY}",
+        "Content-Type": "application/json",
+    }
+    
+    system_prompt = (
+        "You are a helpful news assistant. List exactly 5 top trending topics on X right now. "
+        "Focus on technology, science, world events, and business. "
+        "STRICTLY AVOID gossip, celebrity drama, or shallow viral trends. "
+        "Return a JSON object with a single key 'trends' which is an array of exactly 5 objects. "
+        "Each object must have keys: 'headline' (short title), 'summary' (1-2 sentence explanation), 'link'. "
+        "For 'link', make a search URL like 'https://x.com/search?q=Topic+Name'."
+    )
+    
+    payload = {
+        "model": "grok-4-1-fast-reasoning",
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": "What are the top 5 trending topics on X right now? Return JSON with exactly 5 items."}
+        ],
+        "response_format": {"type": "json_object"}
+    }
+    
+    # Retry logic
+    for attempt in range(3):
+        try:
+            logger.info(f"Attempt {attempt + 1} to fetch X trends...")
+            response = requests.post("https://api.x.ai/v1/chat/completions", headers=headers, json=payload, timeout=45)
+            response.raise_for_status()
+            content = response.json()["choices"][0]["message"]["content"].strip()
+            logger.info(f"X trending raw response: {content[:200]}...")
+
+            data = json.loads(content)
+            
+            # Robust parsing - check various potential key names
+            trends = []
+            if isinstance(data, dict):
+                for key in ["trends", "topics", "items", "data", "trending"]:
+                    if key in data and isinstance(data[key], list):
+                        trends = data[key]
+                        break
+                # Fallback: if dict has headline directly, wrap it
+                if not trends and "headline" in data:
+                    trends = [data]
+            elif isinstance(data, list):
+                trends = data
+            
+            # Validate we have items with required keys
+            valid_trends = []
+            for item in trends:
+                if isinstance(item, dict) and "headline" in item:
+                    # Ensure link exists
+                    if "link" not in item or not item["link"]:
+                        headline_encoded = item["headline"].replace(" ", "+")
+                        item["link"] = f"https://x.com/search?q={headline_encoded}"
+                    valid_trends.append(item)
+                    
+            if valid_trends:
+                logger.info(f"Successfully fetched {len(valid_trends)} X trending topics")
+                return valid_trends[:5]  # Ensure max 5 items
+            else:
+                logger.warning(f"Attempt {attempt + 1}: No valid trends parsed from response")
+            
+        except requests.exceptions.Timeout:
+            logger.error(f"Timeout fetching X trending (attempt {attempt + 1})")
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Request error fetching X trending (attempt {attempt + 1}): {e}")
+        except json.JSONDecodeError as e:
+            logger.error(f"JSON parse error fetching X trending (attempt {attempt + 1}): {e}")
+        except Exception as e:
+            logger.error(f"Unexpected error fetching X trending (attempt {attempt + 1}): {e}")
+        
+        if attempt < 2:  # Don't sleep after last attempt
+            import time
+            time.sleep(2)
+            
+    logger.error("All attempts to fetch X trending failed - returning empty list")
+    return []  # Template will display 'Null'
 
 def fetch_quote():
     """Fetch a Quote of the Day (Stoicism/Proverbs) using AI."""
@@ -286,7 +351,6 @@ def fetch_quote():
         response = requests.post("https://api.x.ai/v1/chat/completions", headers=headers, json=payload, timeout=10)
         response.raise_for_status()
         content = response.json()["choices"][0]["message"]["content"].strip()
-        import json
         return json.loads(content)
     except Exception as e:
         logger.error(f"Error fetching quote: {e}")
@@ -306,7 +370,7 @@ def fetch_copenhagen_events():
             
             # Use AI to judge if it's "unique" or "special"
             content_text = getattr(entry, 'description', getattr(entry, 'summary', entry.title))
-            summary = summarize_with_ai(content_text, "Summarize this event:")
+            summary = summarize_with_ai(content_text, "Summarize this event. If it is not an event, just summarize the news.")
             if summary:
                 news_items.append({
                     "headline": summary,
@@ -377,6 +441,7 @@ def main():
     world_news = fetch_world_news()
     space_news = fetch_space_news()
     copenhagen = fetch_copenhagen_events()
+    x_trending = fetch_x_trending()
     quote = fetch_quote()
     
     
@@ -397,6 +462,7 @@ def main():
         "world_news": world_news,
         "space_news": space_news,
         "copenhagen": copenhagen,
+        "x_trending": x_trending,
         "quote": quote
     }
     
@@ -405,8 +471,8 @@ def main():
     
     # 3. Send to Slack
     if pdf_path:
-        # print("Skipping Slack for now")
-        send_to_slack(pdf_path)
+        print("Skipping Slack for now")
+        # send_to_slack(pdf_path)
     
     logger.info("Done.")
 
