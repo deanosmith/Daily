@@ -1,10 +1,14 @@
 import os
+import ssl
 import sys
 import json
 import logging
 import requests
 from datetime import date, datetime
 from dotenv import load_dotenv
+
+from slack_sdk import WebClient
+from slack_sdk.errors import SlackApiError
 
 # Third-party imports
 import yfinance as yf
@@ -47,6 +51,26 @@ def get_weather_color(code):
     if code in [95, 96, 99]: return "#9370DB" # Medium Purple
     
     return "#AAAAAA" # Grey fallback
+
+def get_weather_icon(code):
+    """Return an emoji icon for WMO weather code."""
+    # Sun / Clear
+    if code == 0: return "☀️"
+    # Partly Cloudy
+    if code in [1, 2]: return "⛅"
+    if code == 3: return "☁️"
+    # Fog
+    if code in [45, 48]: return "🌫️"
+    # Drizzle
+    if code in [51, 53, 55]: return "🌦️"
+    # Rain
+    if code in [61, 63, 65, 80, 81, 82]: return "🌧️"
+    # Snow
+    if code in [71, 73, 75, 77]: return "❄️"
+    # Thunderstorm
+    if code in [95, 96, 99]: return "⛈️"
+    
+    return "🌡️" # Fallback
 
 def fetch_weather():
     """Fetch weather for Copenhagen using Open-Meteo API with hourly breakdown."""
@@ -93,7 +117,8 @@ def fetch_weather():
                 "precip": max_precip,
                 "wind": round(max_wind),
                 "wind_dir": round(avg_wind_dir),
-                "color": get_weather_color(code)
+                "color": get_weather_color(code),
+                "icon": get_weather_icon(code)
             }
 
         weather_data = {
@@ -109,10 +134,6 @@ def fetch_weather():
         logger.error(f"Error fetching weather: {e}")
         return None
 
-
-
-# Fix SSL context for legacy environments/Mac
-import ssl
 if hasattr(ssl, '_create_unverified_context'):
     ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -184,7 +205,7 @@ def summarize_with_ai(text, prompt_prefix="Summarize this news item:"):
                 {"role": "user", "content": f"{prompt_prefix}\n\n{text}"}
             ]
         }
-        response = requests.post("https://api.x.ai/v1/chat/completions", headers=headers, json=payload, timeout=10)
+        response = requests.post("https://api.x.ai/v1/chat/completions", headers=headers, json=payload, timeout=60)
         response.raise_for_status()
         content = response.json()["choices"][0]["message"]["content"].strip()
         
@@ -229,7 +250,7 @@ def fetch_space_news():
         # Check top 3 items
         for entry in feed.entries[:3]:
             content_text = getattr(entry, 'summary', getattr(entry, 'description', entry.title))
-            summary = summarize_with_ai(content_text, "Summarize this space news item:")
+            summary = summarize_with_ai(content_text, "Summarize this content:")
             if summary:
                 news_items.append({
                     "headline": summary,
@@ -242,90 +263,90 @@ def fetch_space_news():
     return news_items
 
 def fetch_x_trending():
-    """Fetch trending topics from X using xAI API."""
+    """Fetch trending topics from X using OAuth1 and the personalized_trends API."""
     logger.info("Fetching X trending topics...")
-    if not XAI_API_KEY:
-        logger.warning("XAI_API_KEY missing - cannot fetch X trending topics")
-        return []  # Template will display 'Null'
-
-    headers = {
-        "Authorization": f"Bearer {XAI_API_KEY}",
-        "Content-Type": "application/json",
-    }
     
-    system_prompt = (
-        "You are a helpful news assistant. List exactly 5 top trending topics on X right now. "
-        "Focus on technology, science, world events, and business. "
-        "STRICTLY AVOID gossip, celebrity drama, or shallow viral trends. "
-        "Return a JSON object with a single key 'trends' which is an array of exactly 5 objects. "
-        "Each object must have keys: 'headline' (short title), 'summary' (1-2 sentence explanation), 'link'. "
-        "For 'link', make a search URL like 'https://x.com/search?q=Topic+Name'."
-    )
+    # X API OAuth credentials
+    consumer_key = os.getenv("CONSUMER_KEY")
+    consumer_secret = os.getenv("CONSUMER_SECRET")
+    access_token = os.getenv("ACCESS_TOKEN")
+    access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
     
-    payload = {
-        "model": "grok-4-1-fast-reasoning",
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": "What are the top 5 trending topics on X right now? Return JSON with exactly 5 items."}
-        ],
-        "response_format": {"type": "json_object"}
-    }
-    
-    # Retry logic
-    for attempt in range(3):
-        try:
-            logger.info(f"Attempt {attempt + 1} to fetch X trends...")
-            response = requests.post("https://api.x.ai/v1/chat/completions", headers=headers, json=payload, timeout=45)
-            response.raise_for_status()
-            content = response.json()["choices"][0]["message"]["content"].strip()
-            logger.info(f"X trending raw response: {content[:200]}...")
-
-            data = json.loads(content)
-            
-            # Robust parsing - check various potential key names
-            trends = []
-            if isinstance(data, dict):
-                for key in ["trends", "topics", "items", "data", "trending"]:
-                    if key in data and isinstance(data[key], list):
-                        trends = data[key]
-                        break
-                # Fallback: if dict has headline directly, wrap it
-                if not trends and "headline" in data:
-                    trends = [data]
-            elif isinstance(data, list):
-                trends = data
-            
-            # Validate we have items with required keys
-            valid_trends = []
-            for item in trends:
-                if isinstance(item, dict) and "headline" in item:
-                    # Ensure link exists
-                    if "link" not in item or not item["link"]:
-                        headline_encoded = item["headline"].replace(" ", "+")
-                        item["link"] = f"https://x.com/search?q={headline_encoded}"
-                    valid_trends.append(item)
-                    
-            if valid_trends:
-                logger.info(f"Successfully fetched {len(valid_trends)} X trending topics")
-                return valid_trends[:5]  # Ensure max 5 items
-            else:
-                logger.warning(f"Attempt {attempt + 1}: No valid trends parsed from response")
-            
-        except requests.exceptions.Timeout:
-            logger.error(f"Timeout fetching X trending (attempt {attempt + 1})")
-        except requests.exceptions.RequestException as e:
-            logger.error(f"Request error fetching X trending (attempt {attempt + 1}): {e}")
-        except json.JSONDecodeError as e:
-            logger.error(f"JSON parse error fetching X trending (attempt {attempt + 1}): {e}")
-        except Exception as e:
-            logger.error(f"Unexpected error fetching X trending (attempt {attempt + 1}): {e}")
+    try:
+        from requests_oauthlib import OAuth1Session
         
-        if attempt < 2:  # Don't sleep after last attempt
-            import time
-            time.sleep(2)
+        oauth = OAuth1Session(
+            consumer_key,
+            client_secret=consumer_secret,
+            resource_owner_key=access_token,
+            resource_owner_secret=access_token_secret
+        )
+        
+        url = 'https://api.x.com/2/users/personalized_trends'
+        response = oauth.get(url)
+        
+        if response.status_code != 200:
+            logger.error(f"X API error {response.status_code}: {response.text}")
+            return {}  # Empty dict for categories
+        
+        trends_data = response.json().get('data', [])
+        
+        # Category keyword groups (lowercase only)
+        categories = {
+            'Science': ['science', 'physics', 'astronomy', 'nasa', 'space', 'discovery', 'quantum'],
+            'Tech': ['ai', 'artificial intelligence', 'crypto', 'blockchain', 'tesla', 'spacex'],
+            'World News': ['breaking', 'war', 'nuclear', 'elon', 'musk', 'trump'],
+            'Copenhagen / Denmark': ['copenhagen', 'cph', 'denmark'],
+            'Misc': ['northern lights', 'south africa', 'aurora', 'comet', 'asteroid']
+        }
+        
+        filtered = {cat: [] for cat in categories}
+        
+        for cat, keywords in categories.items():
+            matches = [
+                trend for trend in trends_data
+                if any(kw.lower() in trend.get('trend_name', '').lower() for kw in keywords)
+            ]
+            if matches:
+                filtered[cat] = []
+                for t in matches[:5]:
+                     # Clean trending_since
+                     raw_since = t.get('trending_since', 'N/A')
+                     if raw_since and 'T' in raw_since and raw_since[0].isdigit():
+                         # ISO format like 2023-10-27T10:00:00Z -> 10:00
+                         display_time = raw_since.split('T')[1][:5]
+                     else:
+                         # Fallback/Text
+                         display_time = raw_since
             
-    logger.error("All attempts to fetch X trending failed - returning empty list")
-    return []  # Template will display 'Null'
+                     filtered[cat].append({
+                        'name': t.get('trend_name'),
+                        'post_count': t.get('post_count') or t.get('tweet_count', 'N/A'),
+                        'category': t.get('category', 'N/A'),
+                        'trending_since': display_time,
+                        'link': f"https://x.com/search?q={t.get('trend_name', '').replace(' ', '+')}"
+                    })
+        
+        # Count total trends found
+        total = sum(len(v) for v in filtered.values())
+        logger.info(f"Successfully fetched {total} X trending topics across {len([c for c in filtered if filtered[c]])} categories")
+        
+        # Sort categories: populated first, then by count (descending), then alphabetical
+        # Converting to a list of tuples (category_name, items) to preserve order for the template
+        sorted_categories = sorted(
+            filtered.items(),
+            key=lambda item: (len(item[1]) > 0, len(item[1])), 
+            reverse=True
+        )
+        
+        return sorted_categories
+        
+    except ImportError:
+        logger.error("requests_oauthlib not installed - cannot fetch X trends")
+        return {}
+    except Exception as e:
+        logger.error(f"Error fetching X trending: {e}")
+        return {}
 
 def fetch_quote():
     """Fetch a Quote of the Day (Stoicism/Proverbs) using AI."""
@@ -348,13 +369,13 @@ def fetch_quote():
             ],
             "response_format": {"type": "json_object"} # Ensure JSON
         }
-        response = requests.post("https://api.x.ai/v1/chat/completions", headers=headers, json=payload, timeout=10)
+        response = requests.post("https://api.x.ai/v1/chat/completions", headers=headers, json=payload, timeout=60)
         response.raise_for_status()
         content = response.json()["choices"][0]["message"]["content"].strip()
         return json.loads(content)
     except Exception as e:
         logger.error(f"Error fetching quote: {e}")
-        return {"text": "This too shall pass.", "author": "Ancient Wisdom (Fallback)"}
+        return {"text": "The obstacle is the way.", "author": "Marcus Aurelius"}
 
 def fetch_copenhagen_events():
     """Fetch and summarize Copenhagen events."""
@@ -370,7 +391,7 @@ def fetch_copenhagen_events():
             
             # Use AI to judge if it's "unique" or "special"
             content_text = getattr(entry, 'description', getattr(entry, 'summary', entry.title))
-            summary = summarize_with_ai(content_text, "Summarize this event. If it is not an event, just summarize the news.")
+            summary = summarize_with_ai(content_text, "Summarize this content.")
             if summary:
                 news_items.append({
                     "headline": summary,
@@ -400,7 +421,7 @@ def generate_pdf(data):
         return None
 
 def send_to_slack(pdf_path):
-    """Upload PDF to Slack."""
+    """Upload PDF to Slack using the v2 API."""
     logger.info("Sending to Slack...")
     
     if not os.path.exists(pdf_path):
@@ -411,24 +432,23 @@ def send_to_slack(pdf_path):
         logger.warning("SLACK_BOT_TOKEN not found. Skipping upload. (Mock success)")
         return
 
-    url = "https://slack.com/api/files.upload"
-    headers = {"Authorization": f"Bearer {SLACK_BOT_TOKEN}"}
+    # Initialize the official Slack Client
+    client = WebClient(token=SLACK_BOT_TOKEN)
     
     try:
-        with open(pdf_path, 'rb') as f:
-            data = {
-                "channels": SLACK_CHANNEL_ID if SLACK_CHANNEL_ID else "#general", # Default to #general if not set
-                "initial_comment": "Here is your Daily Briefing.",
-                "title": f"Daily Briefing - {date.today().strftime('%Y-%m-%d')}"
-            }
-            files = {'file': f}
-            response = requests.post(url, headers=headers, data=data, files=files)
-            response.raise_for_status()
-            res_json = response.json()
-            if not res_json.get("ok"):
-                logger.error(f"Slack API Error: {res_json.get('error')}")
-            else:
-                logger.info("PDF uploaded to Slack successfully.")
+        # files_upload_v2 handles the complex 3-step upload process automatically
+        response = client.files_upload_v2(
+            channel="C09MUE5TGC9",  # Note: argument is 'channel', not 'channels'
+            file=pdf_path,
+            title=f"Daily Briefing - {date.today().strftime('%Y-%m-%d')}",
+            initial_comment="Mr Smith, here is your Daily Briefing."
+        )
+        
+        # The SDK raises an exception on error, so if we get here, it worked.
+        logger.info("PDF uploaded to Slack successfully.")
+
+    except SlackApiError as e:
+        logger.error(f"Slack API Error: {e.response['error']}")
     except Exception as e:
         logger.error(f"Error uploading to Slack: {e}")
 
@@ -471,10 +491,14 @@ def main():
     
     # 3. Send to Slack
     if pdf_path:
-        print("Skipping Slack for now")
-        # send_to_slack(pdf_path)
+        # print("Skipping Slack for now")
+        send_to_slack(pdf_path)
     
     logger.info("Done.")
 
+def slack_test():
+    send_to_slack("daily_brief.pdf")
+
 if __name__ == "__main__":
-    main()
+    # main()
+    slack_test()

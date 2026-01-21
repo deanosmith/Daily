@@ -4,205 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Daily Briefing</title>
-    <style>
-        @page {
-            size: A4;
-            margin: 0.5cm;
-            background-color: #1a1a1a;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            color: #ffffff;
-            background-color: #000000;
-            margin: 0;
-            padding: 10px;
-        }
-
-        h1 {
-            font-size: 32px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 300;
-        }
-
-        h2 {
-            font-size: 18px;
-            border-bottom: 2px solid #ffffff;
-            /* Teal accent */
-            padding-bottom: 8px;
-            margin-top: 20px;
-            margin-bottom: 15px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            color: #00e5ff;
-            text-transform: uppercase;
-        }
-
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        .section {
-            width: 48%;
-            margin-bottom: 20px;
-        }
-
-        .full-width {
-            width: 100%;
-        }
-
-        /* Weather */
-        .wind-arrow {
-            display: inline-block;
-            font-size: 14px;
-            transform-origin: center;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-            border-bottom: 1px dotted #888;
-        }
-
-        .weather-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .weather-item {
-            background-color: #252525;
-            padding: 10px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid #333;
-        }
-
-        .weather-value {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .weather-label {
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 4px;
-        }
-
-        /* Stocks */
-        .stock-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #333;
-        }
-
-        .stock-name {
-            font-weight: bold;
-        }
-
-        .stock-price {
-            font-family: 'Courier New', monospace;
-        }
-
-        .green {
-            color: #4caf50;
-        }
-
-        .red {
-            color: #f44336;
-        }
-
-        .grey {
-            color: #888;
-        }
-
-        /* News */
-        .news-item {
-            margin-bottom: 12px;
-            background-color: #252525;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #333;
-        }
-
-        .news-title {
-            font-weight: 500;
-            margin-bottom: 0;
-            font-size: 15px;
-            line-height: 1.5;
-        }
-
-        .news-title a {
-            color: #ececec;
-            text-decoration: none;
-            border: none;
-            display: block;
-            /* Make the whole block clickable/fill space */
-        }
-
-        .news-summary {
-            font-size: 14px;
-            color: #aaa;
-            line-height: 1.4;
-            margin-top: 5px;
-        }
-
-        /* Footer */
-        .footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 10px;
-            color: #555;
-        }
-    </style>
+    <link rel="stylesheet" href="daily_brief.css">
 </head>
 
 <body>
-    <h1>{{ date }} <span style="font-size: 0.5em; color: #555; vertical-align: middle;">{{ "%.1f"|format(year_percent)
+    <h1>{{ date }} <span style="font-size: 1em; color: #555; vertical-align: middle;">{{ "%.1f"|format(year_percent)
             }}%</span></h1>
     <div class="container">
         <!-- WEATHER -->
         <div class="section">
-            <h2>Weather (Copenhagen)</h2>
+            <h2 style="border-bottom: 2px solid #1da1f2; color: #ffffff;">Weather (Copenhagen)</h2>
             {% if weather %}
-            <div class="weather-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+            <div class="weather-grid">
                 <div class="weather-item">
-                    <div style="font-size: 18px; margin-bottom: 5px; color: white;">
-                        Morning</div>
+                    <div style="font-size: 14px; margin-bottom: 2px; color: white;">Morning</div>
+                    <div class="weather-icon">{{ weather.morning.icon }}</div>
                     <div class="weather-value">{{ weather.morning.temp }}°C</div>
                     <div class="weather-label">
-                        <!-- Dynamic Size: 14px base + 0.8 * wind_speed. Max cap check not strictly needed for typical winds but keeps it sane -->
                         <span class="wind-arrow"
-                            style="transform: rotate({{ weather.morning.wind_dir }}deg); font-size: {{ 14 + (weather.morning.wind * 0.8) }}px;">⬇</span>
-                        <!-- <span style="font-size: 18px; font-weight: bold;">{{ weather.morning.wind }}</span> km/h -->
+                            style="transform: rotate({{ weather.morning.wind_dir }}deg); font-size: {{ 18 + (weather.morning.wind * 0.8) }}px;">⬇</span>
                     </div>
                 </div>
                 <div class="weather-item">
-                    <div style="font-size: 18px; margin-bottom: 5px; color: white;">
-                        Afternoon</div>
+                    <div style="font-size: 14px; margin-bottom: 2px; color: white;">Afternoon</div>
+                    <div class="weather-icon">{{ weather.afternoon.icon }}</div>
                     <div class="weather-value">{{ weather.afternoon.temp }}°C</div>
                     <div class="weather-label">
                         <span class="wind-arrow"
-                            style="transform: rotate({{ weather.afternoon.wind_dir }}deg); font-size: {{ 14 + (weather.afternoon.wind * 0.8) }}px;">⬇</span>
-                        <!-- <span style="font-size: 18px; font-weight: bold;">{{ weather.afternoon.wind }}</span> km/h -->
+                            style="transform: rotate({{ weather.afternoon.wind_dir }}deg); font-size: {{ 18 + (weather.afternoon.wind * 0.8) }}px;">⬇</span>
                     </div>
                 </div>
                 <div class="weather-item">
-                    <div style="font-size: 18px; margin-bottom: 5px; color: white;">
-                        Evening</div>
+                    <div style="font-size: 14px; margin-bottom: 2px; color: white;">Evening</div>
+                    <div class="weather-icon">{{ weather.evening.icon }}</div>
                     <div class="weather-value">{{ weather.evening.temp }}°C</div>
                     <div class="weather-label">
                         <span class="wind-arrow"
-                            style="transform: rotate({{ weather.evening.wind_dir }}deg); font-size: {{ 14 + (weather.evening.wind * 0.8) }}px;">⬇</span>
-                        <!-- <span style="font-size: 18px; font-weight: bold;">{{ weather.evening.wind }}</span> km/h -->
+                            style="transform: rotate({{ weather.evening.wind_dir }}deg); font-size: {{ 18 + (weather.evening.wind * 0.8) }}px;">⬇</span>
                     </div>
                 </div>
                 <div class="weather-item full-width"
-                    style="grid-column: span 3; margin-top: 10px; font-size: 16px; padding: 5px;">
+                    style="grid-column: span 3; margin-top: 5px; font-size: 12px; padding: 4px;">
                     Sunrise: {{ weather.sunrise.split('T')[1] }} | Sunset: {{ weather.sunset.split('T')[1] }} | Precip:
                     {{ weather.daily_precip }}%
                 </div>
@@ -234,31 +76,71 @@
         </div>
     </div>
 
-    <div class="container">
-        <!-- X TRENDING -->
-        <div class="section">
-            <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff;">Trending on X</h2>
-            {% for item in x_trending %}
-            <div class="news-item" style="border-left: 3px solid #1da1f2;">
-                <div class="news-title" style="font-weight: 500; font-size: 14px;">
-                    <a href="{{ item.link }}" target="_blank" style="text-decoration: none; border: none;">{{
-                        item.headline }}</a>
+    <!-- X TRENDING (Full Width Middle Section) -->
+    <!-- Using a new container for full width -->
+    <div class="container" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="section full-width" style="width: 100%;">
+            <h2 style="border-bottom: 2px solid #868686; color: #ffffff;">Trending on X</h2>
+
+            {% if x_trending %}
+            {% set category_colors = {
+            'Science': '#9b59b6',
+            'Tech': '#3498db',
+            'World News': '#e74c3c',
+            'World Politics': '#e67e22',
+            'Copenhagen / Denmark': '#ff0000',
+            'Misc': '#95a5a6'
+            } %}
+
+            <!-- Grid for X categories to fill the full width page effectively -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                <!-- x_trending is now a sorted list of tuples: [('Category', [items]), ...] -->
+                {% for category, trends in x_trending %}
+                <div style="break-inside: avoid;">
+                    <div
+                        style="font-size: 15px; color: {{ category_colors.get(category, '#888') }}; font-weight: bold; margin-bottom: 6px; letter-spacing: 0.5px;">
+                        {{ category }}
+                    </div>
+                    {% if trends %}
+                    {% for item in trends %}
+                    <div class="news-item"
+                        style="border-left: 3px solid {{ category_colors.get(category, '#1da1f2') }}; margin-bottom: 6px; padding: 8px;">
+                        <div class="news-title" style="font-weight: 500; font-size: 13px;">
+                            <a href="{{ item.link }}" target="_blank" style="text-decoration: none; border: none;">{{
+                                item.name }}</a>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-top: 3px;">
+                            <div style="font-size: 10px; color: #666;">{{ item.post_count }} posts</div>
+                            {% if item.trending_since and item.trending_since != 'N/A' %}
+                            <div style="font-size: 9px; color: #555;">Since {{ item.trending_since }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="news-item" style="border-left: 3px solid #333; margin-bottom: 6px; padding: 8px;">
+                        <div class="news-summary" style="font-style: italic; color: #666; font-size: 11px;">Nothing
+                            trending</div>
+                    </div>
+                    {% endif %}
                 </div>
-                <!-- Optional summary if available, usually handled by headline merger but good to have fallback -->
-                {% if item.summary and item.summary != item.headline %}
-                <div class="news-summary">{{ item.summary }}</div>
-                {% endif %}
+                {% endfor %}
             </div>
+
             {% else %}
             <div class="news-item">
                 <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
             </div>
-            {% endfor %}
+            {% endif %}
         </div>
+    </div>
 
-        <!-- COPENHAGEN -->
+    <!-- BOTTOM ROW: Copenhagen | World News -->
+    <div class="container">
+        <!-- LEFT: Copenhagen + Space News -->
         <div class="section">
-            <h2 style="border-bottom: 2px solid #f21d1d; color: #ff0000;">Copenhagen Today</h2>
+            <h2 style="border-bottom: 2px solid #f21d1d; color: #ffffff;">Copenhagen Today</h2>
             {% for item in copenhagen %}
             <div class="news-item">
                 <div class="news-title" style="font-weight: normal; font-size: 14px;"><a href="{{ item.link }}"
@@ -269,14 +151,9 @@
                 <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
             </div>
             {% endfor %}
-        </div>
-    </div>
 
-
-    <div class="container">
-        <!-- WORLD NEWS -->
-        <div class="section">
-            <h2 style="border-bottom: 2px solid #0048ff; color: #0048ff;">World News</h2>
+            <!-- SPACE NEWS -->
+            <h2 style="border-bottom: 2px solid #0048ff; color: #ffffff;">World News</h2>
             {% for item in world_news %}
             <div class="news-item">
                 <div class="news-title"><a href="{{ item.link }}" target="_blank">{{ item.headline }}</a></div>
@@ -286,11 +163,12 @@
                 <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
             </div>
             {% endfor %}
+
         </div>
 
-        <!-- SPACE NEWS-->
+        <!-- RIGHT: World News -->
         <div class="section">
-            <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff;">Space News</h2>
+            <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff; margin-top: 20px;">Space News</h2>
             {% for item in space_news %}
             <div class="news-item">
                 <div class="news-title" style="font-weight: normal; font-size: 14px;"><a href="{{ item.link }}"
@@ -302,12 +180,14 @@
             </div>
             {% endfor %}
         </div>
+        <div class="section"></div>
     </div>
+
 
     <!-- Quote of the Day -->
     {% if quote %}
     <div
-        style="text-align: center; margin-bottom: 25px; padding: 20px; background-color: #222; border-radius: 15px; border-left: 4px solid #00ADB5;">
+        style="text-align: center; margin-bottom: 25px; padding: 20px; background-color: #222; border-radius: 15px; border-left: 6px solid #ffee00; border-right: 6px solid #ffee00;">
         <div
             style="font-family: 'Georgia', serif; font-style: italic; font-size: 18px; margin-bottom: 8px; color: #ddd;">
             {{ quote.text }}</div>
