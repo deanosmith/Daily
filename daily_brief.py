@@ -496,9 +496,5 @@ def main():
     
     logger.info("Done.")
 
-def slack_test():
-    send_to_slack("daily_brief.pdf")
-
 if __name__ == "__main__":
-    # main()
-    slack_test()
+    main()
