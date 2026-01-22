@@ -78,6 +78,10 @@ a {
     border: 1px solid #333;
 }
 
+.weather-item.full-width {
+    grid-column: span 3;
+}
+
 .weather-value {
     font-size: 24px;
     /* Increased size */
@@ -91,9 +95,49 @@ a {
 }
 
 .weather-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
     font-size: 11px;
     color: #aaa;
     margin-top: 2px;
+}
+
+.wind-speed {
+    font-size: 9px;
+    color: #8f8f8f;
+}
+
+.weather-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    margin-top: 6px;
+}
+
+.weather-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #e2e2e2;
+    background-color: #1f1f1f;
+    border: 1px solid #2f2f2f;
+    border-radius: 999px;
+    padding: 5px 12px;
+}
+
+.weather-meta-icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.weather-meta-text {
+    font-size: 14px;
 }
 
 /* Stocks */
@@ -131,7 +175,8 @@ a {
     background-color: #252525;
     padding: 10px;
     border-radius: 8px;
-    border: 1px solid #333;
+    border: 1px solid var(--section-accent, #333);
+    break-inside: avoid;
 }
 
 .news-title {
@@ -148,9 +193,84 @@ a {
     display: block;
 }
 
+.keyword-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0 0 6px 0;
+}
+
+.keyword-badge {
+    background-color: transparent;
+    border: 1px solid #6c6c6c;
+    color: #d2d2d2;
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.keyword-text {
+    display: block;
+}
+
 .news-summary {
     font-size: 15px;
     color: #aaa;
     line-height: 1.6;
     margin-top: 3px;
+}
+
+.x-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.columns {
+    width: 100%;
+}
+
+.columns::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column {
+    width: 48%;
+    break-inside: auto;
+    page-break-inside: auto;
+}
+
+.column-left {
+    float: left;
+}
+
+.column-right {
+    float: right;
+}
+
+.column-section {
+    width: 100%;
+    break-inside: auto;
+    page-break-inside: auto;
+}
+
+.world-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.world-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.world-column .news-item {
+    margin-bottom: 0;
 }

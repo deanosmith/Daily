@@ -8,8 +8,7 @@
 </head>
 
 <body>
-    <h1>{{ date }} <span style="font-size: 1em; color: #555; vertical-align: middle;">{{ "%.1f"|format(year_percent)
-            }}%</span></h1>
+    <h1>{{ date }} | {{ "%.1f"|format(year_percent)}}%</h1>
     <div class="container">
         <!-- WEATHER -->
         <div class="section">
@@ -23,6 +22,7 @@
                     <div class="weather-label">
                         <span class="wind-arrow"
                             style="transform: rotate({{ weather.morning.wind_dir }}deg); font-size: {{ 18 + (weather.morning.wind * 0.8) }}px;">⬇</span>
+                        <div class="wind-speed">{{ weather.morning.wind }} km/h</div>
                     </div>
                 </div>
                 <div class="weather-item">
@@ -32,6 +32,7 @@
                     <div class="weather-label">
                         <span class="wind-arrow"
                             style="transform: rotate({{ weather.afternoon.wind_dir }}deg); font-size: {{ 18 + (weather.afternoon.wind * 0.8) }}px;">⬇</span>
+                        <div class="wind-speed">{{ weather.afternoon.wind }} km/h</div>
                     </div>
                 </div>
                 <div class="weather-item">
@@ -41,12 +42,23 @@
                     <div class="weather-label">
                         <span class="wind-arrow"
                             style="transform: rotate({{ weather.evening.wind_dir }}deg); font-size: {{ 18 + (weather.evening.wind * 0.8) }}px;">⬇</span>
+                        <div class="wind-speed">{{ weather.evening.wind }} km/h</div>
                     </div>
                 </div>
-                <div class="weather-item full-width"
-                    style="grid-column: span 3; margin-top: 5px; font-size: 12px; padding: 4px;">
-                    Sunrise: {{ weather.sunrise.split('T')[1] }} | Sunset: {{ weather.sunset.split('T')[1] }} | Precip:
-                    {{ weather.daily_precip }}%
+                <!-- TODO -->
+                <div class="weather-item full-width weather-meta">
+                    <div class="weather-meta-item">
+                        <span class="weather-meta-icon">🌅</span>
+                        <span class="weather-meta-text">{{ weather.sunrise.split('T')[1][:5] }}</span>
+                    </div>
+                    <div class="weather-meta-item">
+                        <span class="weather-meta-icon">🌇</span>
+                        <span class="weather-meta-text">{{ weather.sunset.split('T')[1][:5] }}</span>
+                    </div>
+                    <div class="weather-meta-item">
+                        <span class="weather-meta-icon">🌧️</span>
+                        <span class="weather-meta-text">{{ weather.daily_precip }}%</span>
+                    </div>
                 </div>
             </div>
             {% else %}
@@ -60,7 +72,7 @@
         <div class="section">
             <h2
                 style="border-bottom: 2px solid #ffffff; color: #ffffff; display: flex; justify-content: space-between; align-items: baseline;">
-                Markets <span style="font-size: 1em; color: {{ 'green' if stocks.average_percent >= 0 else 'red' }};">{{
+                Markets <span style="font-size: 1.25em; font-weight: bold; font-family: 'Courier New', monospace; color: {{ 'green' if stocks.average_percent >= 0 else 'red' }};">{{
                     "%.2f"|format(stocks.average_percent) }}%</span></h2>
             {% for name, data in stocks.items() %}
             {% if name != 'average_percent' %}
@@ -93,7 +105,7 @@
             } %}
 
             <!-- Grid for X categories to fill the full width page effectively -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+            <div class="x-grid">
                 <!-- x_trending is now a sorted list of tuples: [('Category', [items]), ...] -->
                 {% for category, trends in x_trending %}
                 <div style="break-inside: avoid;">
@@ -104,22 +116,22 @@
                     {% if trends %}
                     {% for item in trends %}
                     <div class="news-item"
-                        style="border-left: 3px solid {{ category_colors.get(category, '#1da1f2') }}; margin-bottom: 6px; padding: 8px;">
-                        <div class="news-title" style="font-weight: 500; font-size: 13px;">
+                        style="border-left: 3px solid {{ category_colors.get(category, '#1da1f2') }};">
+                        <div class="news-title">
                             <a href="{{ item.link }}" target="_blank" style="text-decoration: none; border: none;">{{
                                 item.name }}</a>
                         </div>
                         <div
                             style="display: flex; justify-content: space-between; align-items: center; margin-top: 3px;">
                             <div style="font-size: 10px; color: #666;">{{ item.post_count }} posts</div>
-                            {% if item.trending_since and item.trending_since != 'N/A' %}
+                            {% if item.trending_since %}
                             <div style="font-size: 9px; color: #555;">Since {{ item.trending_since }}</div>
                             {% endif %}
                         </div>
                     </div>
                     {% endfor %}
                     {% else %}
-                    <div class="news-item" style="border-left: 3px solid #333; margin-bottom: 6px; padding: 8px;">
+                    <div class="news-item" style="border-left: 3px solid #333;">
                         <div class="news-summary" style="font-style: italic; color: #666; font-size: 11px;">Nothing
                             trending</div>
                     </div>
@@ -136,14 +148,14 @@
         </div>
     </div>
 
-    <!-- BOTTOM ROW: Copenhagen | World News -->
-    <div class="container">
-        <!-- LEFT: Copenhagen + Space News -->
-        <div class="section">
+    <!-- BOTTOM ROW: Copenhagen | Space News -->
+    <div class="columns">
+        <div class="column column-left">
+            <div class="section column-section" style="--section-accent: #f21d1d;">
             <h2 style="border-bottom: 2px solid #f21d1d; color: #ffffff;">Copenhagen Today</h2>
             {% for item in copenhagen %}
             <div class="news-item">
-                <div class="news-title" style="font-weight: normal; font-size: 14px;"><a href="{{ item.link }}"
+                <div class="news-title"><a href="{{ item.link }}"
                         target="_blank" style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
             </div>
             {% else %}
@@ -152,26 +164,16 @@
             </div>
             {% endfor %}
 
-            <!-- SPACE NEWS -->
-            <h2 style="border-bottom: 2px solid #0048ff; color: #ffffff;">World News</h2>
-            {% for item in world_news %}
-            <div class="news-item">
-                <div class="news-title"><a href="{{ item.link }}" target="_blank">{{ item.headline }}</a></div>
-            </div>
-            {% else %}
-            <div class="news-item">
-                <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
-            </div>
-            {% endfor %}
-
+        </div>
         </div>
 
         <!-- RIGHT: World News -->
-        <div class="section">
-            <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff; margin-top: 20px;">Space News</h2>
+        <div class="column column-right">
+            <div class="section column-section" style="--section-accent: #ffffff;">
+            <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff;">Space News</h2>
             {% for item in space_news %}
             <div class="news-item">
-                <div class="news-title" style="font-weight: normal; font-size: 14px;"><a href="{{ item.link }}"
+                <div class="news-title"><a href="{{ item.link }}"
                         target="_blank" style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
             </div>
             {% else %}
@@ -179,8 +181,39 @@
                 <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
             </div>
             {% endfor %}
+            </div>
         </div>
-        <div class="section"></div>
+    </div>
+
+    <!-- WORLD NEWS (Full Width) -->
+    <div class="container" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="section full-width" style="--section-accent: #0048ff;">
+            <h2 style="border-bottom: 2px solid #0048ff; color: #ffffff;">World News</h2>
+            {% if world_news %}
+            {% set world_left = world_news[:5] %}
+            {% set world_right = world_news[5:10] %}
+            <div class="world-grid">
+                <div class="world-column">
+                    {% for item in world_left %}
+                    <div class="news-item">
+                        <div class="news-title"><a href="{{ item.link }}" target="_blank">{{ item.headline }}</a></div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="world-column">
+                    {% for item in world_right %}
+                    <div class="news-item">
+                        <div class="news-title"><a href="{{ item.link }}" target="_blank">{{ item.headline }}</a></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <div class="news-item">
+                <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
+            </div>
+            {% endif %}
+        </div>
     </div>
 
 
@@ -192,7 +225,7 @@
             style="font-family: 'Georgia', serif; font-style: italic; font-size: 18px; margin-bottom: 8px; color: #ddd;">
             {{ quote.text }}</div>
         <div
-            style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #00ADB5; letter-spacing: 1px;">
+            style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #ffee00; letter-spacing: 1px;">
             {{ quote.author }}
         </div>
     </div>
