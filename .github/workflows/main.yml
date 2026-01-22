@@ -31,8 +31,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install dependencies
-        run: pip install requests python-dotenv yfinance feedparser jinja2 weasyprint slack_sdk requests_oauthlib
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v3
+      - name: Sync dependencies
+        run: uv sync --frozen --no-dev
       - name: Run daily brief
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
@@ -42,7 +44,7 @@ jobs:
           CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-        run: python daily_brief.py
+        run: uv run python daily_brief.py
       - name: Commit and Push PDF
         run: |
           git config --global user.name "github-actions[bot]"
