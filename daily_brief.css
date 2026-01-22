@@ -91,9 +91,18 @@ a {
 }
 
 .weather-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
     font-size: 11px;
     color: #aaa;
     margin-top: 2px;
+}
+
+.wind-speed {
+    font-size: 9px;
+    color: #8f8f8f;
 }
 
 /* Stocks */
@@ -132,6 +141,7 @@ a {
     padding: 10px;
     border-radius: 8px;
     border: 1px solid #333;
+    break-inside: avoid;
 }
 
 .news-title {
@@ -153,4 +163,37 @@ a {
     color: #aaa;
     line-height: 1.6;
     margin-top: 3px;
+}
+
+.x-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.two-column {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 16px 0;
+    break-inside: auto;
+    page-break-inside: auto;
+}
+
+.two-column tr {
+    break-inside: auto;
+    page-break-inside: auto;
+}
+
+.two-column-cell {
+    width: 50%;
+    vertical-align: top;
+    padding: 0;
+    break-inside: auto;
+    page-break-inside: auto;
+}
+
+.column-section {
+    width: 100%;
+    break-inside: auto;
+    page-break-inside: auto;
 }
