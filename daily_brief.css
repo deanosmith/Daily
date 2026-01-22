@@ -78,6 +78,10 @@ a {
     border: 1px solid #333;
 }
 
+.weather-item.full-width {
+    grid-column: span 3;
+}
+
 .weather-value {
     font-size: 24px;
     /* Increased size */
@@ -103,6 +107,33 @@ a {
 .wind-speed {
     font-size: 9px;
     color: #8f8f8f;
+}
+
+.weather-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    margin-top: 4px;
+}
+
+.weather-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #d8d8d8;
+}
+
+.weather-meta-icon {
+    font-size: 13px;
+    line-height: 1;
+}
+
+.weather-meta-text {
+    font-size: 12px;
 }
 
 /* Stocks */
@@ -171,25 +202,28 @@ a {
     gap: 15px;
 }
 
-.two-column {
+.columns {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 16px 0;
+}
+
+.columns::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column {
+    width: 48%;
     break-inside: auto;
     page-break-inside: auto;
 }
 
-.two-column tr {
-    break-inside: auto;
-    page-break-inside: auto;
+.column-left {
+    float: left;
 }
 
-.two-column-cell {
-    width: 50%;
-    vertical-align: top;
-    padding: 0;
-    break-inside: auto;
-    page-break-inside: auto;
+.column-right {
+    float: right;
 }
 
 .column-section {

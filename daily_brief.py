@@ -91,6 +91,8 @@ X_CATEGORIES = {
     'Misc': ['northern lights', 'south africa', 'aurora', 'comet', 'asteroid', 'meteor']
 }
 
+X_TRENDS_PER_CATEGORY = 10
+
 
 # ==============================================================================
 # HELPER FUNCTIONS
@@ -139,6 +141,11 @@ def format_trending_since(raw_since):
             minute = match.group(2)
             if 0 <= hour <= 23:
                 return f"{hour:02d}:{minute}"
+        lowered = value.lower()
+        if "trend" in lowered or "now" in lowered:
+            return "Now"
+        if len(value) <= 8:
+            return value
     return None
 
 
@@ -271,7 +278,8 @@ def summarize_with_ai(text, prompt_prefix="Summarize this news item:"):
         }
         system_prompt = (
             "You are a helpful news assistant. "
-            "Merge the news title and description into one single, helpful, engaging sentence (max 20 words). "
+            "Merge the news title and description into one concise sentence (max 22 words). "
+            "Start with 2-3 bracketed keywords, e.g. [AI, Nvidia, chips]. "
             "Do not filter anything out. Be specific."
         )
         payload = {
@@ -302,7 +310,9 @@ def fetch_rss_feed(url, limit=3, prompt="Summarize this content:"):
     try:
         feed = feedparser.parse(url)
         for entry in feed.entries[:limit]:
-            content_text = getattr(entry, 'summary', getattr(entry, 'description', entry.title))
+            title = getattr(entry, 'title', '')
+            summary = getattr(entry, 'summary', getattr(entry, 'description', ''))
+            content_text = f"{title}. {summary}".strip(". ").strip()
             summary = summarize_with_ai(content_text, prompt)
             if summary:
                 news_items.append({
@@ -373,7 +383,7 @@ def fetch_x_trending():
             ]
             
             cleaned_matches = []
-            for t in matches[:5]: # Top 5 per category
+            for t in matches[:X_TRENDS_PER_CATEGORY]:
                 # Clean trending_since data
                 raw_since = t.get('trending_since')
                 display_time = format_trending_since(raw_since)

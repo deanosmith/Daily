@@ -45,10 +45,19 @@
                         <div class="wind-speed">{{ weather.evening.wind }} km/h</div>
                     </div>
                 </div>
-                <div class="weather-item full-width"
-                    style="grid-column: span 3; margin-top: 5px; font-size: 12px; padding: 4px;">
-                    Sunrise: {{ weather.sunrise.split('T')[1] }} | Sunset: {{ weather.sunset.split('T')[1] }} | Precip:
-                    {{ weather.daily_precip }}%
+                <div class="weather-item full-width weather-meta">
+                    <div class="weather-meta-item">
+                        <span class="weather-meta-icon">🌅</span>
+                        <span class="weather-meta-text">{{ weather.sunrise.split('T')[1][:5] }}</span>
+                    </div>
+                    <div class="weather-meta-item">
+                        <span class="weather-meta-icon">🌇</span>
+                        <span class="weather-meta-text">{{ weather.sunset.split('T')[1][:5] }}</span>
+                    </div>
+                    <div class="weather-meta-item">
+                        <span class="weather-meta-icon">🌧️</span>
+                        <span class="weather-meta-text">{{ weather.daily_precip }}%</span>
+                    </div>
                 </div>
             </div>
             {% else %}
@@ -106,7 +115,7 @@
                     {% if trends %}
                     {% for item in trends %}
                     <div class="news-item"
-                        style="border-left: 3px solid {{ category_colors.get(category, '#1da1f2') }}; margin-bottom: 6px; padding: 8px;">
+                        style="border-left: 3px solid {{ category_colors.get(category, '#1da1f2') }};">
                         <div class="news-title">
                             <a href="{{ item.link }}" target="_blank" style="text-decoration: none; border: none;">{{
                                 item.name }}</a>
@@ -121,7 +130,7 @@
                     </div>
                     {% endfor %}
                     {% else %}
-                    <div class="news-item" style="border-left: 3px solid #333; margin-bottom: 6px; padding: 8px;">
+                    <div class="news-item" style="border-left: 3px solid #333;">
                         <div class="news-summary" style="font-style: italic; color: #666; font-size: 11px;">Nothing
                             trending</div>
                     </div>
@@ -139,10 +148,9 @@
     </div>
 
     <!-- BOTTOM ROW: Copenhagen | World News -->
-    <table class="two-column">
-        <tr>
-            <td class="two-column-cell">
-                <div class="section column-section">
+    <div class="columns">
+        <div class="column column-left">
+            <div class="section column-section">
             <h2 style="border-bottom: 2px solid #f21d1d; color: #ffffff;">Copenhagen Today</h2>
             {% for item in copenhagen %}
             <div class="news-item">
@@ -167,13 +175,13 @@
             </div>
             {% endfor %}
 
-                </div>
-            </td>
+        </div>
+        </div>
 
         <!-- RIGHT: World News -->
-            <td class="two-column-cell">
-                <div class="section column-section">
-            <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff; margin-top: 20px;">Space News</h2>
+        <div class="column column-right">
+            <div class="section column-section">
+            <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff;">Space News</h2>
             {% for item in space_news %}
             <div class="news-item">
                 <div class="news-title"><a href="{{ item.link }}"
@@ -184,10 +192,9 @@
                 <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
             </div>
             {% endfor %}
-                </div>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Quote of the Day -->
