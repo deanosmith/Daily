@@ -1,11 +1,20 @@
 import json
+import os
 from requests_oauthlib import OAuth1Session
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Replace with your keys and user tokens
-consumer_key = 'EUCslzDaI2RstsBXNkc7MwDky'
-consumer_secret = 'ZErY5IMmqHYQtYiOHqTZNZjUaRT4cptiaFmMmZkqgOeH7fnDq3'
-access_token = '329605343-naBJBwtvpKwsBcPgFlqJsfMG3qqjYQ2yFuJbAlMb'
-access_token_secret = 'BDdpsrMgLvdtBBmwIHJjBgLNgWwCzhkiAVAq18J75YHYt'
+consumer_key = os.getenv("CONSUMER_KEY")
+consumer_secret = os.getenv("CONSUMER_SECRET")
+access_token = os.getenv("ACCESS_TOKEN")
+access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
+
+# consumer_key = 'EUCslzDaI2RstsBXNkc7MwDky'
+# consumer_secret = 'ZErY5IMmqHYQtYiOHqTZNZjUaRT4cptiaFmMmZkqgOeH7fnDq3'
+# access_token = '329605343-naBJBwtvpKwsBcPgFlqJsfMG3qqjYQ2yFuJbAlMb'
+# access_token_secret = 'BDdpsrMgLvdtBBmwIHJjBgLNgWwCzhkiAVAq18J75YHYt'
 
 oauth = OAuth1Session(consumer_key,
                       client_secret=consumer_secret,
@@ -16,7 +25,9 @@ url = 'https://api.x.com/2/users/personalized_trends'
 response = oauth.get(url)
 
 if response.status_code == 200:
-    trends_data = response.json().get('data', [])
+    raw_data = response.json().get('data', [])
+    print(f"Debug: API returned {len(raw_data)} items total.") # <--- Add this
+    trends_data = raw_data[:10]
 
     # Cleaned-up and extended keyword groups (lowercase only)
     categories = {

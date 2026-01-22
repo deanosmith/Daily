@@ -2,6 +2,8 @@ import os
 import ssl
 import sys
 import re
+import html
+import hashlib
 import json
 import logging
 import requests
@@ -12,6 +14,7 @@ from dotenv import load_dotenv
 import yfinance as yf
 import feedparser
 from jinja2 import Environment, FileSystemLoader
+from markupsafe import Markup
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
@@ -82,6 +85,16 @@ WEATHER_ICONS = {
 }
 
 TRENDING_TIME_RE = re.compile(r"(\d{1,2}):(\d{2})")
+KEYWORDS_RE = re.compile(r"^\s*\[(?P<keywords>[^\]]+)\]\s*")
+
+KEYWORD_COLOR_PALETTE = [
+    ("#294f3a", "#3b6b4c", "#d9f4e2"),
+    ("#2f3f5c", "#3f567a", "#d9e6ff"),
+    ("#5a3a2e", "#7a4f3e", "#ffe1d3"),
+    ("#4a375f", "#5f4c78", "#f0e3ff"),
+    ("#3b545a", "#4f6f77", "#e0f3f6"),
+    ("#5a5a2e", "#78783e", "#fff6c9"),
+]
 
 X_CATEGORIES = {
     'Science': ['science', 'physics', 'astronomy', 'nasa', 'space', 'discovery', 'quantum'],
@@ -91,7 +104,7 @@ X_CATEGORIES = {
     'Misc': ['northern lights', 'south africa', 'aurora', 'comet', 'asteroid', 'meteor']
 }
 
-X_TRENDS_PER_CATEGORY = 10
+X_TRENDS_PER_CATEGORY = 12
 
 
 # ==============================================================================
@@ -109,6 +122,33 @@ def get_weather_text(code):
 def get_weather_icon(code):
     """Return icon for WMO weather code."""
     return WEATHER_ICONS.get(code, "?")
+
+def keyword_style(keyword):
+    """Return a deterministic style string for keyword badges."""
+    digest = hashlib.md5(keyword.lower().encode("utf-8")).hexdigest()
+    index = int(digest[:8], 16) % len(KEYWORD_COLOR_PALETTE)
+    bg, border, text = KEYWORD_COLOR_PALETTE[index]
+    return f"--kw-bg: {bg}; --kw-border: {border}; --kw-text: {text};"
+
+def stylize_keywords(text):
+    """Wrap leading [keywords] in span badges for styling."""
+    if not text:
+        return text
+    match = KEYWORDS_RE.match(text)
+    if not match:
+        return text
+    keywords = [kw.strip() for kw in match.group("keywords").split(",") if kw.strip()]
+    if not keywords:
+        return text
+    badges = "".join(
+        f'<span class="keyword-badge" style="{keyword_style(kw)}">{html.escape(kw)}</span>'
+        for kw in keywords
+    )
+    rest = text[match.end():].strip()
+    rest_html = html.escape(rest)
+    rest_html = f'<span class="keyword-text">{rest_html}</span>' if rest_html else ""
+    # TODO
+    return Markup(f'<span class="keyword-badges">{badges}</span>{rest_html}')
 
 def format_trending_since(raw_since):
     """Normalize trending_since to HH:MM, or return None if invalid."""
@@ -304,7 +344,7 @@ def summarize_with_ai(text, prompt_prefix="Summarize this news item:"):
         return text if text else "Content unavailable"
 
 
-def fetch_rss_feed(url, limit=3, prompt="Summarize this content:"):
+def fetch_rss_feed(url, limit=5, prompt="Summarize this content:"):
     """Generic RSS feed fetcher and summarizer."""
     news_items = []
     try:
@@ -314,6 +354,7 @@ def fetch_rss_feed(url, limit=3, prompt="Summarize this content:"):
             summary = getattr(entry, 'summary', getattr(entry, 'description', ''))
             content_text = f"{title}. {summary}".strip(". ").strip()
             summary = summarize_with_ai(content_text, prompt)
+            summary = stylize_keywords(summary)
             if summary:
                 news_items.append({
                     "headline": summary,
@@ -327,19 +368,19 @@ def fetch_rss_feed(url, limit=3, prompt="Summarize this content:"):
 def fetch_world_news():
     """Fetch and summarize world news from BBC."""
     logger.info("Fetching world news...")
-    return fetch_rss_feed("http://feeds.bbci.co.uk/news/world/rss.xml", limit=5, prompt="Summarize this news item:")
+    return fetch_rss_feed("http://feeds.bbci.co.uk/news/world/rss.xml", limit=10, prompt="Summarize this news item:")
 
 
 def fetch_space_news():
     """Fetch and summarize space news."""
     logger.info("Fetching space news...")
-    return fetch_rss_feed("https://spacenews.com/feed/", limit=3, prompt="Summarize this content:")
+    return fetch_rss_feed("https://spacenews.com/feed/", limit=5, prompt="Summarize this content:")
 
 
 def fetch_copenhagen_events():
     """Fetch and summarize Copenhagen events/news."""
     logger.info("Fetching Copenhagen events...")
-    return fetch_rss_feed("https://cphpost.dk/feed/", limit=3, prompt="Summarize this content.")
+    return fetch_rss_feed("https://cphpost.dk/feed/", limit=5, prompt="Summarize this content.")
 
 
 def fetch_x_trending():
@@ -542,8 +583,7 @@ def main():
     
     # 3. Send to Slack
     if pdf_path:
-        # send_to_slack(pdf_path)
-        print("Skipping Slack")
+        send_to_slack(pdf_path)
     
     logger.info("Done.")
 

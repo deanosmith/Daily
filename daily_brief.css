@@ -113,27 +113,31 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    margin-top: 4px;
+    gap: 12px;
+    padding: 10px 12px;
+    margin-top: 6px;
 }
 
 .weather-meta-item {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 12px;
+    gap: 8px;
+    font-size: 14px;
     font-weight: 600;
-    color: #d8d8d8;
+    color: #e2e2e2;
+    background-color: #1f1f1f;
+    border: 1px solid #2f2f2f;
+    border-radius: 999px;
+    padding: 5px 12px;
 }
 
 .weather-meta-icon {
-    font-size: 13px;
+    font-size: 18px;
     line-height: 1;
 }
 
 .weather-meta-text {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 /* Stocks */
@@ -171,7 +175,7 @@ a {
     background-color: #252525;
     padding: 10px;
     border-radius: 8px;
-    border: 1px solid #333;
+    border: 1px solid var(--section-accent, #333);
     break-inside: avoid;
 }
 
@@ -186,6 +190,29 @@ a {
     color: #ececec;
     text-decoration: none;
     border: none;
+    display: block;
+}
+
+.keyword-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0 0 6px 0;
+}
+
+.keyword-badge {
+    background-color: transparent;
+    border: 1px solid #6c6c6c;
+    color: #d2d2d2;
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.keyword-text {
     display: block;
 }
 
@@ -230,4 +257,20 @@ a {
     width: 100%;
     break-inside: auto;
     page-break-inside: auto;
+}
+
+.world-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.world-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.world-column .news-item {
+    margin-bottom: 0;
 }
