@@ -1,3 +1,4 @@
+import argparse
 import os
 import ssl
 import sys
@@ -6,8 +7,11 @@ import html
 import hashlib
 import json
 import logging
+import functools
 import requests
 import calendar
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlparse
 from datetime import date, datetime
 from dotenv import load_dotenv
 
@@ -105,8 +109,9 @@ X_CATEGORIES = {
 }
 
 X_TRENDS_PER_CATEGORY = 12
-DATA_OUTPUT_PATH = "daily_brief_data.json"
-HTML_OUTPUT_PATH = "daily_brief.html"
+DATA_OUTPUT_PATH = "resources/daily_brief_data.json"
+HTML_OUTPUT_PATH = "brevity.html"
+REFRESH_X_ENDPOINT = "/api/refresh/x"
 
 
 # ==============================================================================
@@ -474,6 +479,87 @@ def fetch_x_trending():
         return {}
 
 
+# ==============================================================================
+# REFRESH & SERVER
+# ==============================================================================
+
+def refresh_x_trending(data_path=DATA_OUTPUT_PATH):
+    """Refresh X trending data and persist to JSON."""
+    logger.info("Refreshing X trending data...")
+    data = {}
+    if os.path.exists(data_path):
+        try:
+            with open(data_path, "r", encoding="utf-8") as file:
+                data = json.load(file)
+        except Exception as e:
+            logger.warning(f"Failed to read existing data file: {e}")
+            data = {}
+
+    new_trends = fetch_x_trending()
+    if new_trends:
+        data["x_trending"] = new_trends
+    elif "x_trending" not in data:
+        data["x_trending"] = []
+
+    try:
+        safe_data = make_json_safe(data)
+        with open(data_path, "w", encoding="utf-8") as file:
+            json.dump(safe_data, file, ensure_ascii=True, indent=2)
+        logger.info(f"X trending data saved to {data_path}")
+    except Exception as e:
+        logger.error(f"Error saving X trending data: {e}")
+    return data.get("x_trending", [])
+
+
+class DailyBriefHandler(SimpleHTTPRequestHandler):
+    """Serve static files and handle refresh endpoints."""
+
+    def do_OPTIONS(self):
+        path = urlparse(self.path).path
+        if path == REFRESH_X_ENDPOINT:
+            self.send_response(204)
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type")
+            self.end_headers()
+            return
+        self.send_error(404)
+
+    def do_POST(self):
+        path = urlparse(self.path).path
+        if path == REFRESH_X_ENDPOINT:
+            try:
+                trends = refresh_x_trending()
+                count = 0
+                if isinstance(trends, list):
+                    count = sum(len(items) for _, items in trends if isinstance(items, list))
+                self._send_json(200, {"status": "ok", "count": count})
+            except Exception as e:
+                logger.error(f"Refresh failed: {e}")
+                self._send_json(500, {"status": "error"})
+            return
+        self.send_error(404)
+
+    def _send_json(self, status_code, payload):
+        body = json.dumps(payload, ensure_ascii=True).encode("utf-8")
+        self.send_response(status_code)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+        self.wfile.write(body)
+
+
+def run_server(host="127.0.0.1", port=8000):
+    """Run a simple local server for the daily brief."""
+    handler = functools.partial(DailyBriefHandler, directory=os.path.dirname(__file__))
+    server = ThreadingHTTPServer((host, port), handler)
+    logger.info(f"Serving daily brief at http://{host}:{port}")
+    logger.info(f"Refresh X endpoint: {REFRESH_X_ENDPOINT}")
+    server.serve_forever()
+
+
 def fetch_quote():
     """Fetch a Quote of the Day (Stoicism/Proverbs) using AI."""
     logger.info("Fetching Quote of the Day...")
@@ -520,7 +606,7 @@ def generate_pdf(data):
         logger.error("PDF generation skipped. Install WeasyPrint system dependencies.")
         return None
     try:
-        html_out = render_html(data)
+        html_out = render_html(data, render_mode="pdf")
         pdf_path = "daily_brief.pdf"
         HTML(string=html_out, base_url=os.path.dirname(__file__)).write_pdf(pdf_path)
         logger.info(f"PDF generated at {pdf_path}")
@@ -530,18 +616,24 @@ def generate_pdf(data):
         return None
 
 
-def render_html(data):
+def render_html(data, render_mode="pdf"):
     """Render daily brief HTML using the Jinja2 template."""
     env = Environment(loader=FileSystemLoader(os.path.dirname(__file__)))
     template = env.get_template("daily_brief_template.html")
-    return template.render(**data)
+    context = {
+        **data,
+        "data_path": DATA_OUTPUT_PATH,
+        "render_mode": render_mode,
+        "refresh_x_endpoint": REFRESH_X_ENDPOINT,
+    }
+    return template.render(**context)
 
 
 def generate_html(data, output_path=HTML_OUTPUT_PATH):
     """Generate HTML file from data using Jinja2."""
     logger.info("Generating HTML...")
     try:
-        html_out = render_html(data)
+        html_out = render_html(data, render_mode="html")
         with open(output_path, "w", encoding="utf-8") as file:
             file.write(html_out)
         logger.info(f"HTML generated at {output_path}")
@@ -637,5 +729,22 @@ def main():
     
     logger.info("Done.")
 
-if __name__ == "__main__":
+def cli():
+    parser = argparse.ArgumentParser(description="Daily brief generator and server.")
+    parser.add_argument("--refresh-x", action="store_true", help="Refresh X trending data only.")
+    parser.add_argument("--serve", action="store_true", help="Serve the daily brief locally.")
+    parser.add_argument("--host", default="127.0.0.1", help="Host for the local server.")
+    parser.add_argument("--port", type=int, default=8000, help="Port for the local server.")
+    args = parser.parse_args()
+
+    if args.refresh_x:
+        refresh_x_trending()
+        return
+    if args.serve:
+        run_server(args.host, args.port)
+        return
     main()
+
+
+if __name__ == "__main__":
+    cli()

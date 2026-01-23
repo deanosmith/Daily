@@ -175,7 +175,8 @@ a {
     background-color: #252525;
     padding: 10px;
     border-radius: 8px;
-    border: 1px solid var(--section-accent, #333);
+    border: none;
+    border-left: 2px solid var(--section-accent, #333);
     break-inside: avoid;
 }
 
@@ -203,8 +204,8 @@ a {
 .keyword-badge {
     background-color: transparent;
     border: none;
-    box-shadow: 0 0 0 1px #6c6c6c;
-    color: #d2d2d2;
+    box-shadow: 0 0 0 1px #b3b3b3;
+    color: #ffffff;
     border-radius: 999px;
     padding: 2px 8px;
     font-size: 10px;
@@ -274,4 +275,56 @@ a {
 
 .world-column .news-item {
     margin-bottom: 0;
+}
+
+.refresh-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    padding: 2px 6px;
+    font-size: 11px;
+    line-height: 1;
+    border-radius: 999px;
+    background: transparent;
+    border: 1px solid #444;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.refresh-button:hover {
+    border-color: #666;
+    color: #e0e0e0;
+}
+
+.refresh-button:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.refresh-button.is-loading {
+    animation: spin 0.8s linear infinite;
+}
+
+.data-error {
+    margin: 6px 0 10px;
+    padding: 8px 10px;
+    background-color: #2b1a1a;
+    border: 1px solid #5c2b2b;
+    color: #ffbdbd;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media print {
+    .refresh-button,
+    .data-error {
+        display: none;
+    }
 }

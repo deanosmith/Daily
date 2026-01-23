@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Brevity</title>
+    <link rel="stylesheet" href="daily_brief.css">
+</head>
+
+<body>
+    <h1 id="page-title">Friday, January 23 | 6.3%</h1>
+    <div id="data-error" class="data-error" hidden></div>
+    <div class="container">
+        <!-- WEATHER -->
+        <div class="section">
+            <h2 style="border-bottom: 2px solid #1da1f2; color: #ffffff;">Weather (Copenhagen)</h2>
+            <div id="weather-content">
+            
+            <div class="weather-grid">
+                <div class="weather-item">
+                    <div style="font-size: 14px; margin-bottom: 2px; color: white;">Morning</div>
+                    <div class="weather-icon">☁️</div>
+                    <div class="weather-value">0°C</div>
+                    <div class="weather-label">
+                        <span class="wind-arrow"
+                            style="transform: rotate(98deg); font-size: 45.2px;">⬇</span>
+                        <div class="wind-speed">34 km/h</div>
+                    </div>
+                </div>
+                <div class="weather-item">
+                    <div style="font-size: 14px; margin-bottom: 2px; color: white;">Afternoon</div>
+                    <div class="weather-icon">☁️</div>
+                    <div class="weather-value">0°C</div>
+                    <div class="weather-label">
+                        <span class="wind-arrow"
+                            style="transform: rotate(94deg); font-size: 43.6px;">⬇</span>
+                        <div class="wind-speed">32 km/h</div>
+                    </div>
+                </div>
+                <div class="weather-item">
+                    <div style="font-size: 14px; margin-bottom: 2px; color: white;">Evening</div>
+                    <div class="weather-icon">☁️</div>
+                    <div class="weather-value">0°C</div>
+                    <div class="weather-label">
+                        <span class="wind-arrow"
+                            style="transform: rotate(95deg); font-size: 42.8px;">⬇</span>
+                        <div class="wind-speed">31 km/h</div>
+                    </div>
+                </div>
+                <!-- TODO -->
+                <div class="weather-item full-width weather-meta">
+                    <div class="weather-meta-item">
+                        <span class="weather-meta-icon">🌅</span>
+                        <span class="weather-meta-text">08:18</span>
+                    </div>
+                    <div class="weather-meta-item">
+                        <span class="weather-meta-icon">🌇</span>
+                        <span class="weather-meta-text">16:24</span>
+                    </div>
+                    <div class="weather-meta-item">
+                        <span class="weather-meta-icon">🌧️</span>
+                        <span class="weather-meta-text">0%</span>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+
+        <!-- MARKETS -->
+        <div class="section">
+            <h2
+                style="border-bottom: 2px solid #ffffff; color: #ffffff; display: flex; justify-content: space-between; align-items: baseline;">
+                Markets <span id="markets-average" style="font-size: 1.25em; font-weight: bold; font-family: 'Courier New', monospace; color: green;">1.88%</span></h2>
+            <div id="markets-content">
+            
+            
+            <div class="stock-item">
+                <span class="stock-name">S&P 500</span>
+                <span class="stock-price green">
+                    688.98 : <span style="font-size: 1.2em; font-weight: bold;">0.52%</span>
+                </span>
+            </div>
+            
+            
+            
+            <div class="stock-item">
+                <span class="stock-name">Tesla</span>
+                <span class="stock-price green">
+                    449.36 : <span style="font-size: 1.2em; font-weight: bold;">4.15%</span>
+                </span>
+            </div>
+            
+            
+            
+            <div class="stock-item">
+                <span class="stock-name">Nvidia</span>
+                <span class="stock-price green">
+                    184.84 : <span style="font-size: 1.2em; font-weight: bold;">0.83%</span>
+                </span>
+            </div>
+            
+            
+            
+            <div class="stock-item">
+                <span class="stock-name">Bitcoin</span>
+                <span class="stock-price red">
+                    88924.14 : <span style="font-size: 1.2em; font-weight: bold;">-0.60%</span>
+                </span>
+            </div>
+            
+            
+            
+            <div class="stock-item">
+                <span class="stock-name">United Health</span>
+                <span class="stock-price green">
+                    354.47 : <span style="font-size: 1.2em; font-weight: bold;">1.93%</span>
+                </span>
+            </div>
+            
+            
+            
+            <div class="stock-item">
+                <span class="stock-name">Echo Star</span>
+                <span class="stock-price green">
+                    127.97 : <span style="font-size: 1.2em; font-weight: bold;">4.47%</span>
+                </span>
+            </div>
+            
+            
+            
+            
+            </div>
+        </div>
+    </div>
+
+    <!-- X TRENDING (Full Width Middle Section) -->
+    <!-- Using a new container for full width -->
+    <div class="container" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="section full-width" style="width: 100%;">
+            <h2 style="border-bottom: 2px solid #868686; color: #ffffff;">
+                Trending on X
+                <button class="refresh-button" type="button" data-section="x_trending"
+                    aria-label="Refresh Trending on X" title="Refresh Trending on X">⟳</button>
+            </h2>
+
+            <div id="x-trending-content">
+            
+            
+
+            <!-- Grid for X categories to fill the full width page effectively -->
+            <div class="x-grid">
+                <!-- x_trending is now a sorted list of tuples: [('Category', [items]), ...] -->
+                
+                <div style="break-inside: avoid;">
+                    <div
+                        style="font-size: 15px; color: #e74c3c; font-weight: bold; margin-bottom: 6px; letter-spacing: 0.5px;">
+                        World News
+                    </div>
+                    
+                    
+                    <div class="news-item"
+                        style="border-left: 3px solid #e74c3c;">
+                        <div class="news-title">
+                            <a href="https://x.com/search?q=Musk+Recalls+Self-Taught+Path+from+Skepticism+to+SpaceX+and+Tesla+Success" target="_blank" style="text-decoration: none; border: none;">Musk Recalls Self-Taught Path from Skepticism to SpaceX and Tesla Success</a>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-top: 3px;">
+                            <div style="font-size: 10px; color: #666;">340 posts posts</div>
+                            
+                            <div style="font-size: 9px; color: #555;">Since Now</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="news-item"
+                        style="border-left: 3px solid #e74c3c;">
+                        <div class="news-title">
+                            <a href="https://x.com/search?q=Elon+Musk+Shares+Optimistic+Vision+at+Davos+Forum" target="_blank" style="text-decoration: none; border: none;">Elon Musk Shares Optimistic Vision at Davos Forum</a>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-top: 3px;">
+                            <div style="font-size: 10px; color: #666;">366K posts posts</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="news-item"
+                        style="border-left: 3px solid #e74c3c;">
+                        <div class="news-title">
+                            <a href="https://x.com/search?q=Trump+Defends+Homeowners+in+Davos+Housing+Speech" target="_blank" style="text-decoration: none; border: none;">Trump Defends Homeowners in Davos Housing Speech</a>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-top: 3px;">
+                            <div style="font-size: 10px; color: #666;">6.3K posts posts</div>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div style="break-inside: avoid;">
+                    <div
+                        style="font-size: 15px; color: #9b59b6; font-weight: bold; margin-bottom: 6px; letter-spacing: 0.5px;">
+                        Science
+                    </div>
+                    
+                    
+                    <div class="news-item"
+                        style="border-left: 3px solid #9b59b6;">
+                        <div class="news-title">
+                            <a href="https://x.com/search?q=Musk+Recalls+Self-Taught+Path+from+Skepticism+to+SpaceX+and+Tesla+Success" target="_blank" style="text-decoration: none; border: none;">Musk Recalls Self-Taught Path from Skepticism to SpaceX and Tesla Success</a>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-top: 3px;">
+                            <div style="font-size: 10px; color: #666;">340 posts posts</div>
+                            
+                            <div style="font-size: 9px; color: #555;">Since Now</div>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div style="break-inside: avoid;">
+                    <div
+                        style="font-size: 15px; color: #3498db; font-weight: bold; margin-bottom: 6px; letter-spacing: 0.5px;">
+                        Tech
+                    </div>
+                    
+                    
+                    <div class="news-item"
+                        style="border-left: 3px solid #3498db;">
+                        <div class="news-title">
+                            <a href="https://x.com/search?q=Musk+Recalls+Self-Taught+Path+from+Skepticism+to+SpaceX+and+Tesla+Success" target="_blank" style="text-decoration: none; border: none;">Musk Recalls Self-Taught Path from Skepticism to SpaceX and Tesla Success</a>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-top: 3px;">
+                            <div style="font-size: 10px; color: #666;">340 posts posts</div>
+                            
+                            <div style="font-size: 9px; color: #555;">Since Now</div>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+            </div>
+
+            
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM ROW: Copenhagen | Space News -->
+    <div class="columns">
+        <div class="column column-left">
+            <div class="section column-section" style="--section-accent: #f21d1d;">
+            <h2 style="border-bottom: 2px solid #f21d1d; color: #ffffff;">Copenhagen Today</h2>
+            <div id="copenhagen-content">
+            
+            <div class="news-item">
+                <div class="news-title"><a href="https://cphpost.dk/2026-01-23/opinion-2/teflon-mark-rutte-the-nato-chief-who-convinced-trump-not-to-invade-greenland/"
+                        target="_blank" style="text-decoration: none; border: none;"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">NATO</span><span class="keyword-badge" style="--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;">Rutte</span><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">Trump</span><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">Greenland</span></span><span class="keyword-text">NATO chief &quot;Teflon Mark&quot; Rutte convinced Trump not to invade Greenland, scrapping EU tariffs and securing a permanent deal.</span></a></div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title"><a href="https://cphpost.dk/2026-01-23/news/round-up/top-diplomat-to-represent-denmark-in-greenland-workgroup/"
+                        target="_blank" style="text-decoration: none; border: none;"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;">Denmark</span><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">Greenland</span><span class="keyword-badge" style="--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;">USA workgroup</span></span><span class="keyword-text">Denmark&#x27;s top diplomat Jeppe Tranholm-Mikkelsen will join US-Greenland working group led by Rubio&#x27;s deputy, confirmed by FM Lars Løkke Rasmussen.</span></a></div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title"><a href="https://cphpost.dk/2026-01-23/news/round-up/mette-frederiksen-to-meet-nato-chief-on-friday/"
+                        target="_blank" style="text-decoration: none; border: none;"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;">Danish PM</span><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">NATO</span><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">Greenland</span></span><span class="keyword-text">Danish PM Mette Frederiksen meets NATO chief Mark Rutte in Brussels Friday, after Trump-Rutte talks on future Greenland agreement.</span></a></div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title"><a href="https://cphpost.dk/2026-01-23/news/round-up/cold-windy-weather-to-mark-the-weekend-in-denmark/"
+                        target="_blank" style="text-decoration: none; border: none;"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;">Denmark</span><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">cold winds</span><span class="keyword-badge" style="--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;">weekend</span></span><span class="keyword-text">Biting cold and strong winds will make Denmark&#x27;s weekend feel much colder than temperatures indicate, says DMI.</span></a></div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title"><a href="https://cphpost.dk/2026-01-23/news/round-up/first-signs-of-west-nile-virus-found-in-denmark-health-officials-say/"
+                        target="_blank" style="text-decoration: none; border: none;"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;">West Nile virus</span><span class="keyword-badge" style="--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;">Denmark</span><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">horses</span></span><span class="keyword-text">Antibodies to West Nile virus detected in four Danish horses for first time, per Statens Serum Institute.</span></a></div>
+            </div>
+            
+            </div>
+
+        </div>
+        </div>
+
+        <!-- RIGHT: World News -->
+        <div class="column column-right">
+            <div class="section column-section" style="--section-accent: #ffffff;">
+            <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff;">Space News</h2>
+            <div id="space-news-content">
+            
+            <div class="news-item">
+                <div class="news-title"><a href="https://spacenews.com/space-forces-acquisition-arm-races-to-rebuild-contracting-workforce-after-civilian-cuts/"
+                        target="_blank" style="text-decoration: none; border: none;"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;">Space Force</span><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">acquisition</span><span class="keyword-badge" style="--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;">workforce rebuild</span></span><span class="keyword-text">Space Force’s acquisition arm races to rebuild contracting workforce after civilian cuts, amid Pentagon reforms and budget surge prospects.</span></a></div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title"><a href="https://spacenews.com/blue-origin-to-reuse-new-glenn-booster-on-next-launch/"
+                        target="_blank" style="text-decoration: none; border: none;"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">Blue Origin</span><span class="keyword-badge" style="--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;">New Glenn</span><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">booster reuse</span></span><span class="keyword-text">Blue Origin will reuse a New Glenn booster for the first time on next launch carrying AST SpaceMobile satellite.</span></a></div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title"><a href="https://spacenews.com/damaged-shenzhou-20-spacecraft-survives-reentry-shenzhou-23-arrives-at-spaceport/"
+                        target="_blank" style="text-decoration: none; border: none;"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">Shenzhou-20</span><span class="keyword-badge" style="--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;">reentry</span><span class="keyword-badge" style="--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;">China</span></span><span class="keyword-text">China&#x27;s damaged Shenzhou-20 survived reentry after on-orbit repairs from debris impact emergency, as Shenzhou-23 arrived at spaceport.</span></a></div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title"><a href="https://spacenews.com/open-cosmos-advances-broadband-plans-with-spectrum-once-held-by-rivada/"
+                        target="_blank" style="text-decoration: none; border: none;"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">Open Cosmos</span><span class="keyword-badge" style="--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;">Ka-band</span><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">Rivada spectrum</span></span><span class="keyword-text">Open Cosmos deployed two satellites Jan. 22 to activate Liechtenstein-reassigned Ka-band spectrum once held by Rivada for broadband deadlines.</span></a></div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title"><a href="https://spacenews.com/blue-origin-flies-first-new-shepard-mission-of-2026/"
+                        target="_blank" style="text-decoration: none; border: none;"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">Blue Origin</span><span class="keyword-badge" style="--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;">New Shepard</span><span class="keyword-badge" style="--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;">NS-38</span></span><span class="keyword-text">Blue Origin launched first 2026 New Shepard mission Jan. 22 with five paying customers, one employee after last-minute change.</span></a></div>
+            </div>
+            
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WORLD NEWS (Full Width) -->
+    <div class="container" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="section full-width" style="--section-accent: #0048ff;">
+            <h2 style="border-bottom: 2px solid #0048ff; color: #ffffff;">World News</h2>
+            <div id="world-news-content">
+            
+            
+            
+            <div class="world-grid">
+                <div class="world-column">
+                    
+                    <div class="news-item">
+                        <div class="news-title"><a href="https://www.bbc.com/news/articles/cn8jj228g2vo?at_medium=RSS&at_campaign=rss" target="_blank"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">Trump</span><span class="keyword-badge" style="--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;">Board of Peace</span><span class="keyword-badge" style="--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;">UN</span></span><span class="keyword-text">Trump&#x27;s new Board of Peace could sideline the struggling UN, promising to end decades of suffering despite critics calling it vainglorious.</span></a></div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-title"><a href="https://www.bbc.com/news/articles/cp3zzv40422o?at_medium=RSS&at_campaign=rss" target="_blank"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;">Oscars</span><span class="keyword-badge" style="--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;">nominations</span><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">surprises</span></span><span class="keyword-text">Oscar nominations surprise with eight takeaways: Paul Mescal and Chase Infiniti snubbed, other actors carrying films to nods.</span></a></div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-title"><a href="https://www.bbc.com/news/articles/cwyrrqwxpz7o?at_medium=RSS&at_campaign=rss" target="_blank"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">ICE</span><span class="keyword-badge" style="--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;">Minnesota</span><span class="keyword-badge" style="--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;">child detention</span></span><span class="keyword-text">ICE detained a five-year-old boy and father in Minnesota per lawyer, but claims it kept boy safe as father ran.</span></a></div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-title"><a href="https://www.bbc.com/news/articles/cy7mmpljze7o?at_medium=RSS&at_campaign=rss" target="_blank"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">Trump</span><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">Gaza</span><span class="keyword-badge" style="--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;">reconstruction</span></span><span class="keyword-text">Trump&#x27;s administration unveils &#x27;New Gaza&#x27; plans with skyscrapers, vowing success in post-war reconstruction.</span></a></div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-title"><a href="https://www.bbc.com/news/articles/czr444j671vo?at_medium=RSS&at_campaign=rss" target="_blank"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">Trump</span><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">NATO</span><span class="keyword-badge" style="--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;">Afghanistan</span></span><span class="keyword-text">Trump&#x27;s claim NATO troops avoided Afghanistan front lines sparks UK outrage despite 457 British deaths.</span></a></div>
+                    </div>
+                    
+                </div>
+                <div class="world-column">
+                    
+                    <div class="news-item">
+                        <div class="news-title"><a href="https://www.bbc.com/news/articles/cn422q1py95o?at_medium=RSS&at_campaign=rss" target="_blank"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;">Nigeria</span><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">church raid</span><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">abduction</span></span><span class="keyword-text">Victim describes escaping &quot;blood was all over&quot; Nigeria church abduction as 160 missing after Sunday attack on three churches.</span></a></div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-title"><a href="https://www.bbc.com/news/articles/cn7jjp8gl0jo?at_medium=RSS&at_campaign=rss" target="_blank"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">Trump</span><span class="keyword-badge" style="--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;">Canada</span><span class="keyword-badge" style="--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;">Board of Peace</span></span><span class="keyword-text">Trump withdrew Canada&#x27;s invite to the &#x27;Board of Peace&#x27; after PM Mark Carney warned of a &quot;rupture&quot; in US-led global order.</span></a></div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-title"><a href="https://www.bbc.com/news/articles/cdexxr2y907o?at_medium=RSS&at_campaign=rss" target="_blank"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;">France</span><span class="keyword-badge" style="--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;">shadow fleet</span><span class="keyword-badge" style="--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;">Grinch</span></span><span class="keyword-text">France&#x27;s navy seized suspected Russian &quot;shadow fleet&quot; tanker Grinch traveling between Spain and Morocco.</span></a></div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-title"><a href="https://www.bbc.com/news/articles/ckgjjy55x2mo?at_medium=RSS&at_campaign=rss" target="_blank"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;">German nurse</span><span class="keyword-badge" style="--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;">murders</span><span class="keyword-badge" style="--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;">deaths</span></span><span class="keyword-text">German nurse jailed for murders possibly linked to 100 more deaths as prosecutors review dozens of suspected palliative care cases.</span></a></div>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-title"><a href="https://www.bbc.com/news/articles/c6200g826d2o?at_medium=RSS&at_campaign=rss" target="_blank"><span class="keyword-badges"><span class="keyword-badge" style="--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;">Ubisoft</span><span class="keyword-badge" style="--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;">cancellations</span><span class="keyword-badge" style="--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;">studio closures</span></span><span class="keyword-text">Ubisoft cancels six games including Prince of Persia, closes studios, and delays seven titles in restructure.</span></a></div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Quote of the Day -->
+    <div id="quote-content">
+        
+        <div
+            style="text-align: center; margin-bottom: 25px; padding: 20px; background-color: #222; border-radius: 15px; border-left: 6px solid #ffee00; border-right: 6px solid #ffee00;">
+            <div
+                style="font-family: 'Georgia', serif; font-style: italic; font-size: 18px; margin-bottom: 8px; color: #ddd;">
+                The obstacle is the way.</div>
+            <div
+                style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #ffee00; letter-spacing: 1px;">
+                Marcus Aurelius
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        (() => {
+            const DATA_URL = "resources/daily_brief_data.json";
+            const headerEl = document.getElementById("page-title");
+            const marketsAvgEl = document.getElementById("markets-average");
+            const errorEl = document.getElementById("data-error");
+            const sections = {
+                weather: document.getElementById("weather-content"),
+                markets: document.getElementById("markets-content"),
+                x_trending: document.getElementById("x-trending-content"),
+                copenhagen: document.getElementById("copenhagen-content"),
+                space_news: document.getElementById("space-news-content"),
+                world_news: document.getElementById("world-news-content"),
+                quote: document.getElementById("quote-content"),
+            };
+
+            const categoryColors = {
+                "Science": "#9b59b6",
+                "Tech": "#3498db",
+                "World News": "#e74c3c",
+                "World Politics": "#e67e22",
+                "Copenhagen / Denmark": "#ff0000",
+                "Misc": "#95a5a6"
+            };
+
+            const toNumber = (value) => {
+                const num = Number(value);
+                return Number.isFinite(num) ? num : 0;
+            };
+
+            const formatNumber = (value, digits) => toNumber(value).toFixed(digits);
+
+            const formatTime = (value) => {
+                if (!value) {
+                    return "";
+                }
+                const parts = String(value).split("T");
+                if (parts.length < 2) {
+                    return "";
+                }
+                return parts[1].slice(0, 5);
+            };
+
+            const showError = (message) => {
+                if (!errorEl) {
+                    return;
+                }
+                errorEl.textContent = message;
+                errorEl.hidden = false;
+            };
+
+            const clearError = () => {
+                if (!errorEl) {
+                    return;
+                }
+                errorEl.textContent = "";
+                errorEl.hidden = true;
+            };
+
+            const loadData = async () => {
+                const response = await fetch(`${DATA_URL}?t=${Date.now()}`, { cache: "no-store" });
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${DATA_URL}`);
+                }
+                return response.json();
+            };
+
+            const renderHeader = (data) => {
+                if (!headerEl) {
+                    return;
+                }
+                const yearPercent = formatNumber(data?.year_percent, 1);
+                headerEl.textContent = `${data?.date || ""} | ${yearPercent}%`;
+            };
+
+            const renderWeather = (weather) => {
+                if (!weather) {
+                    return (
+                        '<div class="weather-item full-width" style="text-align: center; color: #f44336; font-weight: bold;">' +
+                        "ERROR: Weather data unavailable" +
+                        "</div>"
+                    );
+                }
+                const segment = (label, data) => {
+                    const windSize = 18 + (toNumber(data?.wind) * 0.8);
+                    return `
+                        <div class="weather-item">
+                            <div style="font-size: 14px; margin-bottom: 2px; color: white;">${label}</div>
+                            <div class="weather-icon">${data?.icon || ""}</div>
+                            <div class="weather-value">${data?.temp ?? ""}°C</div>
+                            <div class="weather-label">
+                                <span class="wind-arrow" style="transform: rotate(${toNumber(data?.wind_dir)}deg); font-size: ${windSize}px;">⬇</span>
+                                <div class="wind-speed">${toNumber(data?.wind)} km/h</div>
+                            </div>
+                        </div>
+                    `;
+                };
+                return `
+                    <div class="weather-grid">
+                        ${segment("Morning", weather.morning)}
+                        ${segment("Afternoon", weather.afternoon)}
+                        ${segment("Evening", weather.evening)}
+                        <div class="weather-item full-width weather-meta">
+                            <div class="weather-meta-item">
+                                <span class="weather-meta-icon">🌅</span>
+                                <span class="weather-meta-text">${formatTime(weather.sunrise)}</span>
+                            </div>
+                            <div class="weather-meta-item">
+                                <span class="weather-meta-icon">🌇</span>
+                                <span class="weather-meta-text">${formatTime(weather.sunset)}</span>
+                            </div>
+                            <div class="weather-meta-item">
+                                <span class="weather-meta-icon">🌧️</span>
+                                <span class="weather-meta-text">${toNumber(weather.daily_precip)}%</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            };
+
+            const renderMarkets = (stocks) => {
+                if (!stocks || typeof stocks !== "object") {
+                    return "";
+                }
+                const avg = toNumber(stocks.average_percent);
+                if (marketsAvgEl) {
+                    marketsAvgEl.textContent = `${formatNumber(avg, 2)}%`;
+                    marketsAvgEl.style.color = avg >= 0 ? "green" : "red";
+                }
+                const entries = Object.entries(stocks).filter(([name]) => name !== "average_percent");
+                return entries.map(([name, data]) => {
+                    const price = formatNumber(data?.price, 2);
+                    const percent = formatNumber(data?.percent, 2);
+                    const color = data?.color || "grey";
+                    return `
+                        <div class="stock-item">
+                            <span class="stock-name">${name}</span>
+                            <span class="stock-price ${color}">
+                                ${price} : <span style="font-size: 1.2em; font-weight: bold;">${percent}%</span>
+                            </span>
+                        </div>
+                    `;
+                }).join("");
+            };
+
+            const renderNewsItems = (items, includeInlineStyle = true) => {
+                return items.map((item) => {
+                    const link = item?.link || "#";
+                    const headline = item?.headline || "";
+                    const styleAttr = includeInlineStyle ? ' style="text-decoration: none; border: none;"' : "";
+                    return `
+                        <div class="news-item">
+                            <div class="news-title"><a href="${link}" target="_blank"${styleAttr}>${headline}</a></div>
+                        </div>
+                    `;
+                }).join("");
+            };
+
+            const renderNewsList = (items) => {
+                if (!Array.isArray(items) || items.length === 0) {
+                    return `
+                        <div class="news-item">
+                            <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
+                        </div>
+                    `;
+                }
+                return renderNewsItems(items);
+            };
+
+            const renderWorldNews = (items) => {
+                if (!Array.isArray(items) || items.length === 0) {
+                    return `
+                        <div class="news-item">
+                            <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
+                        </div>
+                    `;
+                }
+                const left = items.slice(0, 5);
+                const right = items.slice(5, 10);
+                return `
+                    <div class="world-grid">
+                        <div class="world-column">
+                            ${renderNewsItems(left, false)}
+                        </div>
+                        <div class="world-column">
+                            ${renderNewsItems(right, false)}
+                        </div>
+                    </div>
+                `;
+            };
+
+            const renderXTrending = (xTrending) => {
+                if (!Array.isArray(xTrending) || xTrending.length === 0) {
+                    return `
+                        <div class="news-item">
+                            <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
+                        </div>
+                    `;
+                }
+                const blocks = xTrending.map((entry) => {
+                    const category = Array.isArray(entry) ? entry[0] : entry?.category;
+                    const trends = Array.isArray(entry) ? entry[1] : entry?.trends;
+                    const color = categoryColors[category] || "#888";
+                    const border = categoryColors[category] || "#1da1f2";
+                    const items = Array.isArray(trends) ? trends : [];
+                    const trendsHtml = items.length ? items.map((item) => {
+                        const since = item?.trending_since;
+                        return `
+                            <div class="news-item" style="border-left: 3px solid ${border};">
+                                <div class="news-title">
+                                    <a href="${item?.link || "#"}" target="_blank" style="text-decoration: none; border: none;">${item?.name || ""}</a>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 3px;">
+                                    <div style="font-size: 10px; color: #666;">${item?.post_count ?? "N/A"} posts</div>
+                                    ${since ? `<div style="font-size: 9px; color: #555;">Since ${since}</div>` : ""}
+                                </div>
+                            </div>
+                        `;
+                    }).join("") : `
+                        <div class="news-item" style="border-left: 3px solid #333;">
+                            <div class="news-summary" style="font-style: italic; color: #666; font-size: 11px;">Nothing trending</div>
+                        </div>
+                    `;
+                    return `
+                        <div style="break-inside: avoid;">
+                            <div style="font-size: 15px; color: ${color}; font-weight: bold; margin-bottom: 6px; letter-spacing: 0.5px;">${category || ""}</div>
+                            ${trendsHtml}
+                        </div>
+                    `;
+                }).join("");
+                return `<div class="x-grid">${blocks}</div>`;
+            };
+
+            const renderQuote = (quote) => {
+                if (!quote) {
+                    return "";
+                }
+                return `
+                    <div style="text-align: center; margin-bottom: 25px; padding: 20px; background-color: #222; border-radius: 15px; border-left: 6px solid #ffee00; border-right: 6px solid #ffee00;">
+                        <div style="font-family: 'Georgia', serif; font-style: italic; font-size: 18px; margin-bottom: 8px; color: #ddd;">
+                            ${quote.text || ""}
+                        </div>
+                        <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #ffee00; letter-spacing: 1px;">
+                            ${quote.author || ""}
+                        </div>
+                    </div>
+                `;
+            };
+
+            const renderAll = (data) => {
+                renderHeader(data);
+                if (sections.weather) {
+                    sections.weather.innerHTML = renderWeather(data?.weather);
+                }
+                if (sections.markets) {
+                    sections.markets.innerHTML = renderMarkets(data?.stocks);
+                }
+                if (sections.x_trending) {
+                    sections.x_trending.innerHTML = renderXTrending(data?.x_trending);
+                }
+                if (sections.copenhagen) {
+                    sections.copenhagen.innerHTML = renderNewsList(data?.copenhagen);
+                }
+                if (sections.space_news) {
+                    sections.space_news.innerHTML = renderNewsList(data?.space_news);
+                }
+                if (sections.world_news) {
+                    sections.world_news.innerHTML = renderWorldNews(data?.world_news);
+                }
+                if (sections.quote) {
+                    sections.quote.innerHTML = renderQuote(data?.quote);
+                }
+            };
+
+            const renderSection = (section, data) => {
+                if (section === "x_trending" && sections.x_trending) {
+                    sections.x_trending.innerHTML = renderXTrending(data?.x_trending);
+                } else if (section === "weather" && sections.weather) {
+                    sections.weather.innerHTML = renderWeather(data?.weather);
+                } else if (section === "markets" && sections.markets) {
+                    sections.markets.innerHTML = renderMarkets(data?.stocks);
+                } else if (section === "copenhagen" && sections.copenhagen) {
+                    sections.copenhagen.innerHTML = renderNewsList(data?.copenhagen);
+                } else if (section === "space_news" && sections.space_news) {
+                    sections.space_news.innerHTML = renderNewsList(data?.space_news);
+                } else if (section === "world_news" && sections.world_news) {
+                    sections.world_news.innerHTML = renderWorldNews(data?.world_news);
+                } else if (section === "quote" && sections.quote) {
+                    sections.quote.innerHTML = renderQuote(data?.quote);
+                } else {
+                    renderAll(data);
+                }
+            };
+
+            const refreshSection = async (section, button) => {
+                if (button) {
+                    button.disabled = true;
+                    button.classList.add("is-loading");
+                }
+                try {
+                    const data = await loadData();
+                    renderSection(section, data);
+                    clearError();
+                } catch (err) {
+                    showError("Could not load data file. Try refreshing or serve this folder via a local web server.");
+                } finally {
+                    if (button) {
+                        button.disabled = false;
+                        button.classList.remove("is-loading");
+                    }
+                }
+            };
+
+            document.querySelectorAll(".refresh-button").forEach((button) => {
+                button.addEventListener("click", () => refreshSection(button.dataset.section, button));
+            });
+
+            loadData()
+                .then((data) => {
+                    renderAll(data);
+                    clearError();
+                })
+                .catch(() => {
+                    showError("Could not load data file. Try refreshing or serve this folder via a local web server.");
+                });
+        })();
+    </script>
+
+</body>
+
+</html>
