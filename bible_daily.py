@@ -10,7 +10,7 @@ load_dotenv()
 
 XAI_API_KEY = os.getenv("XAI_API_KEY")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
-HISTORY_PATH = os.path.join(os.path.dirname(__file__), "verse_history.json")
+HISTORY_PATH = os.path.join(os.path.dirname(__file__), "resources/verse_history.json")
 SEED = date.today().strftime("%A %Y-%m-%d")
 
 if not XAI_API_KEY or not SLACK_WEBHOOK_URL:

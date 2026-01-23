@@ -1,3 +1,4 @@
+import argparse
 import os
 import ssl
 import sys
@@ -6,8 +7,11 @@ import html
 import hashlib
 import json
 import logging
+import functools
 import requests
 import calendar
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlparse
 from datetime import date, datetime
 from dotenv import load_dotenv
 
@@ -35,7 +39,7 @@ load_dotenv()
 # API Keys and Config
 XAI_API_KEY = os.getenv("XAI_API_KEY")
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
-SLACK_CHANNEL_ID = os.getenv("SLACK_CHANNEL_ID", "C09MUE5TGC9") # Default from previous use
+SLACK_CHANNEL_ID = os.getenv("SLACK_CHANNEL_ID") # Default from previous use
 
 # WeasyPrint fix for macOS
 if sys.platform == "darwin":
@@ -105,6 +109,9 @@ X_CATEGORIES = {
 }
 
 X_TRENDS_PER_CATEGORY = 12
+DATA_OUTPUT_PATH = "resources/daily_brief_data.json"
+HTML_OUTPUT_PATH = "brevity.html"
+REFRESH_X_ENDPOINT = "/api/refresh/x"
 
 
 # ==============================================================================
@@ -149,6 +156,18 @@ def stylize_keywords(text):
     rest_html = f'<span class="keyword-text">{rest_html}</span>' if rest_html else ""
     # TODO
     return Markup(f'<span class="keyword-badges">{badges}</span>{rest_html}')
+
+def make_json_safe(value):
+    """Convert data into JSON-serializable types."""
+    if isinstance(value, Markup):
+        return str(value)
+    if isinstance(value, (date, datetime)):
+        return value.isoformat()
+    if isinstance(value, dict):
+        return {key: make_json_safe(val) for key, val in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [make_json_safe(item) for item in value]
+    return value
 
 def format_trending_since(raw_since):
     """Normalize trending_since to HH:MM, or return None if invalid."""
@@ -460,6 +479,87 @@ def fetch_x_trending():
         return {}
 
 
+# ==============================================================================
+# REFRESH & SERVER
+# ==============================================================================
+
+def refresh_x_trending(data_path=DATA_OUTPUT_PATH):
+    """Refresh X trending data and persist to JSON."""
+    logger.info("Refreshing X trending data...")
+    data = {}
+    if os.path.exists(data_path):
+        try:
+            with open(data_path, "r", encoding="utf-8") as file:
+                data = json.load(file)
+        except Exception as e:
+            logger.warning(f"Failed to read existing data file: {e}")
+            data = {}
+
+    new_trends = fetch_x_trending()
+    if new_trends:
+        data["x_trending"] = new_trends
+    elif "x_trending" not in data:
+        data["x_trending"] = []
+
+    try:
+        safe_data = make_json_safe(data)
+        with open(data_path, "w", encoding="utf-8") as file:
+            json.dump(safe_data, file, ensure_ascii=True, indent=2)
+        logger.info(f"X trending data saved to {data_path}")
+    except Exception as e:
+        logger.error(f"Error saving X trending data: {e}")
+    return data.get("x_trending", [])
+
+
+class DailyBriefHandler(SimpleHTTPRequestHandler):
+    """Serve static files and handle refresh endpoints."""
+
+    def do_OPTIONS(self):
+        path = urlparse(self.path).path
+        if path == REFRESH_X_ENDPOINT:
+            self.send_response(204)
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type")
+            self.end_headers()
+            return
+        self.send_error(404)
+
+    def do_POST(self):
+        path = urlparse(self.path).path
+        if path == REFRESH_X_ENDPOINT:
+            try:
+                trends = refresh_x_trending()
+                count = 0
+                if isinstance(trends, list):
+                    count = sum(len(items) for _, items in trends if isinstance(items, list))
+                self._send_json(200, {"status": "ok", "count": count})
+            except Exception as e:
+                logger.error(f"Refresh failed: {e}")
+                self._send_json(500, {"status": "error"})
+            return
+        self.send_error(404)
+
+    def _send_json(self, status_code, payload):
+        body = json.dumps(payload, ensure_ascii=True).encode("utf-8")
+        self.send_response(status_code)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+        self.wfile.write(body)
+
+
+def run_server(host="127.0.0.1", port=8000):
+    """Run a simple local server for the daily brief."""
+    handler = functools.partial(DailyBriefHandler, directory=os.path.dirname(__file__))
+    server = ThreadingHTTPServer((host, port), handler)
+    logger.info(f"Serving daily brief at http://{host}:{port}")
+    logger.info(f"Refresh X endpoint: {REFRESH_X_ENDPOINT}")
+    server.serve_forever()
+
+
 def fetch_quote():
     """Fetch a Quote of the Day (Stoicism/Proverbs) using AI."""
     logger.info("Fetching Quote of the Day...")
@@ -506,16 +606,54 @@ def generate_pdf(data):
         logger.error("PDF generation skipped. Install WeasyPrint system dependencies.")
         return None
     try:
-        env = Environment(loader=FileSystemLoader(os.path.dirname(__file__)))
-        template = env.get_template("daily_brief_template.html")
-        html_out = template.render(**data)
-        
+        html_out = render_html(data, render_mode="pdf")
         pdf_path = "daily_brief.pdf"
         HTML(string=html_out, base_url=os.path.dirname(__file__)).write_pdf(pdf_path)
         logger.info(f"PDF generated at {pdf_path}")
         return pdf_path
     except Exception as e:
         logger.error(f"Error generating PDF: {e}")
+        return None
+
+
+def render_html(data, render_mode="pdf"):
+    """Render daily brief HTML using the Jinja2 template."""
+    env = Environment(loader=FileSystemLoader(os.path.dirname(__file__)))
+    template = env.get_template("daily_brief_template.html")
+    context = {
+        **data,
+        "data_path": DATA_OUTPUT_PATH,
+        "render_mode": render_mode,
+        "refresh_x_endpoint": REFRESH_X_ENDPOINT,
+    }
+    return template.render(**context)
+
+
+def generate_html(data, output_path=HTML_OUTPUT_PATH):
+    """Generate HTML file from data using Jinja2."""
+    logger.info("Generating HTML...")
+    try:
+        html_out = render_html(data, render_mode="html")
+        with open(output_path, "w", encoding="utf-8") as file:
+            file.write(html_out)
+        logger.info(f"HTML generated at {output_path}")
+        return output_path
+    except Exception as e:
+        logger.error(f"Error generating HTML: {e}")
+        return None
+
+
+def save_brief_data(data, output_path=DATA_OUTPUT_PATH):
+    """Save daily brief data to JSON."""
+    logger.info("Saving daily brief data...")
+    try:
+        safe_data = make_json_safe(data)
+        with open(output_path, "w", encoding="utf-8") as file:
+            json.dump(safe_data, file, ensure_ascii=True, indent=2)
+        logger.info(f"Daily brief data saved to {output_path}")
+        return output_path
+    except Exception as e:
+        logger.error(f"Error saving daily brief data: {e}")
         return None
 
 
@@ -537,8 +675,8 @@ def send_to_slack(pdf_path):
         client.files_upload_v2(
             channel=SLACK_CHANNEL_ID,
             file=pdf_path,
-            title=f"Daily Briefing - {date.today().strftime('%Y-%m-%d')}",
-            initial_comment="Mr Smith, here is your Daily Briefing."
+            title=f"Brevity - {date.today().strftime('%Y-%m-%d')}",
+            initial_comment="Here is your update Mr Smith.",
         )
         logger.info("PDF uploaded to Slack successfully.")
     except SlackApiError as e:
@@ -548,7 +686,7 @@ def send_to_slack(pdf_path):
 
 
 def main():
-    logger.info("Starting Daily Briefing generation...")
+    logger.info("Starting Brevity generation...")
     
     # 1. Gather Data
     weather = fetch_weather()
@@ -578,14 +716,35 @@ def main():
         "quote": quote
     }
     
-    # 2. Generate PDF
+    # 2. Save data + HTML output
+    save_brief_data(data)
+    generate_html(data)
+
+    # 3. Generate PDF
     pdf_path = generate_pdf(data)
     
-    # 3. Send to Slack
+    # 4. Send to Slack
     if pdf_path:
         send_to_slack(pdf_path)
     
     logger.info("Done.")
 
-if __name__ == "__main__":
+def cli():
+    parser = argparse.ArgumentParser(description="Daily brief generator and server.")
+    parser.add_argument("--refresh-x", action="store_true", help="Refresh X trending data only.")
+    parser.add_argument("--serve", action="store_true", help="Serve the daily brief locally.")
+    parser.add_argument("--host", default="127.0.0.1", help="Host for the local server.")
+    parser.add_argument("--port", type=int, default=8000, help="Port for the local server.")
+    args = parser.parse_args()
+
+    if args.refresh_x:
+        refresh_x_trending()
+        return
+    if args.serve:
+        run_server(args.host, args.port)
+        return
     main()
+
+
+if __name__ == "__main__":
+    cli()

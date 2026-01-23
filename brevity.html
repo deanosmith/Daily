@@ -8,68 +8,14 @@
 </head>
 
 <body>
-    <h1 id="page-title">{% if render_mode == "pdf" %}{{ date }} | {{ "%.1f"|format(year_percent)}}%{% endif %}</h1>
+    <h1 id="page-title"></h1>
     <div id="data-error" class="data-error" hidden></div>
     <div class="container">
         <!-- WEATHER -->
         <div class="section">
             <h2 style="border-bottom: 2px solid #1da1f2; color: #ffffff;">Weather (Copenhagen)</h2>
             <div id="weather-content">
-            {% if render_mode == "pdf" %}
-            {% if weather %}
-            <div class="weather-grid">
-                <div class="weather-item">
-                    <div style="font-size: 14px; margin-bottom: 2px; color: white;">Morning</div>
-                    <div class="weather-icon">{{ weather.morning.icon }}</div>
-                    <div class="weather-value">{{ weather.morning.temp }}°C</div>
-                    <div class="weather-label">
-                        <span class="wind-arrow"
-                            style="transform: rotate({{ weather.morning.wind_dir }}deg); font-size: {{ 18 + (weather.morning.wind * 0.8) }}px;">⬇</span>
-                        <div class="wind-speed">{{ weather.morning.wind }} km/h</div>
-                    </div>
-                </div>
-                <div class="weather-item">
-                    <div style="font-size: 14px; margin-bottom: 2px; color: white;">Afternoon</div>
-                    <div class="weather-icon">{{ weather.afternoon.icon }}</div>
-                    <div class="weather-value">{{ weather.afternoon.temp }}°C</div>
-                    <div class="weather-label">
-                        <span class="wind-arrow"
-                            style="transform: rotate({{ weather.afternoon.wind_dir }}deg); font-size: {{ 18 + (weather.afternoon.wind * 0.8) }}px;">⬇</span>
-                        <div class="wind-speed">{{ weather.afternoon.wind }} km/h</div>
-                    </div>
-                </div>
-                <div class="weather-item">
-                    <div style="font-size: 14px; margin-bottom: 2px; color: white;">Evening</div>
-                    <div class="weather-icon">{{ weather.evening.icon }}</div>
-                    <div class="weather-value">{{ weather.evening.temp }}°C</div>
-                    <div class="weather-label">
-                        <span class="wind-arrow"
-                            style="transform: rotate({{ weather.evening.wind_dir }}deg); font-size: {{ 18 + (weather.evening.wind * 0.8) }}px;">⬇</span>
-                        <div class="wind-speed">{{ weather.evening.wind }} km/h</div>
-                    </div>
-                </div>
-                <!-- TODO -->
-                <div class="weather-item full-width weather-meta">
-                    <div class="weather-meta-item">
-                        <span class="weather-meta-icon">🌅</span>
-                        <span class="weather-meta-text">{{ weather.sunrise.split('T')[1][:5] }}</span>
-                    </div>
-                    <div class="weather-meta-item">
-                        <span class="weather-meta-icon">🌇</span>
-                        <span class="weather-meta-text">{{ weather.sunset.split('T')[1][:5] }}</span>
-                    </div>
-                    <div class="weather-meta-item">
-                        <span class="weather-meta-icon">🌧️</span>
-                        <span class="weather-meta-text">{{ weather.daily_precip }}%</span>
-                    </div>
-                </div>
-            </div>
-            {% else %}
-            <div class="weather-item full-width" style="text-align: center; color: #f44336; font-weight: bold;">
-                ERROR: Weather data unavailable
-            </div>
-            {% endif %}
-            {% endif %}
+            
             </div>
         </div>
 
@@ -78,22 +24,9 @@
             <h2
                 style="border-bottom: 2px solid #ffffff; color: #ffffff; display: flex; justify-content: space-between; align-items: baseline;">
                 Markets <span id="markets-average"
-                    style="font-size: 1.25em; font-weight: bold; font-family: 'Courier New', monospace; color: {% if render_mode == "pdf" %}{{ 'green' if stocks.average_percent >= 0 else 'red' }}{% else %}#aaa{% endif %};">{%
-                    if render_mode == "pdf" %}{{ "%.2f"|format(stocks.average_percent) }}%{% endif %}</span></h2>
+                    style="font-size: 1.25em; font-weight: bold; font-family: 'Courier New', monospace; color: #aaa;"></span></h2>
             <div id="markets-content">
-            {% if render_mode == "pdf" %}
-            {% for name, data in stocks.items() %}
-            {% if name != 'average_percent' %}
-            <div class="stock-item">
-                <span class="stock-name">{{ name }}</span>
-                <span class="stock-price {{ data.color }}">
-                    {{ "%.2f"|format(data.price) }} : <span style="font-size: 1.2em; font-weight: bold;">{{
-                        "%.2f"|format(data.percent) }}%</span>
-                </span>
-            </div>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
+            
             </div>
         </div>
     </div>
@@ -104,66 +37,14 @@
         <div class="section full-width" style="width: 100%;">
             <h2 style="border-bottom: 2px solid #868686; color: #ffffff;">
                 Trending on X
-                {% if render_mode != "pdf" %}
+                
                 <button class="refresh-button" type="button" data-section="x_trending"
                     aria-label="Refresh Trending on X" title="Refresh Trending on X">⟳</button>
-                {% endif %}
+                
             </h2>
 
             <div id="x-trending-content">
-            {% if render_mode == "pdf" %}
-            {% if x_trending %}
-            {% set category_colors = {
-            'Science': '#9b59b6',
-            'Tech': '#3498db',
-            'World News': '#e74c3c',
-            'World Politics': '#e67e22',
-            'Copenhagen / Denmark': '#ff0000',
-            'Misc': '#95a5a6'
-            } %}
-
-            <!-- Grid for X categories to fill the full width page effectively -->
-            <div class="x-grid">
-                <!-- x_trending is now a sorted list of tuples: [('Category', [items]), ...] -->
-                {% for category, trends in x_trending %}
-                <div style="break-inside: avoid;">
-                    <div
-                        style="font-size: 15px; color: {{ category_colors.get(category, '#888') }}; font-weight: bold; margin-bottom: 6px; letter-spacing: 0.5px;">
-                        {{ category }}
-                    </div>
-                    {% if trends %}
-                    {% for item in trends %}
-                    <div class="news-item"
-                        style="border-left: 2px solid {{ category_colors.get(category, '#1da1f2') }};">
-                        <div class="news-title">
-                            <a href="{{ item.link }}" target="_blank" style="text-decoration: none; border: none;">{{
-                                item.name }}</a>
-                        </div>
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-top: 3px;">
-                            <div style="font-size: 10px; color: #666;">{{ item.post_count }} posts</div>
-                            {% if item.trending_since %}
-                            <div style="font-size: 9px; color: #555;">Since {{ item.trending_since }}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% endfor %}
-                    {% else %}
-                    <div class="news-item" style="border-left: 2px solid #333;">
-                        <div class="news-summary" style="font-style: italic; color: #666; font-size: 11px;">Nothing
-                            trending</div>
-                    </div>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-
-            {% else %}
-            <div class="news-item">
-                <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
-            </div>
-            {% endif %}
-            {% endif %}
+            
             </div>
         </div>
     </div>
@@ -174,18 +55,7 @@
             <div class="section column-section" style="--section-accent: #f21d1d;">
             <h2 style="border-bottom: 2px solid #f21d1d; color: #ffffff;">Copenhagen Today</h2>
             <div id="copenhagen-content">
-            {% if render_mode == "pdf" %}
-            {% for item in copenhagen %}
-            <div class="news-item">
-                <div class="news-title"><a href="{{ item.link }}"
-                        target="_blank" style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
-            </div>
-            {% else %}
-            <div class="news-item">
-                <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
-            </div>
-            {% endfor %}
-            {% endif %}
+            
             </div>
 
         </div>
@@ -196,18 +66,7 @@
             <div class="section column-section" style="--section-accent: #ffffff;">
             <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff;">Space News</h2>
             <div id="space-news-content">
-            {% if render_mode == "pdf" %}
-            {% for item in space_news %}
-            <div class="news-item">
-                <div class="news-title"><a href="{{ item.link }}"
-                        target="_blank" style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
-            </div>
-            {% else %}
-            <div class="news-item">
-                <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
-            </div>
-            {% endfor %}
-            {% endif %}
+            
             </div>
             </div>
         </div>
@@ -218,32 +77,7 @@
         <div class="section full-width" style="--section-accent: #0048ff;">
             <h2 style="border-bottom: 2px solid #0048ff; color: #ffffff;">World News</h2>
             <div id="world-news-content">
-            {% if render_mode == "pdf" %}
-            {% if world_news %}
-            {% set world_left = world_news[:5] %}
-            {% set world_right = world_news[5:10] %}
-            <div class="world-grid">
-                <div class="world-column">
-                    {% for item in world_left %}
-                    <div class="news-item">
-                        <div class="news-title"><a href="{{ item.link }}" target="_blank">{{ item.headline }}</a></div>
-                    </div>
-                    {% endfor %}
-                </div>
-                <div class="world-column">
-                    {% for item in world_right %}
-                    <div class="news-item">
-                        <div class="news-title"><a href="{{ item.link }}" target="_blank">{{ item.headline }}</a></div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% else %}
-            <div class="news-item">
-                <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
-            </div>
-            {% endif %}
-            {% endif %}
+            
             </div>
         </div>
     </div>
@@ -251,29 +85,16 @@
 
     <!-- Quote of the Day -->
     <div id="quote-content">
-        {% if render_mode == "pdf" %}
-        {% if quote %}
-        <div
-            style="text-align: center; margin-bottom: 25px; padding: 20px; background-color: #222; border-radius: 15px; border-left: 6px solid #ffee00; border-right: 6px solid #ffee00;">
-            <div
-                style="font-family: 'Georgia', serif; font-style: italic; font-size: 18px; margin-bottom: 8px; color: #ddd;">
-                {{ quote.text }}</div>
-            <div
-                style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #ffee00; letter-spacing: 1px;">
-                {{ quote.author }}
-            </div>
-        </div>
-        {% endif %}
-        {% endif %}
+        
     </div>
 
-    {% if render_mode != "pdf" %}
+    
     <script>
         (() => {
             const isFileProtocol = window.location.protocol === "file:";
             const baseUrl = (!isFileProtocol && window.location.origin) ? `${window.location.origin}/` : window.location.href;
-            const DATA_URL = new URL("{{ data_path }}", baseUrl).toString();
-            const REFRESH_X_URL = new URL("{{ refresh_x_endpoint }}", baseUrl).toString();
+            const DATA_URL = new URL("resources/daily_brief_data.json", baseUrl).toString();
+            const REFRESH_X_URL = new URL("/api/refresh/x", baseUrl).toString();
             const headerEl = document.getElementById("page-title");
             const marketsAvgEl = document.getElementById("markets-average");
             const errorEl = document.getElementById("data-error");
@@ -618,7 +439,7 @@
                 });
         })();
     </script>
-    {% endif %}
+    
 
 </body>
 

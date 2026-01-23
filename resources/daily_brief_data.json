@@ -1,0 +1,204 @@
+{
+  "date": "Friday, January 23",
+  "year_percent": 6.301369863013699,
+  "weather": {
+    "morning": {
+      "temp": 0,
+      "precip": 0,
+      "wind": 34,
+      "wind_dir": 98,
+      "color": "#87CEEB",
+      "condition": "Overcast",
+      "icon": "\u2601\ufe0f"
+    },
+    "afternoon": {
+      "temp": -1,
+      "precip": 0,
+      "wind": 32,
+      "wind_dir": 94,
+      "color": "#87CEEB",
+      "condition": "Overcast",
+      "icon": "\u2601\ufe0f"
+    },
+    "evening": {
+      "temp": -1,
+      "precip": 0,
+      "wind": 31,
+      "wind_dir": 95,
+      "color": "#87CEEB",
+      "condition": "Overcast",
+      "icon": "\u2601\ufe0f"
+    },
+    "sunrise": "2026-01-23T08:18",
+    "sunset": "2026-01-23T16:24",
+    "daily_precip": 0
+  },
+  "stocks": {
+    "S&P 500": {
+      "price": 688.97998046875,
+      "change": 3.5799560546875,
+      "percent": 0.5223163010167597,
+      "color": "green",
+      "arrow": "\u2191"
+    },
+    "Tesla": {
+      "price": 449.3599853515625,
+      "change": 17.91998291015625,
+      "percent": 4.153528372137898,
+      "color": "green",
+      "arrow": "\u2191"
+    },
+    "Nvidia": {
+      "price": 184.83999633789062,
+      "change": 1.519989013671875,
+      "percent": 0.8291451848917019,
+      "color": "green",
+      "arrow": "\u2191"
+    },
+    "Bitcoin": {
+      "price": 89047.6171875,
+      "change": -414.8359375,
+      "percent": -0.4636983706677225,
+      "color": "red",
+      "arrow": "\u2193"
+    },
+    "United Health": {
+      "price": 354.4700012207031,
+      "change": 6.720001220703125,
+      "percent": 1.9324230684983825,
+      "color": "green",
+      "arrow": "\u2191"
+    },
+    "Echo Star": {
+      "price": 127.97000122070312,
+      "change": 5.470001220703125,
+      "percent": 4.465307118941326,
+      "color": "green",
+      "arrow": "\u2191"
+    },
+    "average_percent": 1.9065036124697243
+  },
+  "world_news": [
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">NATO</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Afghanistan</span></span><span class=\"keyword-text\">Trump&#x27;s claim NATO troops avoided Afghanistan front lines sparks UK outrage despite 457 British deaths.</span>",
+      "link": "https://www.bbc.com/news/articles/czr444j671vo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Yemen</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">UAE</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">secret prisons</span></span><span class=\"keyword-text\">BBC visits UAE-run secret prisons in Yemen on former bases where detainees report abuse, including a son unheard from for seven months.</span>",
+      "link": "https://www.bbc.com/news/articles/c3r117w55q4o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">US</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">winter storm</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">hypothermia</span></span><span class=\"keyword-text\">US braces for extremely dangerous winter storm posing life-threatening hypothermia risk, warns National Weather Service.</span>",
+      "link": "https://www.bbc.com/news/articles/c0r44l05q52o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Pakistan</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">mall fire</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">67 deaths</span></span><span class=\"keyword-text\">Pakistan mall fire death toll in Karachi&#x27;s Gul Plaza jumps to 67 as body identification continues.</span>",
+      "link": "https://www.bbc.com/news/articles/cwy11485jeno?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Canada</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Board of Peace</span></span><span class=\"keyword-text\">Trump withdraws Canada&#x27;s invitation to Board of Peace after PM Carney warned of US-led global order rupture, no reason given.</span>",
+      "link": "https://www.bbc.com/news/articles/cn7jjp8gl0jo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Madiba</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">artifacts</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">court battle</span></span><span class=\"keyword-text\">Mandela&#x27;s daughter wins court battle allowing sale of his prison key, sunglasses, and shirt despite heritage export ban attempt.</span>",
+      "link": "https://www.bbc.com/news/articles/cp822g353y6o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Board of Peace</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">UN</span></span><span class=\"keyword-text\">Trump&#x27;s new Board of Peace promises to end decades of suffering and sideline the struggling UN, but critics call it vainglorious.</span>",
+      "link": "https://www.bbc.com/news/articles/cn8jj228g2vo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Russian tankers</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">English Channel</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">UK sanctions</span></span><span class=\"keyword-text\">BBC Verify finds 42 sanctioned Russian tankers passed through the English Channel since January 11 despite UK&#x27;s assertive action vow.</span>",
+      "link": "https://www.bbc.com/news/articles/c2d77rr51rko?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Nigeria</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">church raid</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">160 missing</span></span><span class=\"keyword-text\">Victim describes &quot;blood was all over&quot; escape after attackers raided three Nigerian churches Sunday, leaving 160 missing.</span>",
+      "link": "https://www.bbc.com/news/articles/cn422q1py95o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">US</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Gaza</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span></span><span class=\"keyword-text\">US unveils &#x27;New Gaza&#x27; skyscraper plans as Trump vows success in post-war reconstruction.</span>",
+      "link": "https://www.bbc.com/news/articles/cy7mmpljze7o?at_medium=RSS&at_campaign=rss"
+    }
+  ],
+  "space_news": [
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Space Force</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">acquisition arm</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">contracting workforce</span></span><span class=\"keyword-text\">Space Force\u2019s acquisition arm races to rebuild contracting workforce after civilian cuts amid Pentagon reforms and budget surge.</span>",
+      "link": "https://spacenews.com/space-forces-acquisition-arm-races-to-rebuild-contracting-workforce-after-civilian-cuts/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Blue Origin</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">New Glenn</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">booster reuse</span></span><span class=\"keyword-text\">Blue Origin will reuse a New Glenn booster for the first time on next launch carrying AST SpaceMobile satellite.</span>",
+      "link": "https://spacenews.com/blue-origin-to-reuse-new-glenn-booster-on-next-launch/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Shenzhou-20</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">reentry</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Shenzhou-23</span></span><span class=\"keyword-text\">China&#x27;s damaged Shenzhou-20 survived reentry after on-orbit repairs from debris impact, as Shenzhou-23 arrived at spaceport.</span>",
+      "link": "https://spacenews.com/damaged-shenzhou-20-spacecraft-survives-reentry-shenzhou-23-arrives-at-spaceport/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Open Cosmos</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Rivada</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Ka-band</span></span><span class=\"keyword-text\">Open Cosmos deployed two satellites Jan. 22 to activate spectrum reassigned by Liechtenstein for sovereign broadband deadlines.</span>",
+      "link": "https://spacenews.com/open-cosmos-advances-broadband-plans-with-spectrum-once-held-by-rivada/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Blue Origin</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">New Shepard</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">NS-38</span></span><span class=\"keyword-text\">Blue Origin launched NS-38, its first 2026 New Shepard mission on Jan. 22, with five paying customers and one employee after a last-minute change.</span>",
+      "link": "https://spacenews.com/blue-origin-flies-first-new-shepard-mission-of-2026/"
+    }
+  ],
+  "copenhagen": [
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Frederiksen</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Greenland</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">NATO</span></span><span class=\"keyword-text\">Danish PM Mette Frederiksen travels to Greenland Friday to meet leader Jens-Frederik Nielsen after agreeing with NATO&#x27;s Rutte on increased Arctic engagement.</span>",
+      "link": "https://cphpost.dk/2026-01-23/news/round-up/mette-frederiksen-is-travelling-to-greenland-today/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">retailers</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">price cuts</span></span><span class=\"keyword-text\">Denmark stats agency: 38% retailers expect grocery price cuts soon, first since autumn 2024 vs. October&#x27;s 64% hikes.</span>",
+      "link": "https://cphpost.dk/2026-01-23/news/round-up/4-in-10-grocery-stores-to-cut-prices-soon/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Mink</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">appeal</span></span><span class=\"keyword-text\">Danish group B\u00e6redygtigt Landbrug appeals Glostrup court&#x27;s acquittal of authorities in mink farmers&#x27; culling compensation lawsuit.</span>",
+      "link": "https://cphpost.dk/2026-01-23/news/round-up/mink-breeders-take-legal-action-against-authorities/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Crown Prince Christian</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Royal Life Guards</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">platoon leader</span></span><span class=\"keyword-text\">20-year-old heir Crown Prince Christian follows father\u2019s footsteps, joins Royal Life Guards as conscript platoon leader from August 2026.</span>",
+      "link": "https://cphpost.dk/2026-01-23/news/round-up/crown-prince-christian-to-follow-in-his-fathers-footsteps-and-joins-the-royal-life-guards/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Danish app</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">US boycott</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">App Store</span></span><span class=\"keyword-text\">Danish app boycotting US supermarket products tops Utilities in Apple App Store free apps, surpassing Google and MitID, ranking fourth overall.</span>",
+      "link": "https://cphpost.dk/2026-01-23/life-in-denmark/a-danish-app-to-boycott-us-products-in-supermarkets-has-become-one-of-the-most-popular-in-the-country/"
+    }
+  ],
+  "x_trending": [
+    [
+      "Tech",
+      [
+        {
+          "name": "Elon Musk Debuts at Davos with AI, Mars, and Abundance Vision",
+          "post_count": "388K posts",
+          "category": "News",
+          "trending_since": null,
+          "link": "https://x.com/search?q=Elon+Musk+Debuts+at+Davos+with+AI,+Mars,+and+Abundance+Vision"
+        },
+        {
+          "name": "Operation Metro Surge Raids Spark Clashes in Freezing Minneapolis",
+          "post_count": "39K posts",
+          "category": "News",
+          "trending_since": null,
+          "link": "https://x.com/search?q=Operation+Metro+Surge+Raids+Spark+Clashes+in+Freezing+Minneapolis"
+        }
+      ]
+    ],
+    [
+      "World News",
+      [
+        {
+          "name": "Elon Musk Debuts at Davos with AI, Mars, and Abundance Vision",
+          "post_count": "388K posts",
+          "category": "News",
+          "trending_since": null,
+          "link": "https://x.com/search?q=Elon+Musk+Debuts+at+Davos+with+AI,+Mars,+and+Abundance+Vision"
+        }
+      ]
+    ]
+  ],
+  "quote": {
+    "text": "It's not what happens to you, but how you react to it that matters.",
+    "author": "Epictetus"
+  }
+}
