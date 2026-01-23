@@ -3,7 +3,8 @@ name: Daily Workflow
 on:
   workflow_dispatch:
   schedule:
-    - cron: '25 8 * * *'
+    - cron: '10 6 * * *'  
+    # Github time = -1 hour Cph time
 
 permissions:
   contents: write
@@ -39,7 +40,7 @@ jobs:
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID || 'C09MUE5TGC9' }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
           CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
           CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}

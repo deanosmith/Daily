@@ -35,7 +35,7 @@ load_dotenv()
 # API Keys and Config
 XAI_API_KEY = os.getenv("XAI_API_KEY")
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
-SLACK_CHANNEL_ID = os.getenv("SLACK_CHANNEL_ID", "C09MUE5TGC9") # Default from previous use
+SLACK_CHANNEL_ID = os.getenv("SLACK_CHANNEL_ID") # Default from previous use
 
 # WeasyPrint fix for macOS
 if sys.platform == "darwin":
@@ -105,6 +105,8 @@ X_CATEGORIES = {
 }
 
 X_TRENDS_PER_CATEGORY = 12
+DATA_OUTPUT_PATH = "daily_brief_data.json"
+HTML_OUTPUT_PATH = "daily_brief.html"
 
 
 # ==============================================================================
@@ -149,6 +151,18 @@ def stylize_keywords(text):
     rest_html = f'<span class="keyword-text">{rest_html}</span>' if rest_html else ""
     # TODO
     return Markup(f'<span class="keyword-badges">{badges}</span>{rest_html}')
+
+def make_json_safe(value):
+    """Convert data into JSON-serializable types."""
+    if isinstance(value, Markup):
+        return str(value)
+    if isinstance(value, (date, datetime)):
+        return value.isoformat()
+    if isinstance(value, dict):
+        return {key: make_json_safe(val) for key, val in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [make_json_safe(item) for item in value]
+    return value
 
 def format_trending_since(raw_since):
     """Normalize trending_since to HH:MM, or return None if invalid."""
@@ -506,16 +520,48 @@ def generate_pdf(data):
         logger.error("PDF generation skipped. Install WeasyPrint system dependencies.")
         return None
     try:
-        env = Environment(loader=FileSystemLoader(os.path.dirname(__file__)))
-        template = env.get_template("daily_brief_template.html")
-        html_out = template.render(**data)
-        
+        html_out = render_html(data)
         pdf_path = "daily_brief.pdf"
         HTML(string=html_out, base_url=os.path.dirname(__file__)).write_pdf(pdf_path)
         logger.info(f"PDF generated at {pdf_path}")
         return pdf_path
     except Exception as e:
         logger.error(f"Error generating PDF: {e}")
+        return None
+
+
+def render_html(data):
+    """Render daily brief HTML using the Jinja2 template."""
+    env = Environment(loader=FileSystemLoader(os.path.dirname(__file__)))
+    template = env.get_template("daily_brief_template.html")
+    return template.render(**data)
+
+
+def generate_html(data, output_path=HTML_OUTPUT_PATH):
+    """Generate HTML file from data using Jinja2."""
+    logger.info("Generating HTML...")
+    try:
+        html_out = render_html(data)
+        with open(output_path, "w", encoding="utf-8") as file:
+            file.write(html_out)
+        logger.info(f"HTML generated at {output_path}")
+        return output_path
+    except Exception as e:
+        logger.error(f"Error generating HTML: {e}")
+        return None
+
+
+def save_brief_data(data, output_path=DATA_OUTPUT_PATH):
+    """Save daily brief data to JSON."""
+    logger.info("Saving daily brief data...")
+    try:
+        safe_data = make_json_safe(data)
+        with open(output_path, "w", encoding="utf-8") as file:
+            json.dump(safe_data, file, ensure_ascii=True, indent=2)
+        logger.info(f"Daily brief data saved to {output_path}")
+        return output_path
+    except Exception as e:
+        logger.error(f"Error saving daily brief data: {e}")
         return None
 
 
@@ -537,8 +583,8 @@ def send_to_slack(pdf_path):
         client.files_upload_v2(
             channel=SLACK_CHANNEL_ID,
             file=pdf_path,
-            title=f"Daily Briefing - {date.today().strftime('%Y-%m-%d')}",
-            initial_comment="Mr Smith, here is your Daily Briefing."
+            title=f"Brevity - {date.today().strftime('%Y-%m-%d')}",
+            initial_comment="Here is your update Mr Smith.",
         )
         logger.info("PDF uploaded to Slack successfully.")
     except SlackApiError as e:
@@ -548,7 +594,7 @@ def send_to_slack(pdf_path):
 
 
 def main():
-    logger.info("Starting Daily Briefing generation...")
+    logger.info("Starting Brevity generation...")
     
     # 1. Gather Data
     weather = fetch_weather()
@@ -578,10 +624,14 @@ def main():
         "quote": quote
     }
     
-    # 2. Generate PDF
+    # 2. Save data + HTML output
+    save_brief_data(data)
+    generate_html(data)
+
+    # 3. Generate PDF
     pdf_path = generate_pdf(data)
     
-    # 3. Send to Slack
+    # 4. Send to Slack
     if pdf_path:
         send_to_slack(pdf_path)
     
