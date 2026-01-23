@@ -11,7 +11,7 @@ import functools
 import requests
 import calendar
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
-from urllib.parse import urlparse
+from urllib.parse import urlparse, quote
 from datetime import date, datetime
 from dotenv import load_dotenv
 
@@ -413,7 +413,7 @@ def fetch_x_trending():
     
     if not all([consumer_key, consumer_secret, access_token, access_token_secret]):
         logger.warning("X Trending: Missing OAuth credentials.")
-        return {}
+        return []
 
     try:
         from requests_oauthlib import OAuth1Session
@@ -429,54 +429,36 @@ def fetch_x_trending():
         
         if response.status_code != 200:
             logger.error(f"X API error {response.status_code}: {response.text}")
-            return {}
-        
-        trends_data = response.json().get('data', [])
-        
-        # Filter trends into categories
-        filtered_results = {}
-        
-        for category, keywords in X_CATEGORIES.items():
-            matches = [
-                trend for trend in trends_data
-                if any(kw.lower() in trend.get('trend_name', '').lower() for kw in keywords)
-            ]
-            
-            cleaned_matches = []
-            for t in matches[:X_TRENDS_PER_CATEGORY]:
-                # Clean trending_since data
-                raw_since = t.get('trending_since')
-                display_time = format_trending_since(raw_since)
-                
-                cleaned_matches.append({
-                    'name': t.get('trend_name'),
-                    'post_count': t.get('post_count') or t.get('tweet_count', 'N/A'),
-                    'category': t.get('category', 'N/A'),
-                    'trending_since': display_time,
-                    'link': f"https://x.com/search?q={t.get('trend_name', '').replace(' ', '+')}"
-                })
-            
-            if cleaned_matches:
-                filtered_results[category] = cleaned_matches
-        
-        # Log success
-        total_items = sum(len(v) for v in filtered_results.values())
-        logger.info(f"Successfully fetched {total_items} X trending topics across {len(filtered_results)} categories")
-        
-        # Sort so categories with items appear first, then by count
-        sorted_categories = sorted(
-            filtered_results.items(),
-            key=lambda item: (len(item[1]) > 0, len(item[1])), 
-            reverse=True
-        )
-        return sorted_categories
+            return []
+
+        raw_data = response.json().get('data', [])
+        logger.info(f"X API returned {len(raw_data)} items total.")
+
+        trends_data = raw_data[:10]
+
+        formatted_trends = []
+        for t in trends_data:
+            trend_name = t.get('trend_name') or "N/A"
+            formatted_trends.append({
+                'name': trend_name,
+                'post_count': t.get('post_count') or t.get('tweet_count', 'N/A'),
+                'category': t.get('category', 'N/A'),
+                'trending_since': t.get('trending_since', 'N/A'),
+                'link': f"https://x.com/search?q={quote(trend_name)}"
+            })
+
+        if not formatted_trends:
+            return []
+
+        logger.info(f"Successfully fetched {len(formatted_trends)} X trending topics")
+        return [("Personalized Trends", formatted_trends)]
         
     except ImportError:
         logger.error("requests_oauthlib not installed - cannot fetch X trends")
-        return {}
+        return []
     except Exception as e:
         logger.error(f"Error fetching X trending: {e}")
-        return {}
+        return []
 
 
 # ==============================================================================

@@ -166,33 +166,42 @@
   ],
   "x_trending": [
     [
-      "Tech",
+      "Personalized Trends",
       [
         {
-          "name": "Elon Musk Debuts at Davos with AI, Mars, and Abundance Vision",
-          "post_count": "388K posts",
+          "name": "J.D. Vance Defends U.S. Push for Stronger European Borders",
+          "post_count": "544 posts",
           "category": "News",
-          "trending_since": null,
-          "link": "https://x.com/search?q=Elon+Musk+Debuts+at+Davos+with+AI,+Mars,+and+Abundance+Vision"
+          "trending_since": "Trending now",
+          "link": "https://x.com/search?q=J.D.%20Vance%20Defends%20U.S.%20Push%20for%20Stronger%20European%20Borders"
+        },
+        {
+          "name": "Appeals Court Clears Path for Deportation of Pro-Palestinian Activist Mahmoud Khalil",
+          "post_count": "52K posts",
+          "category": "News",
+          "trending_since": "20 hours ago",
+          "link": "https://x.com/search?q=Appeals%20Court%20Clears%20Path%20for%20Deportation%20of%20Pro-Palestinian%20Activist%20Mahmoud%20Khalil"
+        },
+        {
+          "name": "Elon Musk Debuts at Davos with AI, Mars, and Abundance Vision",
+          "post_count": "392K posts",
+          "category": "News",
+          "trending_since": "1 day ago",
+          "link": "https://x.com/search?q=Elon%20Musk%20Debuts%20at%20Davos%20with%20AI%2C%20Mars%2C%20and%20Abundance%20Vision"
         },
         {
           "name": "Operation Metro Surge Raids Spark Clashes in Freezing Minneapolis",
-          "post_count": "39K posts",
+          "post_count": "44K posts",
           "category": "News",
-          "trending_since": null,
-          "link": "https://x.com/search?q=Operation+Metro+Surge+Raids+Spark+Clashes+in+Freezing+Minneapolis"
-        }
-      ]
-    ],
-    [
-      "World News",
-      [
+          "trending_since": "5 hours ago",
+          "link": "https://x.com/search?q=Operation%20Metro%20Surge%20Raids%20Spark%20Clashes%20in%20Freezing%20Minneapolis"
+        },
         {
-          "name": "Elon Musk Debuts at Davos with AI, Mars, and Abundance Vision",
-          "post_count": "388K posts",
+          "name": "U.S. Murders Drop 21% in 2025, Largest Decline on Record",
+          "post_count": "107K posts",
           "category": "News",
-          "trending_since": null,
-          "link": "https://x.com/search?q=Elon+Musk+Debuts+at+Davos+with+AI,+Mars,+and+Abundance+Vision"
+          "trending_since": "22 hours ago",
+          "link": "https://x.com/search?q=U.S.%20Murders%20Drop%2021%25%20in%202025%2C%20Largest%20Decline%20on%20Record"
         }
       ]
     ]
