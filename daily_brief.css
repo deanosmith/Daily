@@ -278,23 +278,22 @@ a {
 }
 
 .refresh-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 8px;
-    padding: 2px 6px;
-    font-size: 11px;
-    line-height: 1;
-    border-radius: 999px;
-    background: transparent;
-    border: 1px solid #444;
-    color: #aaa;
+    display: right;
+    align-items: right;
+    justify-content: right;
+    /* margin-right: 8px; */
+    padding: 0px 6px;
+    font-size: 24px;
+    border-radius: 100px;
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    color: #000000;
     cursor: pointer;
 }
 
 .refresh-button:hover {
     border-color: #666;
-    color: #e0e0e0;
+    color: #ff0000;
 }
 
 .refresh-button:disabled {
@@ -303,7 +302,7 @@ a {
 }
 
 .refresh-button.is-loading {
-    animation: spin 0.8s linear infinite;
+    animation: spin 1s linear infinite;
 }
 
 .data-error {

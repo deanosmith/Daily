@@ -46,15 +46,18 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
         run: uv run python daily_brief.py
-      - name: Commit and Push PDF
+      - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add daily_brief.pdf
+          
+          # Add PDF, HTML, and the JSON data file required for the web page
+          git add daily_brief.pdf brevity.html resources/daily_brief_data.json
+          
           # Only commit if there are changes
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update daily brief PDF [skip ci]"
+            git commit -m "Update daily brief content [skip ci]"
             git push
           fi
