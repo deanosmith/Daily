@@ -1,167 +1,167 @@
 {
-  "date": "Friday, January 23",
-  "year_percent": 6.301369863013699,
+  "date": "Saturday, January 24",
+  "year_percent": 6.575342465753424,
   "weather": {
     "morning": {
-      "temp": 0,
+      "temp": 1,
       "precip": 0,
-      "wind": 34,
-      "wind_dir": 98,
+      "wind": 19,
+      "wind_dir": 87,
       "color": "#87CEEB",
       "condition": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     "afternoon": {
-      "temp": -1,
+      "temp": 1,
       "precip": 0,
-      "wind": 31,
-      "wind_dir": 95,
+      "wind": 25,
+      "wind_dir": 100,
       "color": "#87CEEB",
       "condition": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     "evening": {
-      "temp": -1,
+      "temp": 0,
       "precip": 0,
-      "wind": 30,
-      "wind_dir": 95,
+      "wind": 24,
+      "wind_dir": 83,
       "color": "#87CEEB",
       "condition": "Overcast",
       "icon": "\u2601\ufe0f"
     },
-    "sunrise": "2026-01-23T08:18",
-    "sunset": "2026-01-23T16:24",
-    "daily_precip": 0
+    "sunrise": "2026-01-24T08:16",
+    "sunset": "2026-01-24T16:26",
+    "daily_precip": 1
   },
   "stocks": {
     "S&P 500": {
-      "price": 688.97998046875,
-      "change": 3.5799560546875,
-      "percent": 0.5223163010167597,
+      "price": 689.22998046875,
+      "change": 0.25,
+      "percent": 0.036285524556157876,
       "color": "green",
       "arrow": "\u2191"
     },
     "Tesla": {
-      "price": 449.3599853515625,
-      "change": 17.91998291015625,
-      "percent": 4.153528372137898,
-      "color": "green",
-      "arrow": "\u2191"
+      "price": 449.05999755859375,
+      "change": -0.29998779296875,
+      "percent": -0.06675890216038055,
+      "color": "red",
+      "arrow": "\u2193"
     },
     "Nvidia": {
-      "price": 184.83999633789062,
-      "change": 1.519989013671875,
-      "percent": 0.8291451848917019,
+      "price": 187.6699981689453,
+      "change": 2.8300018310546875,
+      "percent": 1.5310549053903877,
       "color": "green",
       "arrow": "\u2191"
     },
     "Bitcoin": {
-      "price": 89177.328125,
-      "change": -285.125,
-      "percent": -0.3187091232582384,
-      "color": "red",
-      "arrow": "\u2193"
+      "price": 89517.5390625,
+      "change": 13.6640625,
+      "percent": 0.015266447961051964,
+      "color": "green",
+      "arrow": "\u2191"
     },
     "United Health": {
-      "price": 354.4700012207031,
-      "change": 6.720001220703125,
-      "percent": 1.9324230684983825,
+      "price": 356.260009765625,
+      "change": 1.790008544921875,
+      "percent": 0.5049816736980697,
       "color": "green",
       "arrow": "\u2191"
     },
     "Echo Star": {
-      "price": 127.97000122070312,
-      "change": 5.470001220703125,
-      "percent": 4.465307118941326,
-      "color": "green",
-      "arrow": "\u2191"
+      "price": 126.5,
+      "change": -1.470001220703125,
+      "percent": -1.1487076710797957,
+      "color": "red",
+      "arrow": "\u2193"
     },
-    "average_percent": 1.9306684870379716
+    "average_percent": 0.1453536630609152
   },
   "world_news": [
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">NATO</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">UK outrage</span></span><span class=\"keyword-text\">Trump&#x27;s claim NATO troops stayed off Afghanistan front lines sparks UK outrage despite 457 British deaths.</span>",
-      "link": "https://www.bbc.com/news/articles/czr444j671vo?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Russia</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Ukraine strikes</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">US talks</span></span><span class=\"keyword-text\">Russia struck Ukraine, killing one and injuring 23, as US war-ending talks continue and Abu Dhabi trilateral discussions resume.</span>",
+      "link": "https://www.bbc.com/news/articles/cwyr6p30054o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Russia</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Ukraine</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">US</span></span><span class=\"keyword-text\">Russia, Ukraine, and US to hold trilateral talks in Abu Dhabi as both insist no peace deal until territorial issues resolved.</span>",
-      "link": "https://www.bbc.com/news/articles/cx20011w4zzo?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Pentagon</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">defense strategy</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">limited support</span></span><span class=\"keyword-text\">Pentagon&#x27;s new national defense strategy shifts to offering more limited support to US allies.</span>",
+      "link": "https://www.bbc.com/news/articles/cj9r8ezym3ro?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Yemen</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">UAE</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">secret prisons</span></span><span class=\"keyword-text\">BBC visits UAE-run secret prisons on former bases in Yemen where detainees report abuse, like a mother losing contact with her son for seven months.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Harry</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">NATO</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Afghanistan</span></span><span class=\"keyword-text\">Harry says NATO troops&#x27; sacrifices in Afghanistan deserve respect, as US president&#x27;s comments face condemnation from UK veterans and politicians.</span>",
+      "link": "https://www.bbc.com/news/articles/clym2l7d75eo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Afghanistan</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Allies</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Combat</span></span><span class=\"keyword-text\">BBC&#x27;s Frank Gardner: Brits, Canadians, and Danes joined Americans in Afghanistan&#x27;s toughest fighting, risking life and limb.</span>",
+      "link": "https://www.bbc.com/news/articles/cj3v2mlvzdvo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">shark attack</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Sydney Harbour</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Nico Antic</span></span><span class=\"keyword-text\">12-year-old Nico Antic dies from injuries after shark attack while swimming in Sydney Harbour last Sunday.</span>",
+      "link": "https://www.bbc.com/news/articles/c2k98ql703no?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">TikTok</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">location data</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">privacy policy</span></span><span class=\"keyword-text\">TikTok&#x27;s US venture will collect precise user location data, detailed in its new privacy policy.</span>",
+      "link": "https://www.bbc.com/news/articles/cvgnj7v2rr5o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Ukraine-Russia talks</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">peace deal</span></span><span class=\"keyword-text\">High-stakes Ukraine-Russia-US talks have low expectations despite Trump&#x27;s push for peace amid unresolved major issues.</span>",
+      "link": "https://www.bbc.com/news/articles/c3edde1pwx8o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Yemen</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">UAE prisons</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">abuse</span></span><span class=\"keyword-text\">BBC visits UAE-run secret prisons in Yemen on former bases, where detainees report abuse including a mother&#x27;s seven-month silence from her son.</span>",
       "link": "https://www.bbc.com/news/articles/c3r117w55q4o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">US</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">winter storm</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">hypothermia</span></span><span class=\"keyword-text\">US braces for &#x27;extremely dangerous&#x27; winter storm posing life-threatening hypothermia risk, warns National Weather Service.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">US winter storm</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">hypothermia</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">National Weather Service</span></span><span class=\"keyword-text\">US braces for &#x27;extremely dangerous&#x27; winter storm posing life-threatening hypothermia risk, warns National Weather Service.</span>",
       "link": "https://www.bbc.com/news/articles/c0r44l05q52o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Pakistan</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Karachi</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">mall fire</span></span><span class=\"keyword-text\">Death toll from Gul Plaza mall fire in Karachi rises to 67 as body identification from wreckage continues.</span>",
-      "link": "https://www.bbc.com/news/articles/cwy11485jeno?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Canada</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Board of Peace</span></span><span class=\"keyword-text\">Trump withdrew Canada&#x27;s invitation to the Board of Peace after PM Mark Carney warned of a &quot;rupture&quot; in the US-led global order, without reason.</span>",
-      "link": "https://www.bbc.com/news/articles/cn7jjp8gl0jo?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Taliban</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Khadija Ahmadzada</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">athlete</span></span><span class=\"keyword-text\">Taliban released 22-year-old female athlete Khadija Ahmadzada after 13 days in jail for violating women&#x27;s sports gym rules.</span>",
-      "link": "https://www.bbc.com/news/articles/c1evv6dz3e9o?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Board of Peace</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">UN</span></span><span class=\"keyword-text\">Trump&#x27;s Board of Peace, promised to end decades of suffering, could sideline struggling UN but critics call it vainglorious.</span>",
-      "link": "https://www.bbc.com/news/articles/cn8jj228g2vo?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Mandela</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">artifacts</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">court battle</span></span><span class=\"keyword-text\">Mandela&#x27;s daughter wins court battle allowing sale of his prison key, sunglasses, and shirt despite heritage export ban attempt.</span>",
-      "link": "https://www.bbc.com/news/articles/cp822g353y6o?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Russian tankers</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">sanctions</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">English Channel</span></span><span class=\"keyword-text\">BBC Verify finds 42 sanctioned Russian tankers passed through the Channel since Jan 11 despite UK&#x27;s &#x27;assertive&#x27; action vow.</span>",
-      "link": "https://www.bbc.com/news/articles/c2d77rr51rko?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Minnesota</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">ICE</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">protests</span></span><span class=\"keyword-text\">Hundreds of Minnesota businesses closed to protest ICE presence as thousands join widespread protests against the state&#x27;s weeks-long immigration crackdown.</span>",
+      "link": "https://www.bbc.com/news/articles/c1dk67g4q91o?at_medium=RSS&at_campaign=rss"
     }
   ],
   "space_news": [
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Europe</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">spaceports</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">launch operators</span></span><span class=\"keyword-text\">Launch operators are the rocket fuel required to galvanize Europe&#x27;s mainland spaceports like SaxaVord and And\u00f8ya.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Space Beyond</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">SpaceX</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">memorial cubesat</span></span><span class=\"keyword-text\">Florida-based Space Beyond books October 2027 SpaceX rideshare launch for low-cost memorial cubesat, starting construction next week.</span>",
+      "link": "https://spacenews.com/space-beyond-lines-up-2027-spacex-launch-for-low-cost-memorial-cubesat/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Vast</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Haven-1</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">astronaut</span></span><span class=\"keyword-text\">Vast hires former NASA astronaut as Haven-1 enters integration phase amid first station launch delay.</span>",
+      "link": "https://spacenews.com/former-astronaut-joins-vast-as-haven-1-moves-into-integration/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Europe</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">spaceports</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">launch operators</span></span><span class=\"keyword-text\">Launch operators are rocket fuel needed to galvanize Europe&#x27;s SaxaVord and And\u00f8ya spaceports for mainland satellite launches.</span>",
       "link": "https://spacenews.com/launch-operators-are-the-rocket-fuel-required-to-galvanize-spaceports-in-europe/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">NASA</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">funding</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">2027</span></span><span class=\"keyword-text\">House appropriator sees \u2018room for improvement\u2019 in NASA\u2019s 2027 funding after FY2026 appropriations completion.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">NASA</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">funding</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">2027</span></span><span class=\"keyword-text\">House appropriator sees \u2018room for improvement\u2019 in NASA\u2019s 2027 funding bill, building on completed FY2026 appropriations.</span>",
       "link": "https://spacenews.com/house-appropriator-sees-room-for-improvement-in-nasa-funding-for-2027/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Space Force</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">acquisition</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">workforce</span></span><span class=\"keyword-text\">Space Force\u2019s acquisition arm races to rebuild contracting workforce after civilian cuts amid Pentagon reforms and budget surge.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Space Force</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">acquisition</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">workforce</span></span><span class=\"keyword-text\">Space Force\u2019s acquisition arm races to rebuild contracting workforce after civilian cuts, amid Pentagon reforms and budget surge colliding with thinned staff.</span>",
       "link": "https://spacenews.com/space-forces-acquisition-arm-races-to-rebuild-contracting-workforce-after-civilian-cuts/"
-    },
-    {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Blue Origin</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">New Glenn</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">booster reuse</span></span><span class=\"keyword-text\">Blue Origin will reuse a New Glenn booster for the first time on its next launch carrying an AST SpaceMobile satellite.</span>",
-      "link": "https://spacenews.com/blue-origin-to-reuse-new-glenn-booster-on-next-launch/"
-    },
-    {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Shenzhou-20</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Shenzhou-23</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">debris impact</span></span><span class=\"keyword-text\">China&#x27;s damaged Shenzhou-20 survived reentry after on-orbit repairs from debris, as Shenzhou-23 arrives at spaceport.</span>",
-      "link": "https://spacenews.com/damaged-shenzhou-20-spacecraft-survives-reentry-shenzhou-23-arrives-at-spaceport/"
     }
   ],
   "copenhagen": [
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Frederiksen</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Greenland</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">NATO</span></span><span class=\"keyword-text\">Danish PM Mette Frederiksen heads to Greenland Friday to meet leader Nielsen after agreeing with NATO&#x27;s Rutte on Arctic boost.</span>",
-      "link": "https://cphpost.dk/2026-01-23/news/round-up/mette-frederiksen-is-travelling-to-greenland-today/"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Arc\u2019teryx</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Copenhagen</span></span><span class=\"keyword-text\">Arc\u2019teryx will open its first brand store at Pilestr\u00e6de 16 in central Copenhagen in spring 2026.</span>",
+      "link": "https://cphpost.dk/2026-01-24/news/round-up/arcteryx-to-open-first-brand-store-in-denmark/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">retailers</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">price cuts</span></span><span class=\"keyword-text\">Denmark\u2019s stats agency: 38% of retailers expect lower grocery prices soon, first shift since autumn 2024 from October\u2019s 64% expecting hikes.</span>",
-      "link": "https://cphpost.dk/2026-01-23/news/round-up/4-in-10-grocery-stores-to-cut-prices-soon/"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">fastelavnsboller</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">buns</span></span><span class=\"keyword-text\">Fastelavnsboller, cream-filled buns with seasonal fruits, star in Denmark&#x27;s coming weeks, inspiring city chefs per expert Kiki Canuto.</span>",
+      "link": "https://cphpost.dk/2026-01-24/life-in-denmark/there-is-one-protagonist-in-the-coming-weeks-in-denmark-and-its-name-is-fastelavnsboller-here-is-what-you-need-to-know-about-it-according-to-the-specialists/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">mink culling</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">appeal</span></span><span class=\"keyword-text\">Danish mink group B\u00e6redygtigt Landbrug appeals Glostrup court&#x27;s acquittal of Veterinary Administration on farmers&#x27; compensation claim.</span>",
-      "link": "https://cphpost.dk/2026-01-23/news/round-up/mink-breeders-take-legal-action-against-authorities/"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">food prices</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">government analysis</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Ukraine war</span></span><span class=\"keyword-text\">Government completes first analysis part on skyrocketing food prices from extreme weather, Covid-19, and Ukraine war.</span>",
+      "link": "https://cphpost.dk/2026-01-23/general/government-intensifies-focus-on-fair-food-prices/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Crown Prince Christian</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Royal Life Guards</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">platoon leader</span></span><span class=\"keyword-text\">Crown Prince Christian joins Royal Life Guards as platoon leader for conscripts from August 2026, following father&#x27;s footsteps.</span>",
-      "link": "https://cphpost.dk/2026-01-23/news/round-up/crown-prince-christian-to-follow-in-his-fathers-footsteps-and-joins-the-royal-life-guards/"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Mette Frederiksen</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Greenland</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Diplomacy</span></span><span class=\"keyword-text\">Danish PM Mette Frederiksen arrived in Nuuk to prepare joint diplomatic efforts with Greenland leader Jens-Frederik Nielsen.</span>",
+      "link": "https://cphpost.dk/2026-01-23/news/round-up/mette-frederiksen-visits-greenland-for-diplomatic-talks/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Danish app</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">US boycott</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">App Store</span></span><span class=\"keyword-text\">Danish app boycotting US supermarket products tops free Utilities in Apple App Store, surpassing Sundhedskortet, Google, K\u00f8rekort, MitID; fourth overall.</span>",
-      "link": "https://cphpost.dk/2026-01-23/life-in-denmark/a-danish-app-to-boycott-us-products-in-supermarkets-has-become-one-of-the-most-popular-in-the-country/"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Greenland</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">influence campaigns</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Arctic</span></span><span class=\"keyword-text\">Denmark\u2019s PET warns Greenland targeted by US, Russia, China campaigns to divide it from Denmark amid Arctic power competition.</span>",
+      "link": "https://cphpost.dk/2026-01-23/news/round-up/greenland-may-be-target-for-usa-influence-campaigns/"
     }
   ],
   "x_trending": [
@@ -169,39 +169,39 @@
       "Personalized Trends",
       [
         {
-          "name": "J.D. Vance Defends U.S. Push for Stronger European Borders",
-          "post_count": "595 posts",
+          "name": "Japan's Finance Minister Rejects European Immigration Model at Davos",
+          "post_count": "995 posts",
           "category": "News",
           "trending_since": "Trending now",
-          "link": "https://x.com/search?q=J.D.%20Vance%20Defends%20U.S.%20Push%20for%20Stronger%20European%20Borders"
+          "link": "https://x.com/search?q=Japan%27s%20Finance%20Minister%20Rejects%20European%20Immigration%20Model%20at%20Davos"
         },
         {
-          "name": "Elon Musk Debuts at Davos with AI, Mars, and Abundance Vision",
-          "post_count": "393K posts",
-          "category": "News",
-          "trending_since": "1 day ago",
-          "link": "https://x.com/search?q=Elon%20Musk%20Debuts%20at%20Davos%20with%20AI%2C%20Mars%2C%20and%20Abundance%20Vision"
-        },
-        {
-          "name": "Bald Eagle Perches on Minneapolis Traffic Cam, Sparks Patriotic Buzz",
+          "name": "Department of War Confirms Directed Energy Weapons and Scaling Plans",
           "post_count": "28K posts",
           "category": "News",
           "trending_since": "13 hours ago",
-          "link": "https://x.com/search?q=Bald%20Eagle%20Perches%20on%20Minneapolis%20Traffic%20Cam%2C%20Sparks%20Patriotic%20Buzz"
+          "link": "https://x.com/search?q=Department%20of%20War%20Confirms%20Directed%20Energy%20Weapons%20and%20Scaling%20Plans"
         },
         {
-          "name": "Tesla Launches Unsupervised Robotaxi Rides in Austin",
-          "post_count": "75K posts",
-          "category": "News",
-          "trending_since": "19 hours ago",
-          "link": "https://x.com/search?q=Tesla%20Launches%20Unsupervised%20Robotaxi%20Rides%20in%20Austin"
-        },
-        {
-          "name": "U.S. Officially Exits World Health Organization After 77 Years",
-          "post_count": "222K posts",
+          "name": "Met Police Bans UKIP Christian March in Tower Hamlets Over Disorder Fears",
+          "post_count": "123K posts",
           "category": "News",
           "trending_since": "1 day ago",
-          "link": "https://x.com/search?q=U.S.%20Officially%20Exits%20World%20Health%20Organization%20After%2077%20Years"
+          "link": "https://x.com/search?q=Met%20Police%20Bans%20UKIP%20Christian%20March%20in%20Tower%20Hamlets%20Over%20Disorder%20Fears"
+        },
+        {
+          "name": "Japan Gifts U.S. 250 Cherry Blossom Trees for 250th Anniversary",
+          "post_count": "13K posts",
+          "category": "News",
+          "trending_since": "19 hours ago",
+          "link": "https://x.com/search?q=Japan%20Gifts%20U.S.%20250%20Cherry%20Blossom%20Trees%20for%20250th%20Anniversary"
+        },
+        {
+          "name": "Elon Musk Builds Spoon Rocket at Trump Fundraiser Dinner",
+          "post_count": "5.4K posts",
+          "category": "News",
+          "trending_since": "1 day ago",
+          "link": "https://x.com/search?q=Elon%20Musk%20Builds%20Spoon%20Rocket%20at%20Trump%20Fundraiser%20Dinner"
         }
       ]
     ]
