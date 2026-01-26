@@ -1,37 +1,37 @@
 {
-  "date": "Sunday, January 25",
-  "year_percent": 6.8493150684931505,
+  "date": "Monday, January 26",
+  "year_percent": 7.123287671232877,
   "weather": {
     "morning": {
-      "temp": 1,
-      "precip": 4,
-      "wind": 20,
-      "wind_dir": 104,
+      "temp": -1,
+      "precip": 1,
+      "wind": 26,
+      "wind_dir": 46,
       "color": "#87CEEB",
       "condition": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     "afternoon": {
-      "temp": 1,
-      "precip": 1,
-      "wind": 22,
-      "wind_dir": 96,
+      "temp": 0,
+      "precip": 28,
+      "wind": 26,
+      "wind_dir": 55,
       "color": "#87CEEB",
       "condition": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     "evening": {
-      "temp": 1,
-      "precip": 0,
+      "temp": 0,
+      "precip": 83,
       "wind": 25,
-      "wind_dir": 82,
-      "color": "#87CEEB",
-      "condition": "Overcast",
-      "icon": "\u2601\ufe0f"
+      "wind_dir": 42,
+      "color": "#E0FFFF",
+      "condition": "Light Snow",
+      "icon": "\ud83c\udf28\ufe0f"
     },
-    "sunrise": "2026-01-25T08:15",
-    "sunset": "2026-01-25T16:28",
-    "daily_precip": 4
+    "sunrise": "2026-01-26T08:13",
+    "sunset": "2026-01-26T16:30",
+    "daily_precip": 83
   },
   "stocks": {
     "S&P 500": {
@@ -56,11 +56,11 @@
       "arrow": "\u2191"
     },
     "Bitcoin": {
-      "price": 88170.15625,
-      "change": -940.578125,
-      "percent": -1.0555160740139506,
-      "color": "red",
-      "arrow": "\u2193"
+      "price": 87975.1171875,
+      "change": 1402.8984375,
+      "percent": 1.6204949552595358,
+      "color": "green",
+      "arrow": "\u2191"
     },
     "United Health": {
       "price": 356.260009765625,
@@ -76,117 +76,138 @@
       "color": "red",
       "arrow": "\u2193"
     },
-    "average_percent": -0.03311009060158528
+    "average_percent": 0.41289174761066244
   },
   "world_news": [
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Canada</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">tariffs</span></span><span class=\"keyword-text\">Trump threatens 100% tariffs on Canada if it makes a deal with China, amid escalating tensions with PM Mark Carney.</span>",
-      "link": "https://www.bbc.com/news/articles/cy4qww3w72lo?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Alex Pretti</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">immigration shooting</span></span><span class=\"keyword-text\">Trump tells WSJ administration is &#x27;reviewing everything&#x27; after immigration agent fatally shot Alex Pretti in Minneapolis.</span>",
+      "link": "https://www.bbc.com/news/articles/cr571qg4m61o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">UK soldiers</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Afghanistan</span></span><span class=\"keyword-text\">Trump praises UK soldiers in Afghanistan as &quot;among greatest of all warriors&quot; after claiming allies avoided front lines.</span>",
-      "link": "https://www.bbc.com/news/articles/c3edwx37pd9o?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Minneapolis</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">deadly shooting</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">federal agents</span></span><span class=\"keyword-text\">Minneapolis residents reel in horror from second deadly shooting by federal agents killing two in recent weeks, fueling anger.</span>",
+      "link": "https://www.bbc.com/news/articles/cvg50vv1ezko?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Russia-Ukraine</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">peace talks</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">three-way</span></span><span class=\"keyword-text\">First three-way peace talks on Russia-Ukraine war end without breakthrough amid raging fighting but will resume next month.</span>",
-      "link": "https://www.bbc.com/news/articles/cwyr6p30054o?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Alex Pretti</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">ICU nurse</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Minneapolis shooting</span></span><span class=\"keyword-text\">Alex Pretti, an intensive care nurse and avid outdoorsman who loved mountain biking, was shot dead in Minneapolis.</span>",
+      "link": "https://www.bbc.com/news/articles/c62r4g590wqo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">China</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Xi</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">general purge</span></span><span class=\"keyword-text\">China investigates its highest-ranking general amid accusations President Xi uses probes to purge political rivals.</span>",
-      "link": "https://www.bbc.com/news/articles/c701kr5zqdqo?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">US winter storm</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">deaths</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">power outages</span></span><span class=\"keyword-text\">Major US winter storm kills 7, leaves 800K without power, triggers emergencies in half of states for 180M.</span>",
+      "link": "https://www.bbc.com/news/articles/c1klrmz90yjo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Germany</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Hamas</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">arrest</span></span><span class=\"keyword-text\">Germany arrested a suspected Hamas member, Lebanese man accused by prosecutors of plotting attacks on Jewish and Israeli institutions in Europe.</span>",
-      "link": "https://www.bbc.com/news/articles/c8rm14lkkvzo?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Russia</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Interpol</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">critics</span></span><span class=\"keyword-text\">A leak reveals Russia misusing Interpol&#x27;s wanted list to target critics abroad for arrests.</span>",
+      "link": "https://www.bbc.com/news/articles/c20gg729y1yo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Alex Honnold</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">free solo</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Taiwan skyscraper</span></span><span class=\"keyword-text\">. Alex Honnold becomes first to free solo climb 101-floor Taiwanese skyscraper without safety gear.</span>",
-      "link": "https://www.bbc.com/news/articles/c4gl0njzxjdo?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Philippines</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">ferry sinking</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">18 dead</span></span><span class=\"keyword-text\">Eighteen dead, 24 missing after MV Trisha Kerstin ferry with 300 passengers sinks; coast guard searching.</span>",
+      "link": "https://www.bbc.com/news/articles/cwy1vpqpy23o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Pentagon</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">defense strategy</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">US allies</span></span><span class=\"keyword-text\">Pentagon&#x27;s new national defense strategy shifts to more limited support for US allies.</span>",
-      "link": "https://www.bbc.com/news/articles/cj9r8ezym3ro?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Venezuela</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">political prisoners</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Maduro</span></span><span class=\"keyword-text\">Venezuela frees dozens of political prisoners, latest batch since US seized President Nicol\u00e1s Maduro in raid, human rights group says.</span>",
+      "link": "https://www.bbc.com/news/articles/clymr3pz2kxo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">shark attack</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Sydney Harbour</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Nico Antic</span></span><span class=\"keyword-text\">12-year-old Nico Antic dies from injuries after shark attack while swimming in Sydney Harbour last Sunday.</span>",
-      "link": "https://www.bbc.com/news/articles/c2k98ql703no?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Heatwave</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Australia</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">National Day</span></span><span class=\"keyword-text\">Heatwave warnings across Australia as millions celebrate national day, with temperatures peaking in high forties in Victoria and South Australia Tuesday.</span>",
+      "link": "https://www.bbc.com/news/articles/cz6y7nxx5jvo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Indonesia</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">landslide</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">West Java</span></span><span class=\"keyword-text\">A landslide in West Java village killed seven, with rescue teams searching for 83 missing.</span>",
-      "link": "https://www.bbc.com/news/articles/c87r53y4dx0o?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Kenya</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">assassination attempt</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">church attack</span></span><span class=\"keyword-text\">Kenya&#x27;s ex-deputy president alleges assassination attempt in church attack, condemned by interior minister as police investigate.</span>",
+      "link": "https://www.bbc.com/news/articles/cpqyxew338po?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Greenland</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span></span><span class=\"keyword-text\">Danish PM Mette Frederiksen visits Greenland for a &#x27;show of support&#x27; after Trump&#x27;s threats to take control of it.</span>",
-      "link": "https://www.bbc.com/news/articles/c78ejd0xmp0o?at_medium=RSS&at_campaign=rss"
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Mark Tully</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">BBC</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">India</span></span><span class=\"keyword-text\">Sir Mark Tully, BBC&#x27;s &#x27;voice of India&#x27;, dies aged 90 after covering decades of India&#x27;s defining historical moments.</span>",
+      "link": "https://www.bbc.com/news/articles/c4nnp4d064do?at_medium=RSS&at_campaign=rss"
     }
   ],
   "space_news": [
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">NASA</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">DOE</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">lunar nuclear reactor</span></span><span class=\"keyword-text\">NASA and DOE agree to collaborate on lunar nuclear reactor development as industry awaits final proposals.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Golden Dome</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">missile defense</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Pentagon</span></span><span class=\"keyword-text\">Golden Dome forces Pentagon to confront missile defense economics, as Gen. Guetlein prioritizes cost, production scale over exquisite technology.</span>",
+      "link": "https://spacenews.com/golden-dome-is-forcing-the-pentagon-to-confront-missile-defense-economics/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">NASA</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">DOE</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">lunar reactor</span></span><span class=\"keyword-text\">NASA and DOE agree to collaborate on Moon nuclear reactors as industry awaits final proposals.</span>",
       "link": "https://spacenews.com/nasa-and-doe-to-collaborate-on-lunar-nuclear-reactor-development/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Space Beyond</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">SpaceX</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">memorial cubesat</span></span><span class=\"keyword-text\">Florida-based Space Beyond books October 2027 SpaceX rideshare launch for low-cost memorial cubesat, starts building next week.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Space Beyond</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">SpaceX</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">memorial cubesat</span></span><span class=\"keyword-text\">Florida-based Space Beyond starts building first low-cost memorial cubesat next week for October 2027 rideshare launch.</span>",
       "link": "https://spacenews.com/space-beyond-lines-up-2027-spacex-launch-for-low-cost-memorial-cubesat/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Vast</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Haven-1</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">astronaut</span></span><span class=\"keyword-text\">Vast hires former NASA astronaut as Haven-1 enters integration amid first station launch delay.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Vast</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">astronaut</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Haven-1</span></span><span class=\"keyword-text\">Vast hires former NASA astronaut as Haven-1 enters integration amid first station launch delay.</span>",
       "link": "https://spacenews.com/former-astronaut-joins-vast-as-haven-1-moves-into-integration/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Europe</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">spaceports</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">launch operators</span></span><span class=\"keyword-text\">Launch operators are essential rocket fuel to activate Europe&#x27;s mainland spaceports like SaxaVord and And\u00f8ya for satellite launches.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Europe</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">spaceports</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">launch operators</span></span><span class=\"keyword-text\">Launch operators are essential rocket fuel to activate SaxaVord and And\u00f8ya spaceports, beyond Guiana Space Centre.</span>",
       "link": "https://spacenews.com/launch-operators-are-the-rocket-fuel-required-to-galvanize-spaceports-in-europe/"
-    },
-    {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">NASA</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">funding</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">2027</span></span><span class=\"keyword-text\">House appropriator sees room for improvement in NASA\u2019s 2027 funding, building on completed FY2026 appropriations.</span>",
-      "link": "https://spacenews.com/house-appropriator-sees-room-for-improvement-in-nasa-funding-for-2027/"
     }
   ],
-  "copenhagen": [],
+  "copenhagen": [
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Danish veterans</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">silent protest</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump NATO</span></span><span class=\"keyword-text\">Danish veterans plan silent march to US embassy on Jan. 31 protesting Trump&#x27;s false claim NATO soldiers held back in Afghanistan.</span>",
+      "link": "https://cphpost.dk/2026-01-26/news/round-up/danish-veterans-gather-in-silent-protest-at-us-embassy/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Conservatives</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">deportation</span></span><span class=\"keyword-text\">Denmark&#x27;s Conservatives, led by Mona Juul, propose expelling criminal foreigners with unconditional prison sentences for severe crimes like 3-6 months, ignoring ties.</span>",
+      "link": "https://cphpost.dk/2026-01-26/news/round-up/conservatives-seek-deportation-for-any-foreign-offenses/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Syrians</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">asylum</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span></span><span class=\"keyword-text\">Syrian asylum applications in Denmark dropped to 150 in 2025 from 452 in 2024, trailing Eritreans (247) and Afghans (192).</span>",
+      "link": "https://cphpost.dk/2026-01-26/news/round-up/far-fewer-syrians-sought-asylum-in-denmark-in-2025/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">5000 DKK</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">low-income families</span></span><span class=\"keyword-text\">Danish government to give tax-free 5000 DKK food checks to families with both parents earning under 500,000 DKK annually.</span>",
+      "link": "https://cphpost.dk/2026-01-26/news/round-up/government-to-give-families-5000-kroner-extra-for-food/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Frederik</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Mary</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Australia</span></span><span class=\"keyword-text\">. Australian PM Albanese says King Frederik and Queen Mary plan March visit, unconfirmed by Danish royals.</span>",
+      "link": "https://cphpost.dk/2026-01-26/news/round-up/pm-king-frederik-and-queen-mary-visit-australia/"
+    }
+  ],
   "x_trending": [
     [
       "Personalized Trends",
       [
         {
-          "name": "Elon Musk Calls Hitler a Far-Left Socialist, Sparking History Debate",
-          "post_count": "24K posts",
+          "name": "SpaceX Raptor 3 vs. Diesel Engine Highlights Innovation Paths",
+          "post_count": "248 posts",
+          "category": "Other",
+          "trending_since": "Trending now",
+          "link": "https://x.com/search?q=SpaceX%20Raptor%203%20vs.%20Diesel%20Engine%20Highlights%20Innovation%20Paths"
+        },
+        {
+          "name": "Elon Musk Confirms Mute Option for Political Posts on X",
+          "post_count": "11K posts",
           "category": "News",
-          "trending_since": "12 hours ago",
-          "link": "https://x.com/search?q=Elon%20Musk%20Calls%20Hitler%20a%20Far-Left%20Socialist%2C%20Sparking%20History%20Debate"
+          "trending_since": "16 hours ago",
+          "link": "https://x.com/search?q=Elon%20Musk%20Confirms%20Mute%20Option%20for%20Political%20Posts%20on%20X"
         },
         {
-          "name": "MrBeast Tours Lab-Grown Chicken Facility and Passes Blind Taste Test",
-          "post_count": "10K posts",
-          "category": "Entertainment",
-          "trending_since": "6 hours ago",
-          "link": "https://x.com/search?q=MrBeast%20Tours%20Lab-Grown%20Chicken%20Facility%20and%20Passes%20Blind%20Taste%20Test"
-        },
-        {
-          "name": "Malema Leads 'Kill the Boer' Chant at South Africa Court Rally",
-          "post_count": "48K posts",
+          "name": "Artemis II Astronauts Set for Moon Flyby in Under Two Weeks",
+          "post_count": "3.9K posts",
           "category": "News",
-          "trending_since": "12 hours ago",
-          "link": "https://x.com/search?q=Malema%20Leads%20%27Kill%20the%20Boer%27%20Chant%20at%20South%20Africa%20Court%20Rally"
+          "trending_since": "15 hours ago",
+          "link": "https://x.com/search?q=Artemis%20II%20Astronauts%20Set%20for%20Moon%20Flyby%20in%20Under%20Two%20Weeks"
         },
         {
-          "name": "Palestinian-American Artist Loses $100K in Alleged Ramallah Cafe Scam",
-          "post_count": "396 posts",
+          "name": "Elon Musk Announces Political Post Mute Feature for X",
+          "post_count": "161 posts",
           "category": "News",
           "trending_since": "Trending now",
-          "link": "https://x.com/search?q=Palestinian-American%20Artist%20Loses%20%24100K%20in%20Alleged%20Ramallah%20Cafe%20Scam"
+          "link": "https://x.com/search?q=Elon%20Musk%20Announces%20Political%20Post%20Mute%20Feature%20for%20X"
         },
         {
-          "name": "Thousands Brave Cold for 53rd March for Life in D.C.",
-          "post_count": "129K posts",
-          "category": "News",
-          "trending_since": "1 day ago",
-          "link": "https://x.com/search?q=Thousands%20Brave%20Cold%20for%2053rd%20March%20for%20Life%20in%20D.C."
+          "name": "Elon Musk's 1994 Usenet Post Reveals Early Joystick Optimization Quest",
+          "post_count": "7.6K posts",
+          "category": "Other",
+          "trending_since": "21 hours ago",
+          "link": "https://x.com/search?q=Elon%20Musk%27s%201994%20Usenet%20Post%20Reveals%20Early%20Joystick%20Optimization%20Quest"
         }
       ]
     ]
   ],
   "quote": {
-    "text": "The happiness of your life depends upon the quality of your thoughts.",
+    "text": "You have power over your mind\u2014not outside events. Realize this, and you will find strength.",
     "author": "Marcus Aurelius"
   }
 }
