@@ -14,17 +14,17 @@
     "afternoon": {
       "temp": 0,
       "precip": 10,
-      "wind": 24,
-      "wind_dir": 67,
+      "wind": 23,
+      "wind_dir": 68,
       "color": "#87CEEB",
       "condition": "Overcast",
       "icon": "\u2601\ufe0f"
     },
     "evening": {
-      "temp": -1,
+      "temp": 0,
       "precip": 1,
-      "wind": 24,
-      "wind_dir": 71,
+      "wind": 22,
+      "wind_dir": 70,
       "color": "#87CEEB",
       "condition": "Overcast",
       "icon": "\u2601\ufe0f"
@@ -56,9 +56,9 @@
       "arrow": "\u2193"
     },
     "Bitcoin": {
-      "price": 87927.0859375,
-      "change": -340.0546875,
-      "percent": -0.38525626308063043,
+      "price": 87891.8828125,
+      "change": -375.2578125,
+      "percent": -0.42513874341332786,
       "color": "red",
       "arrow": "\u2193"
     },
@@ -76,61 +76,61 @@
       "color": "red",
       "arrow": "\u2193"
     },
-    "average_percent": -1.7099654913639615
+    "average_percent": -1.716612571419411
   },
   "world_news": [
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Homan</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">immigration</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Minneapolis</span></span><span class=\"keyword-text\">Trump&#x27;s border tsar Tom Homan sent to Minneapolis as local immigration chief at crackdown center departs amid White House tone shift.</span>",
-      "link": "https://www.bbc.com/news/articles/cgrdlr70qg4o?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Minnesota</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">fatal shooting</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">immigration officers</span></span><span class=\"keyword-text\">A terrified Minnesotan tells BBC in tears &quot;We&#x27;re all terrified&quot; after second fatal shooting by federal immigration officers.</span>",
-      "link": "https://www.bbc.com/news/videos/crkr1g5vnveo?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">India</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">EU</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">trade deal</span></span><span class=\"keyword-text\">India and EU announce long-awaited landmark trade deal amid US economic and geopolitical pressures.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">India</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">EU</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">trade deal</span></span><span class=\"keyword-text\">India and EU announce long-awaited &#x27;mother of all trade deals&#x27; amid US economic and geopolitical pressures.</span>",
       "link": "https://www.bbc.com/news/articles/crrnee01r9jo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">US winter storm</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">fatalities</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">power outages</span></span><span class=\"keyword-text\">Deadly US winter storm kills at least a dozen, delays flights, and leaves thousands without power across multiple states.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Homan</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">immigration</span></span><span class=\"keyword-text\">Trump&#x27;s border tsar Tom Homan, central to crackdown, sent to Minneapolis as local immigration chief set to leave.</span>",
+      "link": "https://www.bbc.com/news/articles/cgrdlr70qg4o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">US winter storm</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">deaths</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">power outages</span></span><span class=\"keyword-text\">Deadly US winter storm delays flights, blacks out thousands, and possibly kills at least a dozen across multiple states, officials say.</span>",
       "link": "https://www.bbc.com/news/articles/cp3z8ek7eqyo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Duterte</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">ICC</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">war on drugs</span></span><span class=\"keyword-text\">ICC judges deem 80-year-old Philippines&#x27; Duterte fit for proceedings over crimes against humanity in his bloody drug war that killed thousands.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Duterte</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">ICC</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">drugs war</span></span><span class=\"keyword-text\">ICC judges rule 80-year-old Philippines&#x27; Duterte fit to face proceedings over crimes against humanity in his deadly war on drugs killing thousands.</span>",
       "link": "https://www.bbc.com/news/articles/c0lx2pj84l4o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Japan court</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">North Korea</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">migrants</span></span><span class=\"keyword-text\">A Japanese court ordered compensation for migrants lured there after it was marketed as &quot;paradise on Earth.&quot;</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Japan court</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">North Korea</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">migrants</span></span><span class=\"keyword-text\">Japan&#x27;s court orders compensation for migrants lured there after it was marketed as &quot;paradise on Earth.&quot;</span>",
       "link": "https://www.bbc.com/news/articles/c23r2l81708o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Victoria</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">wildfires</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">heatwave</span></span><span class=\"keyword-text\">Firefighters battle at least six emergency-level major fires in Victoria amid Australia&#x27;s record-breaking heatwave.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Australia</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Victoria</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Heatwave</span></span><span class=\"keyword-text\">Firefighters battle at least six &#x27;emergency level&#x27; major fires amid record-breaking heatwave in Victoria.</span>",
       "link": "https://www.bbc.com/news/articles/cpqyp9w84eeo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Nipah virus</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">India</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">airport screenings</span></span><span class=\"keyword-text\">Nipah virus outbreak in India&#x27;s West Bengal triggers passenger screenings at Thailand and Nepal airports.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Nipah virus</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">West Bengal</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">airport screenings</span></span><span class=\"keyword-text\">Nipah virus outbreak in India&#x27;s West Bengal triggers passenger screenings at Thailand and Nepal airports.</span>",
       "link": "https://www.bbc.com/news/articles/cd7zp581q5do?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">tariffs</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">South Korea</span></span><span class=\"keyword-text\">Trump raises US tariffs on South Korean imports to 25%, accusing Seoul of failing to uphold last year&#x27;s trade deal.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">tariffs</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">South Korea</span></span><span class=\"keyword-text\">Trump raises US tariffs on South Korea imports to 25%, accusing Seoul of not living up to last year&#x27;s trade deal.</span>",
       "link": "https://www.bbc.com/news/articles/cwyw3ynwe37o?at_medium=RSS&at_campaign=rss"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Iran</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Tehran hospital</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">snipers</span></span><span class=\"keyword-text\">New Iran videos show 31 bodies piled in Tehran hospital, seven body bags outside, and snipers on roofs.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Iran</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Tehran hospital</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">snipers</span></span><span class=\"keyword-text\">New videos show 31 bodies piled inside Tehran hospital, seven body bags outside, and snipers on roofs.</span>",
       "link": "https://www.bbc.com/news/articles/c1m7kde3y3zo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">France</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">social media</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">under-15 ban</span></span><span class=\"keyword-text\">French MPs approve bill banning social media for under-15s, potentially effective by September if upper house passes it.</span>",
+      "link": "https://www.bbc.com/news/articles/c07x003vx0yo?at_medium=RSS&at_campaign=rss"
     }
   ],
   "space_news": [
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Space Force</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">RG-XX</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">GEO spy satellites</span></span><span class=\"keyword-text\">Space Force plans to select contractors as soon as March for next-gen Geosynchronous Reconnaissance &amp; Surveillance (RG-XX) satellites.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Space Force</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">RG-XX</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">GEO spy satellites</span></span><span class=\"keyword-text\">Space Force plans to select contractors as soon as March for next-gen Geosynchronous Reconnaissance &amp; Surveillance (RG-XX) GEO spy satellites.</span>",
       "link": "https://spacenews.com/space-force-set-to-choose-contractors-for-next-gen-geo-spy-satellites/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Vega C</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Brazil</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Earth observation</span></span><span class=\"keyword-text\">Brazilian agency to launch Earth observation satellite on Vega C via broker, not directly with Avio.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Vega C</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Brazil</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Earth observation</span></span><span class=\"keyword-text\">Vega C rocket to launch Brazilian government&#x27;s Earth observation satellite via launch broker, not direct Avio contract.</span>",
       "link": "https://spacenews.com/vega-c-to-launch-brazilian-satellite/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Northwood Space</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Series B</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Space Force</span></span><span class=\"keyword-text\">Northwood Space raised $100M Series B and landed $49M Space Force deal for phased-array ground stations linking multi-orbit satellites.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Northwood Space</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Series B</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Space Force</span></span><span class=\"keyword-text\">Northwood Space raises $100M Series B, lands $49M Space Force deal for phased-array ground stations linking multi-orbit satellites.</span>",
       "link": "https://spacenews.com/northwood-space-raises-100-million-series-b-lands-49-million-space-force-deal/"
     },
     {
@@ -138,29 +138,29 @@
       "link": "https://spacenews.com/oman-signs-artemis-accords/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">NASA</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Earth Science</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">partnerships</span></span><span class=\"keyword-text\">NASA\u2019s Earth Science Division seeks external partners for extended missions on ISS instruments and free-flyers.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">NASA</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Earth Science</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">partnerships</span></span><span class=\"keyword-text\">NASA\u2019s Earth Science Division seeks external partners for extended ISS instruments and free-flyer missions.</span>",
       "link": "https://spacenews.com/nasa-seeks-partners-for-earth-science-extended-missions/"
     }
   ],
   "copenhagen": [
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">EU</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">India</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">trade deal</span></span><span class=\"keyword-text\">EU and India sign historic trade deal cutting tariffs on EU goods to India while easing access for qualified Indian workers in Europe.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">EU-India</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">trade deal</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">workers</span></span><span class=\"keyword-text\">EU eases access for qualified Indian workers in Europe via new trade deal cutting tariffs on EU goods to India.</span>",
       "link": "https://cphpost.dk/2026-01-27/news/round-up/eu-to-ease-access-for-qualified-indian-workers-as-new-trade-deal-reduces-tariffs/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">work culture</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">advice</span></span><span class=\"keyword-text\">In Denmark, humbly ask intelligent questions or manager advice if doubtful, especially as a new worker.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">work culture</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">advice</span></span><span class=\"keyword-text\">In Denmark, humbly ask intelligent questions or manager advice when in doubt for success as a new worker.</span>",
       "link": "https://cphpost.dk/2026-01-27/business-education/career/in-denmark-if-you-are-in-doubt-ask-for-clarification/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">housing</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">owner-occupied</span></span><span class=\"keyword-text\">Danish municipalities can now require up to 25% of new housing to be for sale rather than rent.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">housing</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">owner-occupied</span></span><span class=\"keyword-text\">Danish municipalities can require up to 25% of new homes to be for sale rather than rent.</span>",
       "link": "https://cphpost.dk/2026-01-27/news/round-up/municipalities-can-require-that-25-percent-of-homes-in-new-construction-be-for-sale-rather-than-for-rent/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Frederiksen</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Nielsen</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Europe</span></span><span class=\"keyword-text\">Danish PM Mette Frederiksen and Greenland Premier Jens-Frederik Nielsen visited Berlin on foreign policy talks, then Paris to meet Macron.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Frederiksen</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Nielsen</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Europe</span></span><span class=\"keyword-text\">Danish PM Mette Frederiksen and Greenland Premier Jens-Frederik Nielsen visited Berlin for foreign policy talks before meeting Macron in Paris.</span>",
       "link": "https://cphpost.dk/2026-01-27/news/round-up/mette-frederiksen-and-greenland-pm-visit-berlin-and-paris/"
     },
     {
-      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Roskilde Festival</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Lily Allen</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Clipse</span></span><span class=\"keyword-text\">Roskilde Festival adds Lily Allen and Clipse among 25 new acts to its summer Denmark lineup.</span>",
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Roskilde Festival</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Lily Allen</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Clipse</span></span><span class=\"keyword-text\">Roskilde Festival adds British singer Lily Allen and rap duo Clipse among 25 new acts to its Danish summer lineup.</span>",
       "link": "https://cphpost.dk/2026-01-27/news/round-up/lily-allen-and-clipse-will-play-in-denmark-soon/"
     }
   ],
@@ -181,7 +181,7 @@
         },
         {
           "name": "NATO's Rutte Tells Europe: No Defense Without U.S.",
-          "post_count": "75K posts",
+          "post_count": "76K posts",
           "category": "News",
           "trending_since": null,
           "link": "https://x.com/search?q=NATO%27s%20Rutte%20Tells%20Europe%3A%20No%20Defense%20Without%20U.S."
@@ -194,24 +194,24 @@
           "link": "https://x.com/search?q=London%20Rally%20Backs%20Iran%27s%20Deadly%20Protests%20Against%20Regime"
         },
         {
-          "name": "Jim Simons: From Math Genius to Wall Street Legend",
-          "post_count": "2.9K posts",
+          "name": "Bill Ackman Urges Trump to View Graphic Iran Massacre Documentary",
+          "post_count": "77 posts",
           "category": "News",
-          "trending_since": null,
-          "link": "https://x.com/search?q=Jim%20Simons%3A%20From%20Math%20Genius%20to%20Wall%20Street%20Legend"
+          "trending_since": "Now",
+          "link": "https://x.com/search?q=Bill%20Ackman%20Urges%20Trump%20to%20View%20Graphic%20Iran%20Massacre%20Documentary"
         },
         {
-          "name": "Alex Honnold Free Solos Taipei 101 in Netflix Live Event",
-          "post_count": "179K posts",
-          "category": "Sports",
+          "name": "Lone Penguin's Defiant March Captivates Online Audiences",
+          "post_count": "18K posts",
+          "category": "Entertainment",
           "trending_since": null,
-          "link": "https://x.com/search?q=Alex%20Honnold%20Free%20Solos%20Taipei%20101%20in%20Netflix%20Live%20Event"
+          "link": "https://x.com/search?q=Lone%20Penguin%27s%20Defiant%20March%20Captivates%20Online%20Audiences"
         }
       ]
     ]
   ],
   "quote": {
-    "text": "The happiness of your life depends upon the quality of your thoughts.",
+    "text": "You have power over your mind\u2014not outside events. Realize this, and you will find strength.",
     "author": "Marcus Aurelius"
   }
 }
