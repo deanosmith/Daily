@@ -44,8 +44,8 @@ h2 {
 .section {
     width: 48%;
     margin-bottom: 15px;
-    break-inside: avoid;
-    /* Prevent breaking inside a section */
+    break-inside: auto;
+    page-break-inside: auto;
 }
 
 .full-width {
@@ -218,7 +218,6 @@ a {
 .keyword-badge {
     background-color: #ffffff;
     border: 1px solid #3b3b3b;
-    box-shadow: none;
     color: #000000;
     display: inline-block;
     border-radius: 999px;
@@ -329,9 +328,11 @@ a {
 }
 
 .refresh-button {
-    display: right;
-    align-items: right;
-    justify-content: right;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    float: right;
+    margin-left: 8px;
     /* margin-right: 8px; */
     padding: 0px 6px;
     font-size: 24px;
@@ -353,7 +354,7 @@ a {
 }
 
 .refresh-button.is-loading {
-    animation: spin 1s linear infinite;
+    /* Animation disabled for PDF compatibility */
 }
 
 .data-error {
@@ -364,12 +365,6 @@ a {
     color: #ffbdbd;
     border-radius: 8px;
     font-size: 12px;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
 }
 
 @media print {

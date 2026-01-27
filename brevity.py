@@ -939,7 +939,7 @@ def main():
     
     # 4. Send to Slack
     if pdf_path:
-        # send_to_slack(pdf_path)
+        send_to_slack(pdf_path)
         pass
     
     logger.info("Done.")
