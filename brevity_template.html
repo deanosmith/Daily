@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Brevity</title>
-    <link rel="stylesheet" href="daily_brief.css">
+    <link rel="stylesheet" href="brevity.css">
 </head>
 
 <body>
@@ -49,6 +49,7 @@
                     </div>
                 </div>
                 <!-- TODO -->
+                 <!-- Get the right edge of the rain/sun section to align with the right edge of the weather grid -->
                 <div class="weather-item full-width weather-meta">
                     <div class="weather-meta-item">
                         <span class="weather-meta-icon">🌅</span>
@@ -93,6 +94,23 @@
             </div>
             {% endif %}
             {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- WORDS OF JESUS -->
+    <div class="container section-gap">
+        <div class="section full-width">
+            <div id="jesus-quote-content">
+            {% if render_mode == "pdf" %}
+            {% if jesus_quote %}
+            <h2 class="jesus-title">Words of Jesus</h2>
+            <div class="jesus-card">
+                <div class="jesus-quote-text">{{ jesus_quote.text }}</div>
+                <div class="jesus-quote-ref">{{ jesus_quote.author }}</div>
+            </div>
+            {% endif %}
             {% endif %}
             </div>
         </div>
@@ -280,6 +298,7 @@
             const sections = {
                 weather: document.getElementById("weather-content"),
                 markets: document.getElementById("markets-content"),
+                jesus_quote: document.getElementById("jesus-quote-content"),
                 x_trending: document.getElementById("x-trending-content"),
                 copenhagen: document.getElementById("copenhagen-content"),
                 space_news: document.getElementById("space-news-content"),
@@ -521,6 +540,19 @@
                 return `<div class="x-grid">${blocks}</div>`;
             };
 
+            const renderJesusQuote = (quote) => {
+                if (!quote) {
+                    return "";
+                }
+                return `
+                    <h2 class="jesus-title">Words of Jesus</h2>
+                    <div class="jesus-card">
+                        <div class="jesus-quote-text">${quote.text || ""}</div>
+                        <div class="jesus-quote-ref">${quote.author || ""}</div>
+                    </div>
+                `;
+            };
+
             const renderQuote = (quote) => {
                 if (!quote) {
                     return "";
@@ -544,6 +576,9 @@
                 }
                 if (sections.markets) {
                     sections.markets.innerHTML = renderMarkets(data?.stocks);
+                }
+                if (sections.jesus_quote && data?.jesus_quote) {
+                    sections.jesus_quote.innerHTML = renderJesusQuote(data?.jesus_quote);
                 }
                 if (sections.x_trending) {
                     sections.x_trending.innerHTML = renderXTrending(data?.x_trending);
@@ -569,6 +604,8 @@
                     sections.weather.innerHTML = renderWeather(data?.weather);
                 } else if (section === "markets" && sections.markets) {
                     sections.markets.innerHTML = renderMarkets(data?.stocks);
+                } else if (section === "jesus_quote" && sections.jesus_quote && data?.jesus_quote) {
+                    sections.jesus_quote.innerHTML = renderJesusQuote(data?.jesus_quote);
                 } else if (section === "copenhagen" && sections.copenhagen) {
                     sections.copenhagen.innerHTML = renderNewsList(data?.copenhagen);
                 } else if (section === "space_news" && sections.space_news) {

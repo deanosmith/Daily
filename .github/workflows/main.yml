@@ -1,10 +1,10 @@
-name: Daily Workflow
+name: Brevity Workflow
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '10 6 * * *'  
-    # Github time = -1 hour Cph time
+    - cron: '0 5 * * *'
+    # 05:00 UTC = 06:00 CET / 07:00 CEST (before 08:00 Copenhagen time)
 
 permissions:
   contents: write
@@ -36,7 +36,7 @@ jobs:
         uses: astral-sh/setup-uv@v3
       - name: Sync dependencies
         run: uv sync --frozen --no-dev
-      - name: Run daily brief
+      - name: Run Brevity
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
@@ -45,16 +45,19 @@ jobs:
           CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-        run: uv run python daily_brief.py
-      - name: Commit and Push PDF
+        run: uv run python brevity.py
+      - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add daily_brief.pdf
+          
+          # Add PDF, HTML, and the JSON data file required for the web page
+          git add brevity.pdf brevity.html resources/brevity.json
+          
           # Only commit if there are changes
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update daily brief PDF [skip ci]"
+            git commit -m "Update Brevity content [skip ci]"
             git push
           fi

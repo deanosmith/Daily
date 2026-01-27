@@ -65,9 +65,10 @@ a {
 }
 
 .weather-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
     gap: 8px;
+    width: 100%;
 }
 
 .weather-item {
@@ -76,10 +77,19 @@ a {
     border-radius: 8px;
     text-align: center;
     border: 1px solid #333;
+    box-sizing: border-box;
+}
+
+.weather-grid .weather-item {
+    flex: 1 1 calc((100% - 16px) / 3);
+    max-width: calc((100% - 16px) / 3);
+    min-width: 0;
 }
 
 .weather-item.full-width {
-    grid-column: span 3;
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
 }
 
 .weather-value {
@@ -111,33 +121,37 @@ a {
 
 .weather-meta {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
+    gap: 8px;
+    padding: 8px 10px;
     margin-top: 6px;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .weather-meta-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 14px;
+    justify-content: center;
+    gap: 6px;
+    flex: 1 1 0;
+    min-width: 0;
+    font-size: 12px;
     font-weight: 600;
-    color: #e2e2e2;
-    background-color: #1f1f1f;
-    border: 1px solid #2f2f2f;
-    border-radius: 999px;
-    padding: 5px 12px;
+    color: #d8d8d8;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 2px 0;
 }
 
 .weather-meta-icon {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1;
 }
 
 .weather-meta-text {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 /* Stocks */
@@ -202,16 +216,17 @@ a {
 }
 
 .keyword-badge {
-    background-color: transparent;
-    border: none;
-    box-shadow: 0 0 0 1px #b3b3b3;
-    color: #ffffff;
+    background-color: #ffffff;
+    border: 1px solid #3b3b3b;
+    box-shadow: none;
+    color: #000000;
+    display: inline-block;
     border-radius: 999px;
     padding: 2px 8px;
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.3px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .keyword-text {
@@ -233,6 +248,42 @@ a {
 
 .columns {
     width: 100%;
+}
+
+.section-gap {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.jesus-title {
+    border-bottom: 2px solid #ffee00;
+    color: #ffffff;
+}
+
+.jesus-card {
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 15px;
+    border-left: 6px solid #ffee00;
+    border-right: 6px solid #ffee00;
+}
+
+.jesus-quote-text {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #ddd;
+}
+
+.jesus-quote-ref {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffee00;
+    letter-spacing: 1px;
 }
 
 .columns::after {
@@ -278,23 +329,22 @@ a {
 }
 
 .refresh-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 8px;
-    padding: 2px 6px;
-    font-size: 11px;
-    line-height: 1;
-    border-radius: 999px;
-    background: transparent;
-    border: 1px solid #444;
-    color: #aaa;
+    display: right;
+    align-items: right;
+    justify-content: right;
+    /* margin-right: 8px; */
+    padding: 0px 6px;
+    font-size: 24px;
+    border-radius: 100px;
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    color: #000000;
     cursor: pointer;
 }
 
 .refresh-button:hover {
     border-color: #666;
-    color: #e0e0e0;
+    color: #ff0000;
 }
 
 .refresh-button:disabled {
@@ -303,7 +353,7 @@ a {
 }
 
 .refresh-button.is-loading {
-    animation: spin 0.8s linear infinite;
+    animation: spin 1s linear infinite;
 }
 
 .data-error {

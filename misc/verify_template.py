@@ -21,7 +21,7 @@ news = [{"headline": "News 1", "link": "#"}]
 
 def test_template():
     env = Environment(loader=FileSystemLoader("."))
-    template = env.get_template("daily_brief_template.html")
+    template = env.get_template("brevity_template.html")
     
     # Test 1: Full Data
     print("--- Test 1: Full Data ---")

@@ -32,7 +32,7 @@ response = oauth.get(url)
 if response.status_code == 200:
     raw_data = response.json().get('data', [])
     print(f"Debug: API returned {len(raw_data)} items total.") # <--- Add this
-    trends_data = raw_data[:10]
+    trends_data = raw_data[:20]
     # trends_data = response.json().get('data', [])[:10]  # Limit to top 10
 
     # Format trends
@@ -48,10 +48,10 @@ if response.status_code == 200:
         })
 
     # JSON output
-    print(json.dumps(formatted_trends, indent=2, ensure_ascii=False))
+    # print(json.dumps(formatted_trends, indent=2, ensure_ascii=False))
 
     # Human-readable output
-    print("\nTop 10 Trends (Personalized):")
+    print("\nTop Trends (Personalized):")
     if not formatted_trends:
         print("No trends available.")
     else:
