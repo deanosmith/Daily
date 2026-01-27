@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Brevity</title>
-    <link rel="stylesheet" href="daily_brief.css">
+    <link rel="stylesheet" href="brevity.css">
 </head>
 
 <body>
@@ -130,6 +130,19 @@
             
             
             
+            </div>
+        </div>
+    </div>
+
+    <!-- WORDS OF JESUS -->
+    <div class="container section-gap">
+        <div class="section full-width">
+            <div id="jesus-quote-content">
+                <h2 class="jesus-title">Words of Jesus</h2>
+                <div class="jesus-card">
+                    <div class="jesus-quote-text">Come, follow me, and I will send you out to fish for people.</div>
+                    <div class="jesus-quote-ref">Matthew 4:19</div>
+                </div>
             </div>
         </div>
     </div>
@@ -408,13 +421,14 @@
 
     <script>
         (() => {
-            const DATA_URL = "resources/daily_brief_data.json";
+            const DATA_URL = "resources/brevity.json";
             const headerEl = document.getElementById("page-title");
             const marketsAvgEl = document.getElementById("markets-average");
             const errorEl = document.getElementById("data-error");
             const sections = {
                 weather: document.getElementById("weather-content"),
                 markets: document.getElementById("markets-content"),
+                jesus_quote: document.getElementById("jesus-quote-content"),
                 x_trending: document.getElementById("x-trending-content"),
                 copenhagen: document.getElementById("copenhagen-content"),
                 space_news: document.getElementById("space-news-content"),
@@ -639,6 +653,19 @@
                 return `<div class="x-grid">${blocks}</div>`;
             };
 
+            const renderJesusQuote = (quote) => {
+                if (!quote) {
+                    return "";
+                }
+                return `
+                    <h2 class="jesus-title">Words of Jesus</h2>
+                    <div class="jesus-card">
+                        <div class="jesus-quote-text">${quote.text || ""}</div>
+                        <div class="jesus-quote-ref">${quote.author || ""}</div>
+                    </div>
+                `;
+            };
+
             const renderQuote = (quote) => {
                 if (!quote) {
                     return "";
@@ -662,6 +689,9 @@
                 }
                 if (sections.markets) {
                     sections.markets.innerHTML = renderMarkets(data?.stocks);
+                }
+                if (sections.jesus_quote && data?.jesus_quote) {
+                    sections.jesus_quote.innerHTML = renderJesusQuote(data?.jesus_quote);
                 }
                 if (sections.x_trending) {
                     sections.x_trending.innerHTML = renderXTrending(data?.x_trending);
@@ -687,6 +717,8 @@
                     sections.weather.innerHTML = renderWeather(data?.weather);
                 } else if (section === "markets" && sections.markets) {
                     sections.markets.innerHTML = renderMarkets(data?.stocks);
+                } else if (section === "jesus_quote" && sections.jesus_quote && data?.jesus_quote) {
+                    sections.jesus_quote.innerHTML = renderJesusQuote(data?.jesus_quote);
                 } else if (section === "copenhagen" && sections.copenhagen) {
                     sections.copenhagen.innerHTML = renderNewsList(data?.copenhagen);
                 } else if (section === "space_news" && sections.space_news) {

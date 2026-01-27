@@ -1,7 +1,7 @@
 [project]
-name = "daily"
+name = "brevity"
 version = "0.1.0"
-description = "Post a daily NKJV quote to Slack using the xAI API"
+description = "Generate the Brevity daily brief and deliver it to Slack"
 requires-python = ">=3.10"
 dependencies = [
     "requests>=2.31.0",
