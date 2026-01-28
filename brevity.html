@@ -42,8 +42,8 @@
 
     <!-- X TRENDING (Full Width Middle Section) -->
     <!-- Using a new container for full width -->
-    <div class="container" style="margin-top: 10px; margin-bottom: 10px;">
-        <div class="section full-width" style="width: 100%;">
+    <div class="container x-trending-section">
+        <div class="section full-width x-trending">
             <h2 style="border-bottom: 2px solid #868686; color: #ffffff;">
                 Trending on X
                 
@@ -132,6 +132,54 @@
                 return Number.isFinite(num) ? num : 0;
             };
 
+            const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+            const PLASMA_STOPS = [
+                { t: 0.0, color: "#0d0887" },
+                { t: 0.25, color: "#6a00a8" },
+                { t: 0.5, color: "#b12a90" },
+                { t: 0.75, color: "#e16462" },
+                { t: 1.0, color: "#f0f921" }
+            ];
+
+            const hexToRgb = (hex) => {
+                const value = String(hex).replace("#", "");
+                if (value.length !== 6) {
+                    return [0, 0, 0];
+                }
+                return [
+                    parseInt(value.slice(0, 2), 16),
+                    parseInt(value.slice(2, 4), 16),
+                    parseInt(value.slice(4, 6), 16)
+                ];
+            };
+
+            const rgbToHex = (rgb) => {
+                const toHex = (channel) => {
+                    const clamped = Math.max(0, Math.min(255, Math.round(channel)));
+                    return clamped.toString(16).padStart(2, "0");
+                };
+                return `#${toHex(rgb[0])}${toHex(rgb[1])}${toHex(rgb[2])}`;
+            };
+
+            const plasmaColor = (value, vmin = 0, vmax = 40) => {
+                const numeric = toNumber(value);
+                const denom = vmax - vmin;
+                const t = denom === 0 ? 1 : clamp((numeric - vmin) / denom, 0, 1);
+                for (let i = 0; i < PLASMA_STOPS.length - 1; i += 1) {
+                    const left = PLASMA_STOPS[i];
+                    const right = PLASMA_STOPS[i + 1];
+                    if (t <= right.t) {
+                        const local = right.t === left.t ? 0 : (t - left.t) / (right.t - left.t);
+                        const rgb0 = hexToRgb(left.color);
+                        const rgb1 = hexToRgb(right.color);
+                        const rgb = rgb0.map((channel, idx) => channel + (rgb1[idx] - channel) * local);
+                        return rgbToHex(rgb);
+                    }
+                }
+                return PLASMA_STOPS[PLASMA_STOPS.length - 1].color;
+            };
+
             const formatNumber = (value, digits) => toNumber(value).toFixed(digits);
 
             const formatTime = (value) => {
@@ -203,15 +251,17 @@
                     );
                 }
                 const segment = (label, data) => {
-                    const windSize = 18 + (toNumber(data?.wind) * 0.8);
+                    const windSpeed = toNumber(data?.wind);
+                    const windSize = 18 + (windSpeed * 0.8);
+                    const windColor = plasmaColor(windSpeed);
                     return `
                         <div class="weather-item">
                             <div style="font-size: 14px; margin-bottom: 2px; color: white;">${label}</div>
                             <div class="weather-icon">${data?.icon || ""}</div>
                             <div class="weather-value">${data?.temp ?? ""}°C</div>
                             <div class="weather-label">
-                                <span class="wind-arrow" style="transform: rotate(${toNumber(data?.wind_dir)}deg); font-size: ${windSize}px;">⬇</span>
-                                <div class="wind-speed">${toNumber(data?.wind)} km/h</div>
+                                <span class="wind-arrow" style="transform: rotate(${toNumber(data?.wind_dir)}deg); font-size: ${windSize}px; color: ${windColor};">⬇</span>
+                                <div class="wind-speed">${windSpeed} km/h</div>
                             </div>
                         </div>
                     `;
@@ -344,7 +394,7 @@
                     `;
                     return `
                         <div style="break-inside: avoid;">
-                            <div style="font-size: 15px; color: ${color}; font-weight: bold; margin-bottom: 6px; letter-spacing: 0.5px;">${category || ""}</div>
+                            <div class="x-category" style="color: ${color};">${category || ""}</div>
                             ${trendsHtml}
                         </div>
                     `;
