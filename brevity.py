@@ -1,4 +1,3 @@
-import argparse
 import os
 import ssl
 import sys
@@ -7,13 +6,12 @@ import html
 import hashlib
 import json
 import logging
-import functools
 import time
 import requests
 import calendar
-from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
-from urllib.parse import urlparse, quote
+from urllib.parse import quote
 from datetime import date, datetime
+
 from dotenv import load_dotenv
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -25,32 +23,29 @@ from markupsafe import Markup
 from slack_sdk import WebClient
 
 # ==============================================================================
-# CONFIGURATION & SETUP
+# CONFIGURATION
 # ==============================================================================
 
-# Setup logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
+    format="%(asctime)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
 
-# Load environment variables
 load_dotenv()
 
-# API Keys and Config
 XAI_API_KEY = os.getenv("XAI_API_KEY")
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
-SLACK_CHANNEL_ID = os.getenv("SLACK_CHANNEL_ID") # Default from previous use
+SLACK_CHANNEL_ID = os.getenv("SLACK_CHANNEL_ID")
 
-# WeasyPrint fix for macOS
+# Ensure WeasyPrint can locate system libraries on macOS.
 if sys.platform == "darwin":
     os.environ["DYLD_FALLBACK_LIBRARY_PATH"] = (
         "/opt/homebrew/lib:" + os.environ.get("DYLD_FALLBACK_LIBRARY_PATH", "")
     )
 
-# Fix SSL context for legacy environments/Mac
-if hasattr(ssl, '_create_unverified_context'):
+# Allow HTTPS requests in environments with legacy SSL setups.
+if hasattr(ssl, "_create_unverified_context"):
     ssl._create_default_https_context = ssl._create_unverified_context
 
 
@@ -60,34 +55,77 @@ if hasattr(ssl, '_create_unverified_context'):
 
 WEATHER_COLORS = {
     0: "#FFD700",  # Sun / Clear (Gold)
-    1: "#87CEEB", 2: "#87CEEB", 3: "#87CEEB", # Partly Cloudy (Sky Blue)
-    45: "#708090", 48: "#708090", # Fog (Slate Gray)
-    51: "#4682B4", 53: "#4682B4", 55: "#4682B4", # Drizzle (Steel Blue)
-    61: "#4682B4", 63: "#4682B4", 65: "#4682B4", # Rain
-    80: "#4682B4", 81: "#4682B4", 82: "#4682B4", # Showers
-    71: "#E0FFFF", 73: "#E0FFFF", 75: "#E0FFFF", 77: "#E0FFFF", # Snow (Light Cyan)
-    95: "#9370DB", 96: "#9370DB", 99: "#9370DB"  # Thunderstorm (Medium Purple)
+    1: "#87CEEB",
+    2: "#87CEEB",
+    3: "#87CEEB",  # Partly Cloudy (Sky Blue)
+    45: "#708090",
+    48: "#708090",  # Fog (Slate Gray)
+    51: "#4682B4",
+    53: "#4682B4",
+    55: "#4682B4",  # Drizzle (Steel Blue)
+    61: "#4682B4",
+    63: "#4682B4",
+    65: "#4682B4",  # Rain
+    80: "#4682B4",
+    81: "#4682B4",
+    82: "#4682B4",  # Showers
+    71: "#E0FFFF",
+    73: "#E0FFFF",
+    75: "#E0FFFF",
+    77: "#E0FFFF",  # Snow (Light Cyan)
+    95: "#9370DB",
+    96: "#9370DB",
+    99: "#9370DB",  # Thunderstorm (Medium Purple)
 }
 
 WEATHER_TEXT = {
     0: "Clear Sky",
-    1: "Partly Cloudy", 2: "Partly Cloudy", 3: "Overcast",
-    45: "Foggy", 48: "Rime Fog",
-    51: "Light Drizzle", 53: "Drizzle", 55: "Heavy Drizzle",
-    61: "Light Rain", 63: "Rain", 65: "Heavy Rain", 80: "Showers", 81: "Showers", 82: "Showers",
-    71: "Light Snow", 73: "Snow", 75: "Heavy Snow", 77: "Snow Grains",
-    95: "Thunderstorm", 96: "Thunderstorm", 99: "Thunderstorm"
+    1: "Partly Cloudy",
+    2: "Partly Cloudy",
+    3: "Overcast",
+    45: "Foggy",
+    48: "Rime Fog",
+    51: "Light Drizzle",
+    53: "Drizzle",
+    55: "Heavy Drizzle",
+    61: "Light Rain",
+    63: "Rain",
+    65: "Heavy Rain",
+    80: "Showers",
+    81: "Showers",
+    82: "Showers",
+    71: "Light Snow",
+    73: "Snow",
+    75: "Heavy Snow",
+    77: "Snow Grains",
+    95: "Thunderstorm",
+    96: "Thunderstorm",
+    99: "Thunderstorm",
 }
 
 WEATHER_ICONS = {
     0: "☀️",  # Clear
-    1: "⛅️", 2: "⛅️", 3: "☁️",  # Cloudy
-    45: "🌫️", 48: "🌫️",  # Fog
-    51: "🌦️", 53: "🌦️", 55: "🌧️",  # Drizzle
-    61: "🌧️", 63: "🌧️", 65: "🌧️",  # Rain
-    80: "🌦️", 81: "🌦️", 82: "🌦️",  # Showers
-    71: "🌨️", 73: "🌨️", 75: "🌨️", 77: "🌨️",  # Snow
-    95: "⛈️", 96: "⛈️", 99: "⛈️"  # Thunderstorm
+    1: "⛅️",
+    2: "⛅️",
+    3: "☁️",  # Cloudy
+    45: "🌫️",
+    48: "🌫️",  # Fog
+    51: "🌦️",
+    53: "🌦️",
+    55: "🌧️",  # Drizzle
+    61: "🌧️",
+    63: "🌧️",
+    65: "🌧️",  # Rain
+    80: "🌦️",
+    81: "🌦️",
+    82: "🌦️",  # Showers
+    71: "🌨️",
+    73: "🌨️",
+    75: "🌨️",
+    77: "🌨️",  # Snow
+    95: "⛈️",
+    96: "⛈️",
+    99: "⛈️",  # Thunderstorm
 }
 
 TRENDING_TIME_RE = re.compile(r"(\d{1,2}):(\d{2})")
@@ -102,20 +140,15 @@ KEYWORD_COLOR_PALETTE = [
     ("#5a5a2e", "#78783e", "#fff6c9"),
 ]
 
-X_CATEGORIES = {
-    'Science': ['science', 'physics', 'astronomy', 'nasa', 'space', 'discovery', 'quantum'],
-    'Tech': ['ai', 'artificial intelligence', 'crypto', 'blockchain', 'tesla', 'spacex'],
-    'World News': ['breaking', 'war', 'nuclear', 'elon', 'musk', 'trump'],
-    'Copenhagen / Denmark': ['copenhagen', 'cph', 'denmark'],
-    'Misc': ['northern lights', 'south africa', 'aurora', 'comet', 'asteroid', 'meteor']
-}
+PLASMA_STOPS = (
+    (0.0, "#0d0887"),
+    (0.25, "#6a00a8"),
+    (0.5, "#b12a90"),
+    (0.75, "#e16462"),
+    (1.0, "#f0f921"),
+)
 
-X_TRENDS_PER_CATEGORY = 12
-DATA_OUTPUT_PATH = "resources/brevity.json"
-LEGACY_DATA_OUTPUT_PATH = "resources/daily_brief_data.json"
 JESUS_QUOTES_PATH = "resources/jesus.json"
-HTML_OUTPUT_PATH = "brevity.html"
-REFRESH_X_ENDPOINT = "/api/refresh/x"
 DEFAULT_HEADERS = {"User-Agent": "Brevity/1.0"}
 REQUEST_TIMEOUT = 30
 AI_TIMEOUT = 60
@@ -125,30 +158,72 @@ RETRY_STATUS_CODES = (429, 500, 502, 503, 504)
 
 
 # ==============================================================================
-# HELPER FUNCTIONS
+# HELPERS
 # ==============================================================================
 
+
 def get_weather_color(code):
-    """Return a hex color for WMO weather code."""
-    return WEATHER_COLORS.get(code, "#AAAAAA")  # Default Grey
+    """Return a hex color for WMO weather codes."""
+    return WEATHER_COLORS.get(code, "#AAAAAA")
+
 
 def get_weather_text(code):
-    """Return text description for WMO weather code."""
+    """Return description text for WMO weather codes."""
     return WEATHER_TEXT.get(code, "Unknown")
 
+
 def get_weather_icon(code):
-    """Return icon for WMO weather code."""
+    """Return an icon for WMO weather codes."""
     return WEATHER_ICONS.get(code, "?")
 
+
+def _hex_to_rgb(value):
+    value = value.lstrip("#")
+    if len(value) != 6:
+        return (0, 0, 0)
+    return tuple(int(value[i : i + 2], 16) for i in (0, 2, 4))
+
+
+def _rgb_to_hex(rgb):
+    return "#{:02x}{:02x}{:02x}".format(*rgb)
+
+
+def plasma_color(value, vmin=0.0, vmax=40.0):
+    """Map a numeric value onto the Plasma colormap."""
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        numeric = vmin
+    if vmax == vmin:
+        return PLASMA_STOPS[-1][1]
+    t = (numeric - vmin) / (vmax - vmin)
+    t = max(0.0, min(1.0, t))
+    for idx in range(len(PLASMA_STOPS) - 1):
+        left_t, left_color = PLASMA_STOPS[idx]
+        right_t, right_color = PLASMA_STOPS[idx + 1]
+        if t <= right_t:
+            if right_t == left_t:
+                return right_color
+            local = (t - left_t) / (right_t - left_t)
+            r0, g0, b0 = _hex_to_rgb(left_color)
+            r1, g1, b1 = _hex_to_rgb(right_color)
+            r = int(round(r0 + (r1 - r0) * local))
+            g = int(round(g0 + (g1 - g0) * local))
+            b = int(round(b0 + (b1 - b0) * local))
+            return _rgb_to_hex((r, g, b))
+    return PLASMA_STOPS[-1][1]
+
+
 def keyword_style(keyword):
-    """Return a deterministic style string for keyword badges."""
+    """Create a deterministic CSS custom-property string for a keyword badge."""
     digest = hashlib.md5(keyword.lower().encode("utf-8")).hexdigest()
     index = int(digest[:8], 16) % len(KEYWORD_COLOR_PALETTE)
     bg, border, text = KEYWORD_COLOR_PALETTE[index]
     return f"--kw-bg: {bg}; --kw-border: {border}; --kw-text: {text};"
 
+
 def stylize_keywords(text):
-    """Wrap leading [keywords] in span badges for styling."""
+    """Wrap leading [keywords] in styled span badges."""
     if not text:
         return text
     match = KEYWORDS_RE.match(text)
@@ -161,23 +236,11 @@ def stylize_keywords(text):
         f'<span class="keyword-badge" style="{keyword_style(kw)}">{html.escape(kw)}</span>'
         for kw in keywords
     )
-    rest = text[match.end():].strip()
+    rest = text[match.end() :].strip()
     rest_html = html.escape(rest)
     rest_html = f'<span class="keyword-text">{rest_html}</span>' if rest_html else ""
-    # TODO
     return Markup(f'<span class="keyword-badges">{badges}</span>{rest_html}')
 
-def make_json_safe(value):
-    """Convert data into JSON-serializable types."""
-    if isinstance(value, Markup):
-        return str(value)
-    if isinstance(value, (date, datetime)):
-        return value.isoformat()
-    if isinstance(value, dict):
-        return {key: make_json_safe(val) for key, val in value.items()}
-    if isinstance(value, (list, tuple)):
-        return [make_json_safe(item) for item in value]
-    return value
 
 def format_trending_since(raw_since):
     """Normalize trending_since to HH:MM, or return None if invalid."""
@@ -243,6 +306,7 @@ HTTP_SESSION = build_retry_session()
 
 
 def retry_call(label, func, attempts=RETRY_ATTEMPTS, base_delay=1.0, max_delay=8.0):
+    """Retry a callable with exponential backoff and logging."""
     for attempt in range(1, attempts + 1):
         try:
             return func()
@@ -263,38 +327,8 @@ def retry_call(label, func, attempts=RETRY_ATTEMPTS, base_delay=1.0, max_delay=8
     return None
 
 
-def is_missing(value):
-    if value is None:
-        return True
-    if isinstance(value, (list, tuple, dict, str)) and len(value) == 0:
-        return True
-    return False
-
-
-def prefer_fallback(value, fallback, label):
-    if not is_missing(value):
-        return value
-    if not is_missing(fallback):
-        logger.warning("%s unavailable; using cached data", label)
-        return fallback
-    return value
-
-
-def load_previous_data(paths=(DATA_OUTPUT_PATH, LEGACY_DATA_OUTPUT_PATH)):
-    for path in paths:
-        if not path or not os.path.exists(path):
-            continue
-        try:
-            with open(path, "r", encoding="utf-8") as file:
-                data = json.load(file)
-            if isinstance(data, dict):
-                return data
-        except Exception as e:
-            logger.warning(f"Failed to read prior data from {path}: {e}")
-    return {}
-
-
 def load_jesus_quotes(path=JESUS_QUOTES_PATH):
+    """Load the local Jesus quotes JSON file into a list of tuples."""
     if not path or not os.path.exists(path):
         if path:
             logger.warning("Jesus quotes file not found: %s", path)
@@ -302,8 +336,8 @@ def load_jesus_quotes(path=JESUS_QUOTES_PATH):
     try:
         with open(path, "r", encoding="utf-8") as file:
             data = json.load(file)
-    except Exception as e:
-        logger.warning("Failed to read Jesus quotes from %s: %s", path, e)
+    except Exception as exc:
+        logger.warning("Failed to read Jesus quotes from %s: %s", path, exc)
         return []
     if not isinstance(data, dict):
         logger.warning("Jesus quotes file has unexpected format: %s", type(data))
@@ -312,33 +346,40 @@ def load_jesus_quotes(path=JESUS_QUOTES_PATH):
 
 
 # ==============================================================================
-# DATA FETCHING FUNCTIONS
+# DATA FETCHING
 # ==============================================================================
 
-def fetch_weather(fallback=None):
-    """Fetch weather for Copenhagen using Open-Meteo API with hourly breakdown."""
+
+def fetch_weather():
+    """Fetch weather for Copenhagen using Open-Meteo with an hourly breakdown."""
     logger.info("Fetching weather...")
-    # Copenhagen coordinates
     lat, lon = 55.6761, 12.5683
     url = "https://api.open-meteo.com/v1/forecast"
     params = {
         "latitude": lat,
         "longitude": lon,
-        "hourly": ["temperature_2m", "precipitation_probability", "wind_speed_10m",
-                   "wind_direction_10m", "weather_code"],
+        "hourly": [
+            "temperature_2m",
+            "precipitation_probability",
+            "wind_speed_10m",
+            "wind_direction_10m",
+            "weather_code",
+        ],
         "daily": ["sunrise", "sunset"],
         "timezone": "Europe/Berlin",
-        "forecast_days": 1
+        "forecast_days": 1,
     }
-    
+
     def _request():
-        response = HTTP_SESSION.get(url, params=params, timeout=REQUEST_TIMEOUT, headers=DEFAULT_HEADERS)
+        response = HTTP_SESSION.get(
+            url, params=params, timeout=REQUEST_TIMEOUT, headers=DEFAULT_HEADERS
+        )
         response.raise_for_status()
         return response.json()
 
     data = retry_call("Weather fetch", _request)
     if not data:
-        return prefer_fallback(None, fallback, "Weather")
+        return None
 
     try:
         hourly = data.get("hourly", {})
@@ -352,9 +393,8 @@ def fetch_weather(fallback=None):
             "weather_code",
         ]
         if not all(isinstance(hourly.get(key), list) and hourly.get(key) for key in required_keys):
-            if not is_missing(fallback):
-                logger.warning("Incomplete weather payload; using cached data")
-                return fallback
+            logger.warning("Incomplete weather payload; skipping weather section")
+            return None
 
         def clean_numbers(values):
             return [value for value in values if isinstance(value, (int, float))]
@@ -371,20 +411,16 @@ def fetch_weather(fallback=None):
             return values[start:end] if isinstance(values, list) else []
 
         def get_segment_data(start_h, end_h):
-            # Extract slices
             temps = slice_list(hourly.get("temperature_2m"), start_h, end_h)
             precips = slice_list(hourly.get("precipitation_probability"), start_h, end_h)
             winds = slice_list(hourly.get("wind_speed_10m"), start_h, end_h)
             wind_dirs = slice_list(hourly.get("wind_direction_10m"), start_h, end_h)
             codes = slice_list(hourly.get("weather_code"), start_h, end_h)
 
-            # Aggregate
             avg_temp = safe_avg(temps)
             max_precip = safe_max(precips)
             max_wind = safe_max(winds)
             avg_wind_dir = safe_avg(wind_dirs)
-
-            # Most common weather code in segment
             code = max(codes, key=codes.count) if codes else 0
 
             return {
@@ -392,6 +428,7 @@ def fetch_weather(fallback=None):
                 "precip": max_precip,
                 "wind": round(max_wind) if max_wind else 0,
                 "wind_dir": round(avg_wind_dir) if avg_wind_dir else 0,
+                "wind_color": plasma_color(max_wind),
                 "color": get_weather_color(code),
                 "condition": get_weather_text(code),
                 "icon": get_weather_icon(code),
@@ -405,12 +442,12 @@ def fetch_weather(fallback=None):
             "sunset": (daily.get("sunset") or [""])[0],
             "daily_precip": safe_max(hourly.get("precipitation_probability") or []),
         }
-    except Exception as e:
-        logger.error(f"Error parsing weather data: {e}")
-        return prefer_fallback(None, fallback, "Weather")
+    except Exception as exc:
+        logger.error("Error parsing weather data: %s", exc)
+        return None
 
 
-def fetch_stocks(fallback=None):
+def fetch_stocks():
     """Fetch stock data using yfinance."""
     logger.info("Fetching stocks...")
     tickers = {
@@ -419,10 +456,9 @@ def fetch_stocks(fallback=None):
         "Nvidia": "NVDA",
         "Bitcoin": "BTC-USD",
         "United Health": "UNH",
-        "Echo Star": "SATS"
+        "Echo Star": "SATS",
     }
-    
-    fallback = fallback if isinstance(fallback, dict) else {}
+
     stock_data = {}
     for name, symbol in tickers.items():
         def _fetch_history():
@@ -434,19 +470,18 @@ def fetch_stocks(fallback=None):
 
         hist = retry_call(f"Stock fetch {name}", _fetch_history)
         if hist is None:
-            cached = fallback.get(name)
-            if cached:
-                logger.warning("Using cached stock data for %s", name)
-                stock_data[name] = cached
-            else:
-                stock_data[name] = {"price": 0.0, "change": 0.0, "percent": 0.0, "color": "grey", "arrow": "-"}
+            stock_data[name] = {
+                "price": 0.0,
+                "change": 0.0,
+                "percent": 0.0,
+                "color": "grey",
+                "arrow": "-",
+            }
             continue
 
         try:
             current_close = hist["Close"].iloc[-1]
-            # Use previous close if available, else standard fallback
             prev_close = hist["Close"].iloc[-2] if len(hist) > 1 else current_close
-
             change = current_close - prev_close
             percent_change = (change / prev_close) * 100 if prev_close else 0.0
 
@@ -457,16 +492,16 @@ def fetch_stocks(fallback=None):
                 "color": "green" if change >= 0 else "red",
                 "arrow": "↑" if change >= 0 else "↓",
             }
-        except Exception as e:
-            logger.error(f"Error parsing {name} data: {e}")
-            cached = fallback.get(name)
-            if cached:
-                logger.warning("Using cached stock data for %s", name)
-                stock_data[name] = cached
-            else:
-                stock_data[name] = {"price": 0.0, "change": 0.0, "percent": 0.0, "color": "grey", "arrow": "-"}
-            
-    # Calculate average market performance
+        except Exception as exc:
+            logger.error("Error parsing %s data: %s", name, exc)
+            stock_data[name] = {
+                "price": 0.0,
+                "change": 0.0,
+                "percent": 0.0,
+                "color": "grey",
+                "arrow": "-",
+            }
+
     percents = [
         data.get("percent")
         for data in stock_data.values()
@@ -478,12 +513,10 @@ def fetch_stocks(fallback=None):
 
 
 def summarize_with_ai(text, prompt_prefix="Summarize this news item:"):
-    """Summarize text using xAI API."""
+    """Summarize text using the xAI API."""
     if not XAI_API_KEY:
-        return text 
-    
-    # Simple deduplication or length check could go here if needed
-    
+        return text
+
     headers = {
         "Authorization": f"Bearer {XAI_API_KEY}",
         "Content-Type": "application/json",
@@ -538,12 +571,12 @@ def fetch_feed(url):
     return feed
 
 
-def fetch_rss_feed(url, limit=5, prompt="Summarize this content:", fallback=None):
-    """Generic RSS feed fetcher and summarizer."""
+def fetch_rss_feed(url, limit=5, prompt="Summarize this content:"):
+    """Fetch and summarize items from an RSS feed."""
     news_items = []
     feed = fetch_feed(url)
     if not feed or not getattr(feed, "entries", None):
-        return prefer_fallback([], fallback, f"RSS feed {url}")
+        return []
 
     for entry in feed.entries[:limit]:
         try:
@@ -557,70 +590,66 @@ def fetch_rss_feed(url, limit=5, prompt="Summarize this content:", fallback=None
                     "headline": item_summary,
                     "link": entry.get("link", ""),
                 })
-        except Exception as e:
-            logger.warning(f"Error parsing feed entry from {url}: {e}")
+        except Exception as exc:
+            logger.warning("Error parsing feed entry from %s: %s", url, exc)
 
-    if not news_items:
-        return prefer_fallback([], fallback, f"RSS feed {url}")
     return news_items
 
 
-def fetch_world_news(fallback=None):
+def fetch_world_news():
     """Fetch and summarize world news from BBC."""
     logger.info("Fetching world news...")
     return fetch_rss_feed(
         "http://feeds.bbci.co.uk/news/world/rss.xml",
         limit=10,
         prompt="Summarize this news item:",
-        fallback=fallback,
     )
 
 
-def fetch_space_news(fallback=None):
+def fetch_space_news():
     """Fetch and summarize space news."""
     logger.info("Fetching space news...")
     return fetch_rss_feed(
         "https://spacenews.com/feed/",
         limit=5,
         prompt="Summarize this content:",
-        fallback=fallback,
     )
 
 
-def fetch_copenhagen_events(fallback=None):
+def fetch_copenhagen_events():
     """Fetch and summarize Copenhagen events/news."""
     logger.info("Fetching Copenhagen events...")
     return fetch_rss_feed(
         "https://cphpost.dk/feed/",
         limit=5,
         prompt="Summarize this content.",
-        fallback=fallback,
     )
 
 
-def fetch_x_trending(fallback=None):
+def fetch_x_trending():
     """Fetch trending topics from X using OAuth1 and personalized_trends API."""
     logger.info("Fetching X trending topics...")
-    
+
     consumer_key = os.getenv("CONSUMER_KEY")
     consumer_secret = os.getenv("CONSUMER_SECRET")
     access_token = os.getenv("ACCESS_TOKEN")
     access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
-    
+
     if not all([consumer_key, consumer_secret, access_token, access_token_secret]):
         logger.warning("X Trending: Missing OAuth credentials.")
-        return prefer_fallback([], fallback, "X trending")
+        return []
 
     try:
         from requests_oauthlib import OAuth1Session
+
         oauth = OAuth1Session(
             consumer_key,
             client_secret=consumer_secret,
             resource_owner_key=access_token,
-            resource_owner_secret=access_token_secret
+            resource_owner_secret=access_token_secret,
         )
-        
-        url = 'https://api.x.com/2/users/personalized_trends'
+
+        url = "https://api.x.com/2/users/personalized_trends"
 
         def _request():
             response = oauth.get(url, timeout=REQUEST_TIMEOUT)
@@ -630,127 +659,46 @@ def fetch_x_trending(fallback=None):
 
         payload = retry_call("X trending fetch", _request)
         if not payload:
-            return prefer_fallback([], fallback, "X trending")
+            return []
 
-        raw_data = payload.get('data', [])
-        logger.info(f"X API returned {len(raw_data)} items total.")
+        raw_data = payload.get("data", [])
+        logger.info("X API returned %s items total.", len(raw_data))
 
-        trends_data = raw_data[:10]
-
+        trends_data = raw_data[:20]
         formatted_trends = []
-        for t in trends_data:
-            trend_name = t.get('trend_name') or "N/A"
-            formatted_trends.append({
-                'name': trend_name,
-                'post_count': t.get('post_count') or t.get('tweet_count', 'N/A'),
-                'category': t.get('category', 'N/A'),
-                'trending_since': format_trending_since(t.get('trending_since')),
-                'link': f"https://x.com/search?q={quote(trend_name)}"
-            })
+        for trend in trends_data:
+            trend_name = trend.get("trend_name") or "N/A"
+            formatted_trends.append(
+                {
+                    "name": trend_name,
+                    "post_count": trend.get("post_count") or trend.get("tweet_count", "N/A"),
+                    "category": trend.get("category", "N/A"),
+                    "trending_since": format_trending_since(trend.get("trending_since")),
+                    "link": f"https://x.com/search?q={quote(trend_name)}",
+                }
+            )
 
         if not formatted_trends:
-            return prefer_fallback([], fallback, "X trending")
+            return []
 
-        logger.info(f"Successfully fetched {len(formatted_trends)} X trending topics")
+        logger.info("Successfully fetched %s X trending topics", len(formatted_trends))
         return [("Personalized Trends", formatted_trends)]
-        
+
     except ImportError:
         logger.error("requests_oauthlib not installed - cannot fetch X trends")
-        return prefer_fallback([], fallback, "X trending")
-    except Exception as e:
-        logger.error(f"Error fetching X trending: {e}")
-        return prefer_fallback([], fallback, "X trending")
+        return []
+    except Exception as exc:
+        logger.error("Error fetching X trending: %s", exc)
+        return []
 
 
-# ==============================================================================
-# REFRESH & SERVER
-# ==============================================================================
-
-def refresh_x_trending(data_path=DATA_OUTPUT_PATH):
-    """Refresh X trending data and persist to JSON."""
-    logger.info("Refreshing X trending data...")
-    data = {}
-    if os.path.exists(data_path):
-        try:
-            with open(data_path, "r", encoding="utf-8") as file:
-                data = json.load(file)
-        except Exception as e:
-            logger.warning(f"Failed to read existing data file: {e}")
-            data = {}
-
-    new_trends = fetch_x_trending(data.get("x_trending"))
-    if new_trends:
-        data["x_trending"] = new_trends
-    elif "x_trending" not in data:
-        data["x_trending"] = []
-
-    try:
-        safe_data = make_json_safe(data)
-        with open(data_path, "w", encoding="utf-8") as file:
-            json.dump(safe_data, file, ensure_ascii=True, indent=2)
-        logger.info(f"X trending data saved to {data_path}")
-    except Exception as e:
-        logger.error(f"Error saving X trending data: {e}")
-    return data.get("x_trending", [])
-
-
-class BrevityHandler(SimpleHTTPRequestHandler):
-    """Serve static files and handle refresh endpoints."""
-
-    def do_OPTIONS(self):
-        path = urlparse(self.path).path
-        if path == REFRESH_X_ENDPOINT:
-            self.send_response(204)
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
-            self.send_header("Access-Control-Allow-Headers", "Content-Type")
-            self.end_headers()
-            return
-        self.send_error(404)
-
-    def do_POST(self):
-        path = urlparse(self.path).path
-        if path == REFRESH_X_ENDPOINT:
-            try:
-                trends = refresh_x_trending()
-                count = 0
-                if isinstance(trends, list):
-                    count = sum(len(items) for _, items in trends if isinstance(items, list))
-                self._send_json(200, {"status": "ok", "count": count})
-            except Exception as e:
-                logger.error(f"Refresh failed: {e}")
-                self._send_json(500, {"status": "error"})
-            return
-        self.send_error(404)
-
-    def _send_json(self, status_code, payload):
-        body = json.dumps(payload, ensure_ascii=True).encode("utf-8")
-        self.send_response(status_code)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Content-Length", str(len(body)))
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Cache-Control", "no-store")
-        self.end_headers()
-        self.wfile.write(body)
-
-
-def run_server(host="127.0.0.1", port=8000):
-    """Run a simple local server for Brevity."""
-    handler = functools.partial(BrevityHandler, directory=os.path.dirname(__file__))
-    server = ThreadingHTTPServer((host, port), handler)
-    logger.info(f"Serving Brevity at http://{host}:{port}")
-    logger.info(f"Refresh X endpoint: {REFRESH_X_ENDPOINT}")
-    server.serve_forever()
-
-
-def fetch_quote(fallback=None):
-    """Fetch a Quote of the Day (Stoicism/Proverbs) using AI."""
+def fetch_quote():
+    """Fetch a quote of the day (Stoicism/Proverbs) using AI."""
     logger.info("Fetching Quote of the Day...")
-    default_fallback = {"text": "The obstacle is the way.", "author": "Marcus Aurelius"}
-    cached_fallback = fallback if not is_missing(fallback) else default_fallback
-    
+    fallback = {"text": "The obstacle is the way.", "author": "Marcus Aurelius"}
+
     if not XAI_API_KEY:
-        return cached_fallback
+        return fallback
 
     headers = {
         "Authorization": f"Bearer {XAI_API_KEY}",
@@ -760,7 +708,7 @@ def fetch_quote(fallback=None):
         "Generate a short, wise quote from Stoic philosophy or the Book of Proverbs. "
         "Return JSON format: {\"text\": \"Quote text\", \"author\": \"Author Name\"}."
     )
-    
+
     payload = {
         "model": "grok-4-1-fast-reasoning",
         "messages": [
@@ -782,19 +730,17 @@ def fetch_quote(fallback=None):
         return json.loads(content)
 
     quote = retry_call("Quote fetch", _request)
-    if not isinstance(quote, dict):
-        return cached_fallback
-    if not quote.get("text"):
-        return cached_fallback
+    if not isinstance(quote, dict) or not quote.get("text"):
+        return fallback
     return quote
 
 
-def fetch_jesus_quote(fallback=None, seed_date=None):
+def fetch_jesus_quote(seed_date=None):
     """Select a deterministic Jesus quote from local JSON."""
     logger.info("Selecting Jesus quote...")
     quotes = load_jesus_quotes()
     if not quotes:
-        return prefer_fallback(None, fallback, "Jesus quote")
+        return None
     seed = seed_date or date.today()
     index = (seed.toordinal() - 1) % len(quotes)
     reference, text = quotes[index]
@@ -802,74 +748,41 @@ def fetch_jesus_quote(fallback=None, seed_date=None):
 
 
 # ==============================================================================
-# GENERATION & DELIVERY
+# PDF GENERATION & DELIVERY
 # ==============================================================================
 
+
+def render_html(data):
+    """Render the Jinja2 template for PDF generation."""
+    env = Environment(loader=FileSystemLoader(os.path.dirname(__file__)))
+    template = env.get_template("brevity_template.html")
+    return template.render(**data)
+
+
 def generate_pdf(data):
-    """Generate PDF from data using Jinja2 and WeasyPrint."""
+    """Generate PDF from the HTML template using WeasyPrint."""
     logger.info("Generating PDF...")
     try:
         from weasyprint import HTML
-    except Exception as e:
-        logger.error(f"WeasyPrint import failed: {e}")
+    except Exception as exc:
+        logger.error("WeasyPrint import failed: %s", exc)
         logger.error("PDF generation skipped. Install WeasyPrint system dependencies.")
         return None
     try:
-        html_out = render_html(data, render_mode="pdf")
+        html_out = render_html(data)
         pdf_path = "brevity.pdf"
         HTML(string=html_out, base_url=os.path.dirname(__file__)).write_pdf(pdf_path)
-        logger.info(f"PDF generated at {pdf_path}")
+        logger.info("PDF generated at %s", pdf_path)
         return pdf_path
-    except Exception as e:
-        logger.error(f"Error generating PDF: {e}")
-        return None
-
-
-def render_html(data, render_mode="pdf"):
-    """Render Brevity HTML using the Jinja2 template."""
-    env = Environment(loader=FileSystemLoader(os.path.dirname(__file__)))
-    template = env.get_template("brevity_template.html")
-    context = {
-        **data,
-        "data_path": DATA_OUTPUT_PATH,
-        "render_mode": render_mode,
-        "refresh_x_endpoint": REFRESH_X_ENDPOINT,
-    }
-    return template.render(**context)
-
-
-def generate_html(data, output_path=HTML_OUTPUT_PATH):
-    """Generate HTML file from data using Jinja2."""
-    logger.info("Generating HTML...")
-    try:
-        html_out = render_html(data, render_mode="html")
-        with open(output_path, "w", encoding="utf-8") as file:
-            file.write(html_out)
-        logger.info(f"HTML generated at {output_path}")
-        return output_path
-    except Exception as e:
-        logger.error(f"Error generating HTML: {e}")
-        return None
-
-
-def save_brief_data(data, output_path=DATA_OUTPUT_PATH):
-    """Save Brevity data to JSON."""
-    logger.info("Saving Brevity data...")
-    try:
-        safe_data = make_json_safe(data)
-        with open(output_path, "w", encoding="utf-8") as file:
-            json.dump(safe_data, file, ensure_ascii=True, indent=2)
-        logger.info(f"Brevity data saved to {output_path}")
-        return output_path
-    except Exception as e:
-        logger.error(f"Error saving Brevity data: {e}")
+    except Exception as exc:
+        logger.error("Error generating PDF: %s", exc)
         return None
 
 
 def send_to_slack(pdf_path):
     """Upload PDF to Slack using the v2 API."""
     logger.info("Sending to Slack...")
-    
+
     if not os.path.exists(pdf_path):
         logger.error("PDF file does not exist.")
         return
@@ -879,7 +792,7 @@ def send_to_slack(pdf_path):
         return
 
     client = WebClient(token=SLACK_BOT_TOKEN)
-    
+
     def _upload():
         client.files_upload_v2(
             channel=SLACK_CHANNEL_ID,
@@ -898,21 +811,17 @@ def send_to_slack(pdf_path):
 
 def main():
     logger.info("Starting Brevity generation...")
-    
-    # 1. Gather Data
+
     today = date.today()
-    previous_data = load_previous_data()
-    weather = fetch_weather(previous_data.get("weather"))
-    stocks = fetch_stocks(previous_data.get("stocks"))
-    # Use generic fetcher wrappers for news
-    world_news = fetch_world_news(previous_data.get("world_news"))
-    space_news = fetch_space_news(previous_data.get("space_news"))
-    copenhagen = fetch_copenhagen_events(previous_data.get("copenhagen"))
-    x_trending = fetch_x_trending(previous_data.get("x_trending"))
-    jesus_quote = fetch_jesus_quote(previous_data.get("jesus_quote"), today)
-    quote = fetch_quote(previous_data.get("quote"))
-    
-    # Calculate Year Percentage
+    weather = fetch_weather()
+    stocks = fetch_stocks()
+    world_news = fetch_world_news()
+    space_news = fetch_space_news()
+    copenhagen = fetch_copenhagen_events()
+    x_trending = fetch_x_trending()
+    jesus_quote = fetch_jesus_quote(today)
+    quote = fetch_quote()
+
     day_of_year = today.timetuple().tm_yday
     days_in_year = 366 if calendar.isleap(today.year) else 365
     year_percent = (day_of_year / days_in_year) * 100
@@ -927,39 +836,15 @@ def main():
         "copenhagen": copenhagen,
         "jesus_quote": jesus_quote,
         "x_trending": x_trending,
-        "quote": quote
+        "quote": quote,
     }
-    
-    # 2. Save data + HTML output
-    save_brief_data(data)
-    generate_html(data)
 
-    # 3. Generate PDF
     pdf_path = generate_pdf(data)
-    
-    # 4. Send to Slack
     if pdf_path:
         send_to_slack(pdf_path)
-        pass
-    
+
     logger.info("Done.")
-
-def cli():
-    parser = argparse.ArgumentParser(description="Brevity generator and server.")
-    parser.add_argument("--refresh-x", action="store_true", help="Refresh X trending data only.")
-    parser.add_argument("--serve", action="store_true", help="Serve Brevity locally.")
-    parser.add_argument("--host", default="127.0.0.1", help="Host for the local server.")
-    parser.add_argument("--port", type=int, default=8000, help="Port for the local server.")
-    args = parser.parse_args()
-
-    if args.refresh_x:
-        refresh_x_trending()
-        return
-    if args.serve:
-        run_server(args.host, args.port)
-        return
-    main()
 
 
 if __name__ == "__main__":
-    cli()
+    main()

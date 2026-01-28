@@ -3,7 +3,7 @@ name: Brevity Workflow
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 5 * * *'
+    - cron: '0 4 * * *'
     # 05:00 UTC = 06:00 CET / 07:00 CEST (before 08:00 Copenhagen time)
 
 permissions:
@@ -52,7 +52,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
           # Add PDF, HTML, and the JSON data file required for the web page
-          git add brevity.pdf brevity.html resources/brevity.json
+          git add brevity.pdf
           
           # Only commit if there are changes
           if git diff --staged --quiet; then

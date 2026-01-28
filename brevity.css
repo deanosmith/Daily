@@ -1,7 +1,6 @@
 @page {
     size: A4;
     margin: 0.3cm;
-    /* Reduced margins */
     background-color: #000000;
 }
 
@@ -15,7 +14,6 @@ body {
 
 h1 {
     font-size: 28px;
-    /* Slightly smaller header */
     text-align: center;
     margin-bottom: 15px;
     font-weight: 300;
@@ -31,7 +29,6 @@ h2 {
     font-weight: 600;
     letter-spacing: 0.5px;
     color: #00e5ff;
-    /* text-transform: uppercase; Removed per user request */
 }
 
 .container {
@@ -94,7 +91,6 @@ a {
 
 .weather-value {
     font-size: 24px;
-    /* Increased size */
     font-weight: bold;
     margin: 4px 0;
 }
@@ -225,7 +221,6 @@ a {
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.3px;
-    /* text-transform: uppercase; */
 }
 
 .keyword-text {
@@ -250,8 +245,8 @@ a {
 }
 
 .section-gap {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 8px;
+    margin-bottom: 6px;
 }
 
 .jesus-title {
@@ -261,8 +256,8 @@ a {
 
 .jesus-card {
     text-align: center;
-    margin-bottom: 25px;
-    padding: 20px;
+    margin-bottom: 16px;
+    padding: 16px;
     background-color: #222;
     border-radius: 15px;
     border-left: 6px solid #ffee00;
@@ -272,7 +267,7 @@ a {
 .jesus-quote-text {
     font-family: 'Georgia', serif;
     font-style: italic;
-    font-size: 18px;
+    font-size: 17px;
     margin-bottom: 8px;
     color: #ddd;
 }
@@ -327,49 +322,37 @@ a {
     margin-bottom: 0;
 }
 
-.refresh-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    float: right;
-    margin-left: 8px;
-    /* margin-right: 8px; */
-    padding: 0px 6px;
-    font-size: 24px;
-    border-radius: 100px;
-    background: #ffffff;
-    border: 1px solid #ffffff;
-    color: #000000;
-    cursor: pointer;
+.x-trending-section {
+    margin-top: 6px;
+    margin-bottom: 6px;
 }
 
-.refresh-button:hover {
-    border-color: #666;
-    color: #ff0000;
+.x-trending h2 {
+    margin-top: 10px;
+    margin-bottom: 8px;
 }
 
-.refresh-button:disabled {
-    opacity: 0.6;
-    cursor: default;
+.x-trending .x-grid {
+    gap: 10px;
 }
 
-.refresh-button.is-loading {
-    /* Animation disabled for PDF compatibility */
+.x-trending .news-item {
+    padding: 8px;
+    margin-bottom: 6px;
 }
 
-.data-error {
-    margin: 6px 0 10px;
-    padding: 8px 10px;
-    background-color: #2b1a1a;
-    border: 1px solid #5c2b2b;
-    color: #ffbdbd;
-    border-radius: 8px;
-    font-size: 12px;
+.x-trending .news-title {
+    font-size: 14px;
+    line-height: 1.45;
 }
 
-@media print {
-    .refresh-button,
-    .data-error {
-        display: none;
-    }
+.x-trending .news-summary {
+    font-size: 11px;
+}
+
+.x-category {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    letter-spacing: 0.4px;
 }
