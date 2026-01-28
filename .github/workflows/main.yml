@@ -52,7 +52,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
           # Add PDF, HTML, and the JSON data file required for the web page
-          git add brevity.pdf brevity.html resources/brevity.json
+          git add brevity.pdf
           
           # Only commit if there are changes
           if git diff --staged --quiet; then
