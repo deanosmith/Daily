@@ -1,0 +1,217 @@
+{
+  "date": "Wednesday, January 28",
+  "year_percent": 7.671232876712329,
+  "weather": {
+    "morning": {
+      "temp": -1,
+      "precip": 0,
+      "wind": 22,
+      "wind_dir": 65,
+      "color": "#87CEEB",
+      "condition": "Overcast",
+      "icon": "\u2601\ufe0f"
+    },
+    "afternoon": {
+      "temp": 0,
+      "precip": 0,
+      "wind": 24,
+      "wind_dir": 65,
+      "color": "#87CEEB",
+      "condition": "Overcast",
+      "icon": "\u2601\ufe0f"
+    },
+    "evening": {
+      "temp": -1,
+      "precip": 0,
+      "wind": 27,
+      "wind_dir": 61,
+      "color": "#87CEEB",
+      "condition": "Overcast",
+      "icon": "\u2601\ufe0f"
+    },
+    "sunrise": "2026-01-28T08:10",
+    "sunset": "2026-01-28T16:34",
+    "daily_precip": 0
+  },
+  "stocks": {
+    "S&P 500": {
+      "price": 695.489990234375,
+      "change": 2.760009765625,
+      "percent": 0.398425049217212,
+      "color": "green",
+      "arrow": "\u2191"
+    },
+    "Tesla": {
+      "price": 430.8999938964844,
+      "change": -4.300018310546875,
+      "percent": -0.9880556502607107,
+      "color": "red",
+      "arrow": "\u2193"
+    },
+    "Nvidia": {
+      "price": 188.52000427246094,
+      "change": 2.0500030517578125,
+      "percent": 1.099374182623327,
+      "color": "green",
+      "arrow": "\u2191"
+    },
+    "Bitcoin": {
+      "price": 88914.9453125,
+      "change": -187.625,
+      "percent": -0.21057192777039174,
+      "color": "red",
+      "arrow": "\u2193"
+    },
+    "United Health": {
+      "price": 282.70001220703125,
+      "change": -68.94000244140625,
+      "percent": -19.605278002940324,
+      "color": "red",
+      "arrow": "\u2193"
+    },
+    "Echo Star": {
+      "price": 125.80999755859375,
+      "change": 6.089996337890625,
+      "percent": 5.086866251081766,
+      "color": "green",
+      "arrow": "\u2191"
+    },
+    "average_percent": -2.369873349674853
+  },
+  "world_news": [
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Minnesota</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Pretti shooting</span></span><span class=\"keyword-text\">Trump says government will de-escalate in Minnesota after Alex Pretti&#x27;s shooting, amid calls to end immigration operation.</span>",
+      "link": "https://www.bbc.com/news/articles/c0q425vg4qzo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Ilhan Omar</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">attack</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">town hall</span></span><span class=\"keyword-text\">Minnesota Congresswoman Ilhan Omar was attacked with unknown liquid at town hall but uninjured and continued speaking.</span>",
+      "link": "https://www.bbc.com/news/articles/cn9zpee3llxo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Zelensky</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Russian drone</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">Ukraine train</span></span><span class=\"keyword-text\">Zelensky condemned Russian drone strike killing five on packed passenger train in north-eastern Ukraine.</span>",
+      "link": "https://www.bbc.com/news/articles/crkrpl4ngdzo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">South Korea</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Kim Keon Hee</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">bribery</span></span><span class=\"keyword-text\">South Korea&#x27;s ex-first lady Kim Keon Hee jailed 20 months for bribery, ordered to return Graff diamond necklace and 12.85m won.</span>",
+      "link": "https://www.bbc.com/news/articles/cevnppplkjjo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Iran</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">protests</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">crackdown</span></span><span class=\"keyword-text\">Young Iranians tell BBC they saw friends die as security forces brutally crushed protests this month.</span>",
+      "link": "https://www.bbc.com/news/articles/cy8y2jxx9ppo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">French senator</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">drugging MP</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">prison sentence</span></span><span class=\"keyword-text\">. Former French senator Joel Guerriau guilty of drugging MP, sentenced to 4 years with 18 months behind bars.</span>",
+      "link": "https://www.bbc.com/news/articles/cy8p1mn3j29o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">BTS</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Mexico president</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">concerts</span></span><span class=\"keyword-text\">Mexico&#x27;s president asks South Korea for more BTS concerts after 1M fans vied for 150K tickets sold out in 40 minutes.</span>",
+      "link": "https://www.bbc.com/news/articles/cz7y2gy4p24o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Republicans</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">immigration crackdown</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span></span><span class=\"keyword-text\">Republicans criticize federal immigration crackdown killing two citizens but avoid attacking Trump amid rising anger.</span>",
+      "link": "https://www.bbc.com/news/articles/cj3vp84j1l3o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Iraq</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Maliki</span></span><span class=\"keyword-text\">Trump says US will stop helping Iraq if it picks Maliki as PM, claiming zero chance of success without American support.</span>",
+      "link": "https://www.bbc.com/news/articles/cn0kpk3drgjo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Neil Young</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Greenland</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Trump threats</span></span><span class=\"keyword-text\">Neil Young offers Greenlanders free access to his archives to ease stress from Trump&#x27;s threats to the territory.</span>",
+      "link": "https://www.bbc.com/news/articles/crmlpl0w2z2o?at_medium=RSS&at_campaign=rss"
+    }
+  ],
+  "space_news": [
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">SpaceX</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">GPS</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">ULA</span></span><span class=\"keyword-text\">SpaceX launches GPS satellite for U.S. Space Force, marking third consecutive launch reassigned from ULA.</span>",
+      "link": "https://spacenews.com/spacex-launches-gps-satellite-for-u-s-space-force/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">Exotrail</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Astroscale France</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">LEO deorbiting</span></span><span class=\"keyword-text\">Exotrail and Astroscale France announced Jan. 28 partnership to test deorbiting capabilities for low Earth orbit satellites.</span>",
+      "link": "https://spacenews.com/exotrail-and-astroscale-france-join-forces-to-build-deorbiting-capability-for-leo/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">NOAA</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">SWFO-L1</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Lagrange Point 1</span></span><span class=\"keyword-text\">NOAA&#x27;s Space Weather Follow On-Lagrange 1 solar observatory reached L1 after final engine burn.</span>",
+      "link": "https://spacenews.com/noaa-solar-observatory-reaches-lagrange-point-1/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">GeoXO</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">NOAA</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">budget</span></span><span class=\"keyword-text\">NOAA closely monitors tight budget for scaled-back GeoXO geostationary weather satellite program.</span>",
+      "link": "https://spacenews.com/budget-remains-tight-for-scaled-back-geoxo-program/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">EU</span><span class=\"keyword-badge\" style=\"--kw-bg: #4a375f; --kw-border: #5f4c78; --kw-text: #f0e3ff;\">GOVSATCOM</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">satcom</span></span><span class=\"keyword-text\">EU launches GOVSATCOM program pooling eight geosynchronous satellites for secure government communications in sovereignty push.</span>",
+      "link": "https://spacenews.com/eu-launches-government-satcom-program-in-sovereignty-push/"
+    }
+  ],
+  "copenhagen": [
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">foreign inmates</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">transfers</span></span><span class=\"keyword-text\">Denmark transferred a record 219 years of sentences from 43 foreign inmates to home countries last year.</span>",
+      "link": "https://cphpost.dk/2026-01-28/news/round-up/inmates-with-200-years-left-deported-in-2025/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">Council of Europe</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Greenland</span></span><span class=\"keyword-text\">Over 30 Council of Europe countries back declaration affirming Greenland belongs to its people, who decide its and Denmark&#x27;s future.</span>",
+      "link": "https://cphpost.dk/2026-01-28/news/round-up/strong-support-from-european-council-majority-for-denmark-and-greenland/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Trump</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">EU</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a5a2e; --kw-border: #78783e; --kw-text: #fff6c9;\">Greenland</span></span><span class=\"keyword-text\">EU to more than double aid to Greenland from \u20ac225M to \u20ac500-550M amid Trump&#x27;s threat.</span>",
+      "link": "https://cphpost.dk/2026-01-28/news/round-up/trumps-threat-boosts-doubled-eu-aid-to-greenland/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">Vineyard Wind</span><span class=\"keyword-badge\" style=\"--kw-bg: #3b545a; --kw-border: #4f6f77; --kw-text: #e0f3f6;\">CIP</span><span class=\"keyword-badge\" style=\"--kw-bg: #5a3a2e; --kw-border: #7a4f3e; --kw-text: #ffe1d3;\">offshore wind</span></span><span class=\"keyword-text\">A Massachusetts judge ruled CIP&#x27;s Vineyard Wind project can continue after Trump administration halt.</span>",
+      "link": "https://cphpost.dk/2026-01-28/news/round-up/danish-energy-investor-can-continue-us-offshore-wind-project/"
+    },
+    {
+      "headline": "<span class=\"keyword-badges\"><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">Denmark</span><span class=\"keyword-badge\" style=\"--kw-bg: #294f3a; --kw-border: #3b6b4c; --kw-text: #d9f4e2;\">real estate</span><span class=\"keyword-badge\" style=\"--kw-bg: #2f3f5c; --kw-border: #3f567a; --kw-text: #d9e6ff;\">307B kroner</span></span><span class=\"keyword-text\">Denmark&#x27;s 2025 real estate sales hit 307 billion kroner, up 28%, first exceeding 300B with 100K+ properties per Boligsiden.</span>",
+      "link": "https://cphpost.dk/2026-01-28/news/round-up/over-300-billion-in-home-sales-in-2025/"
+    }
+  ],
+  "jesus_quote": {
+    "text": "I am the resurrection and the life. The one who believes in me will live, even though they die; and whoever lives by believing in me will never die.",
+    "author": "John 11:25-26"
+  },
+  "x_trending": [
+    [
+      "Personalized Trends",
+      [
+        {
+          "name": "Old Photo of Migrant Girl's Death Reignites Immigration Custody Debate",
+          "post_count": "258 posts",
+          "category": "News",
+          "trending_since": "Now",
+          "link": "https://x.com/search?q=Old%20Photo%20of%20Migrant%20Girl%27s%20Death%20Reignites%20Immigration%20Custody%20Debate"
+        },
+        {
+          "name": "Prediction Markets Bet Against Congress Banning Stock Trades Before 2027",
+          "post_count": "2.4K posts",
+          "category": "News",
+          "trending_since": null,
+          "link": "https://x.com/search?q=Prediction%20Markets%20Bet%20Against%20Congress%20Banning%20Stock%20Trades%20Before%202027"
+        },
+        {
+          "name": "Ye Publishes Apology Letter Linking Brain Injury to Antisemitic Actions",
+          "post_count": "232K posts",
+          "category": "Entertainment",
+          "trending_since": null,
+          "link": "https://x.com/search?q=Ye%20Publishes%20Apology%20Letter%20Linking%20Brain%20Injury%20to%20Antisemitic%20Actions"
+        },
+        {
+          "name": "Japan's Ueno Zoo Bids Farewell to Last Giant Pandas Xiao Xiao and Lei Lei",
+          "post_count": "2.9K posts",
+          "category": "News",
+          "trending_since": null,
+          "link": "https://x.com/search?q=Japan%27s%20Ueno%20Zoo%20Bids%20Farewell%20to%20Last%20Giant%20Pandas%20Xiao%20Xiao%20and%20Lei%20Lei"
+        },
+        {
+          "name": "Gold Tops $5,100 and Silver Hits $114 Before Massive Reversal",
+          "post_count": "301K posts",
+          "category": "News",
+          "trending_since": null,
+          "link": "https://x.com/search?q=Gold%20Tops%20%245%2C100%20and%20Silver%20Hits%20%24114%20Before%20Massive%20Reversal"
+        }
+      ]
+    ]
+  ],
+  "quote": {
+    "text": "Waste no more time arguing about what a good man should be. Be one.",
+    "author": "Marcus Aurelius"
+  }
+}

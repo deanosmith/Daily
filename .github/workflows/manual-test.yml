@@ -1,13 +1,10 @@
-name: Brevity Workflow
+name: Brevity Manual Test
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 5 * * *'
-    # 05:00 UTC = 06:00 CET / 07:00 CEST (before 08:00 Copenhagen time)
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   run-script:
@@ -31,7 +28,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
       - name: Set up uv
         uses: astral-sh/setup-uv@v3
       - name: Sync dependencies
@@ -46,18 +43,13 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
         run: uv run python brevity.py
-      - name: Commit and Push Changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Add PDF, HTML, and the JSON data file required for the web page
-          git add brevity.pdf brevity.html resources/brevity.json
-          
-          # Only commit if there are changes
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "Update Brevity content [skip ci]"
-            git push
-          fi
+      - name: Upload outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brevity-output
+          path: |
+            brevity.pdf
+            brevity.html
+            resources/brevity.json
+          if-no-files-found: warn
