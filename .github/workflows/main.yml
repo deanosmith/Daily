@@ -3,7 +3,7 @@ name: Brevity Workflow
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 5 * * *'
+    - cron: '0 4 * * *'
     # 05:00 UTC = 06:00 CET / 07:00 CEST (before 08:00 Copenhagen time)
 
 permissions:
