@@ -50,6 +50,4 @@ jobs:
           name: brevity-output
           path: |
             brevity.pdf
-            brevity.html
-            resources/brevity.json
           if-no-files-found: warn

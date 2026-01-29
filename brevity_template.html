@@ -8,14 +8,11 @@
 </head>
 
 <body>
-    <h1 id="page-title">{% if render_mode == "pdf" %}{{ date }} | {{ "%.1f"|format(year_percent)}}%{% endif %}</h1>
-    <div id="data-error" class="data-error" hidden></div>
+    <h1>{{ date }} | {{ "%.1f"|format(year_percent)}}%</h1>
     <div class="container">
-        <!-- WEATHER -->
+        <!-- Weather -->
         <div class="section">
             <h2 style="border-bottom: 2px solid #1da1f2; color: #ffffff;">Weather (Copenhagen)</h2>
-            <div id="weather-content">
-            {% if render_mode == "pdf" %}
             {% if weather %}
             <div class="weather-grid">
                 <div class="weather-item">
@@ -24,7 +21,7 @@
                     <div class="weather-value">{{ weather.morning.temp }}°C</div>
                     <div class="weather-label">
                         <span class="wind-arrow"
-                            style="transform: rotate({{ weather.morning.wind_dir }}deg); font-size: {{ 18 + (weather.morning.wind * 0.8) }}px;">⬇</span>
+                            style="transform: rotate({{ weather.morning.wind_dir }}deg); font-size: {{ 18 + (weather.morning.wind * 0.8) }}px; color: {{ weather.morning.wind_color }};">⬇</span>
                         <div class="wind-speed">{{ weather.morning.wind }} km/h</div>
                     </div>
                 </div>
@@ -34,7 +31,7 @@
                     <div class="weather-value">{{ weather.afternoon.temp }}°C</div>
                     <div class="weather-label">
                         <span class="wind-arrow"
-                            style="transform: rotate({{ weather.afternoon.wind_dir }}deg); font-size: {{ 18 + (weather.afternoon.wind * 0.8) }}px;">⬇</span>
+                            style="transform: rotate({{ weather.afternoon.wind_dir }}deg); font-size: {{ 18 + (weather.afternoon.wind * 0.8) }}px; color: {{ weather.afternoon.wind_color }};">⬇</span>
                         <div class="wind-speed">{{ weather.afternoon.wind }} km/h</div>
                     </div>
                 </div>
@@ -44,12 +41,10 @@
                     <div class="weather-value">{{ weather.evening.temp }}°C</div>
                     <div class="weather-label">
                         <span class="wind-arrow"
-                            style="transform: rotate({{ weather.evening.wind_dir }}deg); font-size: {{ 18 + (weather.evening.wind * 0.8) }}px;">⬇</span>
+                            style="transform: rotate({{ weather.evening.wind_dir }}deg); font-size: {{ 18 + (weather.evening.wind * 0.8) }}px; color: {{ weather.evening.wind_color }};">⬇</span>
                         <div class="wind-speed">{{ weather.evening.wind }} km/h</div>
                     </div>
                 </div>
-                <!-- TODO -->
-                 <!-- Get the right edge of the rain/sun section to align with the right edge of the weather grid -->
                 <div class="weather-item full-width weather-meta">
                     <div class="weather-meta-item">
                         <span class="weather-meta-icon">🌅</span>
@@ -70,19 +65,15 @@
                 ERROR: Weather data unavailable
             </div>
             {% endif %}
-            {% endif %}
-            </div>
         </div>
 
-        <!-- MARKETS -->
+        <!-- Markets -->
         <div class="section">
             <h2
                 style="border-bottom: 2px solid #ffffff; color: #ffffff; display: flex; justify-content: space-between; align-items: baseline;">
-                Markets <span id="markets-average"
-                    style="font-size: 1.25em; font-weight: bold; font-family: 'Courier New', monospace; color: {% if render_mode == "pdf" %}{{ 'green' if stocks.average_percent >= 0 else 'red' }}{% else %}#aaa{% endif %};">{%
-                    if render_mode == "pdf" %}{{ "%.2f"|format(stocks.average_percent) }}%{% endif %}</span></h2>
-            <div id="markets-content">
-            {% if render_mode == "pdf" %}
+                Markets <span
+                    style="font-size: 1.25em; font-weight: bold; font-family: 'Courier New', monospace; color: {{ 'green' if stocks.average_percent >= 0 else 'red' }};">{{
+                    "%.2f"|format(stocks.average_percent) }}%</span></h2>
             {% for name, data in stocks.items() %}
             {% if name != 'average_percent' %}
             <div class="stock-item">
@@ -94,16 +85,12 @@
             </div>
             {% endif %}
             {% endfor %}
-            {% endif %}
-            </div>
         </div>
     </div>
 
-    <!-- WORDS OF JESUS -->
+    <!-- Words of Jesus -->
     <div class="container section-gap">
         <div class="section full-width">
-            <div id="jesus-quote-content">
-            {% if render_mode == "pdf" %}
             {% if jesus_quote %}
             <h2 class="jesus-title">Words of Jesus</h2>
             <div class="jesus-card">
@@ -111,25 +98,14 @@
                 <div class="jesus-quote-ref">{{ jesus_quote.author }}</div>
             </div>
             {% endif %}
-            {% endif %}
-            </div>
         </div>
     </div>
 
-    <!-- X TRENDING (Full Width Middle Section) -->
-    <!-- Using a new container for full width -->
-    <div class="container" style="margin-top: 10px; margin-bottom: 10px;">
-        <div class="section full-width" style="width: 100%;">
-            <h2 style="border-bottom: 2px solid #868686; color: #ffffff;">
-                Trending on X
-                {% if render_mode != "pdf" %}
-                <button class="refresh-button" type="button" data-section="x_trending"
-                    aria-label="Refresh Trending on X" title="Refresh Trending on X">⟳</button>
-                {% endif %}
-            </h2>
+    <!-- X Trending -->
+    <div class="container x-trending-section">
+        <div class="section full-width x-trending">
+            <h2 style="border-bottom: 2px solid #868686; color: #ffffff;">Trending on X</h2>
 
-            <div id="x-trending-content">
-            {% if render_mode == "pdf" %}
             {% if x_trending %}
             {% set category_colors = {
             'Science': '#9b59b6',
@@ -140,13 +116,10 @@
             'Misc': '#95a5a6'
             } %}
 
-            <!-- Grid for X categories to fill the full width page effectively -->
             <div class="x-grid">
-                <!-- x_trending is now a sorted list of tuples: [('Category', [items]), ...] -->
                 {% for category, trends in x_trending %}
                 <div style="break-inside: avoid;">
-                    <div
-                        style="font-size: 15px; color: {{ category_colors.get(category, '#888') }}; font-weight: bold; margin-bottom: 6px; letter-spacing: 0.5px;">
+                    <div class="x-category" style="color: {{ category_colors.get(category, '#888') }};">
                         {{ category }}
                     </div>
                     {% if trends %}
@@ -181,62 +154,40 @@
                 <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
             </div>
             {% endif %}
-            {% endif %}
-            </div>
         </div>
     </div>
 
-    <!-- BOTTOM ROW: Copenhagen | Space News -->
+    <!-- Copenhagen | Space News -->
     <div class="columns">
         <div class="column column-left">
             <div class="section column-section" style="--section-accent: #f21d1d;">
-            <h2 style="border-bottom: 2px solid #f21d1d; color: #ffffff;">Copenhagen Today</h2>
-            <div id="copenhagen-content">
-            {% if render_mode == "pdf" %}
-            {% for item in copenhagen %}
-            <div class="news-item">
-                <div class="news-title"><a href="{{ item.link }}"
-                        target="_blank" style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
+                <h2 style="border-bottom: 2px solid #f21d1d; color: #ffffff;">Copenhagen Today</h2>
+                {% for item in copenhagen %}
+                <div class="news-item">
+                    <div class="news-title"><a href="{{ item.link }}" target="_blank"
+                            style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
+                </div>
+                {% endfor %}
             </div>
-            {% else %}
-            <div class="news-item">
-                <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
-            </div>
-            {% endfor %}
-            {% endif %}
-            </div>
-
-        </div>
         </div>
 
-        <!-- RIGHT: World News -->
         <div class="column column-right">
             <div class="section column-section" style="--section-accent: #ffffff;">
-            <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff;">Space News</h2>
-            <div id="space-news-content">
-            {% if render_mode == "pdf" %}
-            {% for item in space_news %}
-            <div class="news-item">
-                <div class="news-title"><a href="{{ item.link }}"
-                        target="_blank" style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
-            </div>
-            {% else %}
-            <div class="news-item">
-                <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
-            </div>
-            {% endfor %}
-            {% endif %}
-            </div>
+                <h2 style="border-bottom: 2px solid #ffffff; color: #ffffff;">Space News</h2>
+                {% for item in space_news %}
+                <div class="news-item">
+                    <div class="news-title"><a href="{{ item.link }}" target="_blank"
+                            style="text-decoration: none; border: none;">{{ item.headline }}</a></div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
 
-    <!-- WORLD NEWS (Full Width) -->
+    <!-- World News -->
     <div class="container" style="margin-top: 10px; margin-bottom: 10px;">
         <div class="section full-width" style="--section-accent: #0048ff;">
             <h2 style="border-bottom: 2px solid #0048ff; color: #ffffff;">World News</h2>
-            <div id="world-news-content">
-            {% if render_mode == "pdf" %}
             {% if world_news %}
             {% set world_left = world_news[:5] %}
             {% set world_right = world_news[5:10] %}
@@ -261,402 +212,22 @@
                 <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
             </div>
             {% endif %}
-            {% endif %}
-            </div>
         </div>
     </div>
-
 
     <!-- Quote of the Day -->
-    <div id="quote-content">
-        {% if render_mode == "pdf" %}
-        {% if quote %}
+    {% if quote %}
+    <div
+        style="text-align: center; margin-bottom: 25px; padding: 20px; background-color: #222; border-radius: 15px; border-left: 6px solid #ffee00; border-right: 6px solid #ffee00;">
         <div
-            style="text-align: center; margin-bottom: 25px; padding: 20px; background-color: #222; border-radius: 15px; border-left: 6px solid #ffee00; border-right: 6px solid #ffee00;">
-            <div
-                style="font-family: 'Georgia', serif; font-style: italic; font-size: 18px; margin-bottom: 8px; color: #ddd;">
-                {{ quote.text }}</div>
-            <div
-                style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #ffee00; letter-spacing: 1px;">
-                {{ quote.author }}
-            </div>
+            style="font-family: 'Georgia', serif; font-style: italic; font-size: 18px; margin-bottom: 8px; color: #ddd;">
+            {{ quote.text }}</div>
+        <div
+            style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #ffee00; letter-spacing: 1px;">
+            {{ quote.author }}
         </div>
-        {% endif %}
-        {% endif %}
     </div>
-
-    {% if render_mode != "pdf" %}
-    <script>
-        (() => {
-            const isFileProtocol = window.location.protocol === "file:";
-            const baseUrl = (!isFileProtocol && window.location.origin) ? `${window.location.origin}/` : window.location.href;
-            const DATA_URL = new URL("{{ data_path }}", baseUrl).toString();
-            const REFRESH_X_URL = new URL("{{ refresh_x_endpoint }}", baseUrl).toString();
-            const headerEl = document.getElementById("page-title");
-            const marketsAvgEl = document.getElementById("markets-average");
-            const errorEl = document.getElementById("data-error");
-            const sections = {
-                weather: document.getElementById("weather-content"),
-                markets: document.getElementById("markets-content"),
-                jesus_quote: document.getElementById("jesus-quote-content"),
-                x_trending: document.getElementById("x-trending-content"),
-                copenhagen: document.getElementById("copenhagen-content"),
-                space_news: document.getElementById("space-news-content"),
-                world_news: document.getElementById("world-news-content"),
-                quote: document.getElementById("quote-content"),
-            };
-
-            const categoryColors = {
-                "Science": "#9b59b6",
-                "Tech": "#3498db",
-                "World News": "#e74c3c",
-                "World Politics": "#e67e22",
-                "Copenhagen / Denmark": "#ff0000",
-                "Misc": "#95a5a6"
-            };
-
-            const toNumber = (value) => {
-                const num = Number(value);
-                return Number.isFinite(num) ? num : 0;
-            };
-
-            const formatNumber = (value, digits) => toNumber(value).toFixed(digits);
-
-            const formatTime = (value) => {
-                if (!value) {
-                    return "";
-                }
-                const parts = String(value).split("T");
-                if (parts.length < 2) {
-                    return "";
-                }
-                return parts[1].slice(0, 5);
-            };
-
-            const showError = (message) => {
-                if (!errorEl) {
-                    return;
-                }
-                errorEl.textContent = message;
-                errorEl.hidden = false;
-            };
-
-            const clearError = () => {
-                if (!errorEl) {
-                    return;
-                }
-                errorEl.textContent = "";
-                errorEl.hidden = true;
-            };
-
-            const loadData = async () => {
-                const response = await fetch(`${DATA_URL}?t=${Date.now()}`, { cache: "no-store" });
-                if (!response.ok) {
-                    throw new Error(`Failed to load ${DATA_URL}`);
-                }
-                return response.json();
-            };
-
-            const refreshXTrends = async () => {
-                if (isFileProtocol) {
-                    throw new Error("Refresh requires a local server.");
-                }
-                if (!REFRESH_X_URL) {
-                    return;
-                }
-                const response = await fetch(REFRESH_X_URL, { method: "POST" });
-                if (!response.ok) {
-                    throw new Error("Failed to refresh X trends");
-                }
-                const payload = await response.json().catch(() => ({}));
-                if (payload.status && payload.status !== "ok") {
-                    throw new Error("Failed to refresh X trends");
-                }
-            };
-
-            const renderHeader = (data) => {
-                if (!headerEl) {
-                    return;
-                }
-                const yearPercent = formatNumber(data?.year_percent, 1);
-                headerEl.textContent = `${data?.date || ""} | ${yearPercent}%`;
-            };
-
-            const renderWeather = (weather) => {
-                if (!weather) {
-                    return (
-                        '<div class="weather-item full-width" style="text-align: center; color: #f44336; font-weight: bold;">' +
-                        "ERROR: Weather data unavailable" +
-                        "</div>"
-                    );
-                }
-                const segment = (label, data) => {
-                    const windSize = 18 + (toNumber(data?.wind) * 0.8);
-                    return `
-                        <div class="weather-item">
-                            <div style="font-size: 14px; margin-bottom: 2px; color: white;">${label}</div>
-                            <div class="weather-icon">${data?.icon || ""}</div>
-                            <div class="weather-value">${data?.temp ?? ""}°C</div>
-                            <div class="weather-label">
-                                <span class="wind-arrow" style="transform: rotate(${toNumber(data?.wind_dir)}deg); font-size: ${windSize}px;">⬇</span>
-                                <div class="wind-speed">${toNumber(data?.wind)} km/h</div>
-                            </div>
-                        </div>
-                    `;
-                };
-                return `
-                    <div class="weather-grid">
-                        ${segment("Morning", weather.morning)}
-                        ${segment("Afternoon", weather.afternoon)}
-                        ${segment("Evening", weather.evening)}
-                        <div class="weather-item full-width weather-meta">
-                            <div class="weather-meta-item">
-                                <span class="weather-meta-icon">🌅</span>
-                                <span class="weather-meta-text">${formatTime(weather.sunrise)}</span>
-                            </div>
-                            <div class="weather-meta-item">
-                                <span class="weather-meta-icon">🌇</span>
-                                <span class="weather-meta-text">${formatTime(weather.sunset)}</span>
-                            </div>
-                            <div class="weather-meta-item">
-                                <span class="weather-meta-icon">🌧️</span>
-                                <span class="weather-meta-text">${toNumber(weather.daily_precip)}%</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            };
-
-            const renderMarkets = (stocks) => {
-                if (!stocks || typeof stocks !== "object") {
-                    return "";
-                }
-                const avg = toNumber(stocks.average_percent);
-                if (marketsAvgEl) {
-                    marketsAvgEl.textContent = `${formatNumber(avg, 2)}%`;
-                    marketsAvgEl.style.color = avg >= 0 ? "green" : "red";
-                }
-                const entries = Object.entries(stocks).filter(([name]) => name !== "average_percent");
-                return entries.map(([name, data]) => {
-                    const price = formatNumber(data?.price, 2);
-                    const percent = formatNumber(data?.percent, 2);
-                    const color = data?.color || "grey";
-                    return `
-                        <div class="stock-item">
-                            <span class="stock-name">${name}</span>
-                            <span class="stock-price ${color}">
-                                ${price} : <span style="font-size: 1.2em; font-weight: bold;">${percent}%</span>
-                            </span>
-                        </div>
-                    `;
-                }).join("");
-            };
-
-            const renderNewsItems = (items, includeInlineStyle = true) => {
-                return items.map((item) => {
-                    const link = item?.link || "#";
-                    const headline = item?.headline || "";
-                    const styleAttr = includeInlineStyle ? ' style="text-decoration: none; border: none;"' : "";
-                    return `
-                        <div class="news-item">
-                            <div class="news-title"><a href="${link}" target="_blank"${styleAttr}>${headline}</a></div>
-                        </div>
-                    `;
-                }).join("");
-            };
-
-            const renderNewsList = (items) => {
-                if (!Array.isArray(items) || items.length === 0) {
-                    return `
-                        <div class="news-item">
-                            <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
-                        </div>
-                    `;
-                }
-                return renderNewsItems(items);
-            };
-
-            const renderWorldNews = (items) => {
-                if (!Array.isArray(items) || items.length === 0) {
-                    return `
-                        <div class="news-item">
-                            <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
-                        </div>
-                    `;
-                }
-                const left = items.slice(0, 5);
-                const right = items.slice(5, 10);
-                return `
-                    <div class="world-grid">
-                        <div class="world-column">
-                            ${renderNewsItems(left, false)}
-                        </div>
-                        <div class="world-column">
-                            ${renderNewsItems(right, false)}
-                        </div>
-                    </div>
-                `;
-            };
-
-            const renderXTrending = (xTrending) => {
-                if (!Array.isArray(xTrending) || xTrending.length === 0) {
-                    return `
-                        <div class="news-item">
-                            <div class="news-summary" style="font-style: italic; color: #888;">Null</div>
-                        </div>
-                    `;
-                }
-                const blocks = xTrending.map((entry) => {
-                    const category = Array.isArray(entry) ? entry[0] : entry?.category;
-                    const trends = Array.isArray(entry) ? entry[1] : entry?.trends;
-                    const color = categoryColors[category] || "#888";
-                    const border = categoryColors[category] || "#1da1f2";
-                    const items = Array.isArray(trends) ? trends : [];
-                    const trendsHtml = items.length ? items.map((item) => {
-                        const since = item?.trending_since;
-                        return `
-                            <div class="news-item" style="border-left: 2px solid ${border};">
-                                <div class="news-title">
-                                    <a href="${item?.link || "#"}" target="_blank" style="text-decoration: none; border: none;">${item?.name || ""}</a>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 3px;">
-                                    <div style="font-size: 10px; color: #666;">${item?.post_count ?? "N/A"} posts</div>
-                                    ${since ? `<div style="font-size: 9px; color: #555;">Since ${since}</div>` : ""}
-                                </div>
-                            </div>
-                        `;
-                    }).join("") : `
-                        <div class="news-item" style="border-left: 2px solid #333;">
-                            <div class="news-summary" style="font-style: italic; color: #666; font-size: 11px;">Nothing trending</div>
-                        </div>
-                    `;
-                    return `
-                        <div style="break-inside: avoid;">
-                            <div style="font-size: 15px; color: ${color}; font-weight: bold; margin-bottom: 6px; letter-spacing: 0.5px;">${category || ""}</div>
-                            ${trendsHtml}
-                        </div>
-                    `;
-                }).join("");
-                return `<div class="x-grid">${blocks}</div>`;
-            };
-
-            const renderJesusQuote = (quote) => {
-                if (!quote) {
-                    return "";
-                }
-                return `
-                    <h2 class="jesus-title">Words of Jesus</h2>
-                    <div class="jesus-card">
-                        <div class="jesus-quote-text">${quote.text || ""}</div>
-                        <div class="jesus-quote-ref">${quote.author || ""}</div>
-                    </div>
-                `;
-            };
-
-            const renderQuote = (quote) => {
-                if (!quote) {
-                    return "";
-                }
-                return `
-                    <div style="text-align: center; margin-bottom: 25px; padding: 20px; background-color: #222; border-radius: 15px; border-left: 6px solid #ffee00; border-right: 6px solid #ffee00;">
-                        <div style="font-family: 'Georgia', serif; font-style: italic; font-size: 18px; margin-bottom: 8px; color: #ddd;">
-                            ${quote.text || ""}
-                        </div>
-                        <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #ffee00; letter-spacing: 1px;">
-                            ${quote.author || ""}
-                        </div>
-                    </div>
-                `;
-            };
-
-            const renderAll = (data) => {
-                renderHeader(data);
-                if (sections.weather) {
-                    sections.weather.innerHTML = renderWeather(data?.weather);
-                }
-                if (sections.markets) {
-                    sections.markets.innerHTML = renderMarkets(data?.stocks);
-                }
-                if (sections.jesus_quote && data?.jesus_quote) {
-                    sections.jesus_quote.innerHTML = renderJesusQuote(data?.jesus_quote);
-                }
-                if (sections.x_trending) {
-                    sections.x_trending.innerHTML = renderXTrending(data?.x_trending);
-                }
-                if (sections.copenhagen) {
-                    sections.copenhagen.innerHTML = renderNewsList(data?.copenhagen);
-                }
-                if (sections.space_news) {
-                    sections.space_news.innerHTML = renderNewsList(data?.space_news);
-                }
-                if (sections.world_news) {
-                    sections.world_news.innerHTML = renderWorldNews(data?.world_news);
-                }
-                if (sections.quote) {
-                    sections.quote.innerHTML = renderQuote(data?.quote);
-                }
-            };
-
-            const renderSection = (section, data) => {
-                if (section === "x_trending" && sections.x_trending) {
-                    sections.x_trending.innerHTML = renderXTrending(data?.x_trending);
-                } else if (section === "weather" && sections.weather) {
-                    sections.weather.innerHTML = renderWeather(data?.weather);
-                } else if (section === "markets" && sections.markets) {
-                    sections.markets.innerHTML = renderMarkets(data?.stocks);
-                } else if (section === "jesus_quote" && sections.jesus_quote && data?.jesus_quote) {
-                    sections.jesus_quote.innerHTML = renderJesusQuote(data?.jesus_quote);
-                } else if (section === "copenhagen" && sections.copenhagen) {
-                    sections.copenhagen.innerHTML = renderNewsList(data?.copenhagen);
-                } else if (section === "space_news" && sections.space_news) {
-                    sections.space_news.innerHTML = renderNewsList(data?.space_news);
-                } else if (section === "world_news" && sections.world_news) {
-                    sections.world_news.innerHTML = renderWorldNews(data?.world_news);
-                } else if (section === "quote" && sections.quote) {
-                    sections.quote.innerHTML = renderQuote(data?.quote);
-                } else {
-                    renderAll(data);
-                }
-            };
-
-            const refreshSection = async (section, button) => {
-                if (button) {
-                    button.disabled = true;
-                    button.classList.add("is-loading");
-                }
-                try {
-                    if (section === "x_trending") {
-                        await refreshXTrends();
-                    }
-                    const data = await loadData();
-                    renderSection(section, data);
-                    clearError();
-                } catch (err) {
-                    showError("Could not refresh data. Serve this folder via a local web server and try again.");
-                } finally {
-                    if (button) {
-                        button.disabled = false;
-                        button.classList.remove("is-loading");
-                    }
-                }
-            };
-
-            document.querySelectorAll(".refresh-button").forEach((button) => {
-                button.addEventListener("click", () => refreshSection(button.dataset.section, button));
-            });
-
-            loadData()
-                .then((data) => {
-                    renderAll(data);
-                    clearError();
-                })
-                .catch(() => {
-                    showError("Could not load data file. Serve this folder via a local web server and try again.");
-                });
-        })();
-    </script>
     {% endif %}
-
 </body>
 
 </html>
