@@ -128,6 +128,15 @@ WEATHER_ICONS = {
     99: "⛈️",  # Thunderstorm
 }
 
+STOCK_BASELINES = {
+    "S&P 500": {"price": 99.22, "currency": "EUR"},
+    "Tesla": {"price": 339.0, "currency": "USD"},
+    "Nvidia": {"price": 152.19, "currency": "USD"},
+    "Bitcoin": {"price": 712262.0, "currency": "DKK"},
+    "United Health": {"price": 301.0, "currency": "USD"},
+    "Echo Star": {"price": 82.90, "currency": "USD"},
+}
+
 TRENDING_TIME_RE = re.compile(r"(\d{1,2}):(\d{2})")
 KEYWORDS_RE = re.compile(r"^\s*\[(?P<keywords>[^\]]+)\]\s*")
 
@@ -459,6 +468,38 @@ def fetch_stocks():
         "Echo Star": "SATS",
     }
 
+    fx_cache = {}
+
+    def fetch_fx_rate(symbol):
+        if symbol in fx_cache:
+            return fx_cache[symbol]
+
+        def _fetch_history():
+            ticker = yf.Ticker(symbol)
+            hist = ticker.history(period="1d")
+            if hist is None or hist.empty:
+                raise ValueError("No FX history returned")
+            return hist
+
+        hist = retry_call(f"FX fetch {symbol}", _fetch_history)
+        if hist is None:
+            fx_cache[symbol] = 0.0
+            return 0.0
+        rate = hist["Close"].iloc[-1]
+        fx_cache[symbol] = rate
+        return rate
+
+    def convert_usd_to(currency, price):
+        if currency == "USD":
+            return price
+        if currency == "EUR":
+            rate = fetch_fx_rate("EURUSD=X")
+            return price / rate if rate else price
+        if currency == "DKK":
+            rate = fetch_fx_rate("USDDKK=X")
+            return price * rate if rate else price
+        return price
+
     stock_data = {}
     for name, symbol in tickers.items():
         def _fetch_history():
@@ -474,6 +515,7 @@ def fetch_stocks():
                 "price": 0.0,
                 "change": 0.0,
                 "percent": 0.0,
+                "return_percent": 0.0,
                 "color": "grey",
                 "arrow": "-",
             }
@@ -484,11 +526,20 @@ def fetch_stocks():
             prev_close = hist["Close"].iloc[-2] if len(hist) > 1 else current_close
             change = current_close - prev_close
             percent_change = (change / prev_close) * 100 if prev_close else 0.0
+            return_percent = 0.0
+            baseline = STOCK_BASELINES.get(name)
+            if baseline:
+                baseline_price = baseline.get("price", 0.0)
+                baseline_currency = baseline.get("currency", "USD")
+                current_in_baseline = convert_usd_to(baseline_currency, current_close)
+                if baseline_price:
+                    return_percent = ((current_in_baseline - baseline_price) / baseline_price) * 100
 
             stock_data[name] = {
                 "price": current_close,
                 "change": change,
                 "percent": percent_change,
+                "return_percent": return_percent,
                 "color": "green" if change >= 0 else "red",
                 "arrow": "↑" if change >= 0 else "↓",
             }
@@ -498,6 +549,7 @@ def fetch_stocks():
                 "price": 0.0,
                 "change": 0.0,
                 "percent": 0.0,
+                "return_percent": 0.0,
                 "color": "grey",
                 "arrow": "-",
             }

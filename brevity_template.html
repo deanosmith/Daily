@@ -80,7 +80,8 @@
                 <span class="stock-name">{{ name }}</span>
                 <span class="stock-price {{ data.color }}">
                     {{ "%.2f"|format(data.price) }} : <span style="font-size: 1.2em; font-weight: bold;">{{
-                        "%.2f"|format(data.percent) }}%</span>
+                        "%.2f"|format(data.percent) }}%</span> | <span class="grey"
+                        style="font-size: 1.2em;">{{ "%.2f"|format(data.return_percent) }}%</span>
                 </span>
             </div>
             {% endif %}
