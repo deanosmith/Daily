@@ -1,65 +1,79 @@
 import os
 import json
 import requests
-from requests_oauthlib import OAuth1Session
 from urllib.parse import quote
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# OAuth credentials (use your actual values; hardcoded for testing if needed)
-consumer_key = os.getenv("CONSUMER_KEY")
-consumer_secret = os.getenv("CONSUMER_SECRET")
-access_token = os.getenv("ACCESS_TOKEN")
-access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
+# 1. Use BEARER_TOKEN as verified in your working snippet
+bearer_token = os.getenv("BEARER_TOKEN")
 
-# Debug: Check if credentials are set
-if not all([consumer_key, consumer_secret, access_token, access_token_secret]):
-    print("Error: Missing OAuth credentials.")
+if not bearer_token:
+    print("Error: Missing BEARER_TOKEN in environment variables.")
     exit(1)
 
-oauth = OAuth1Session(
-    consumer_key,
-    client_secret=consumer_secret,
-    resource_owner_key=access_token,
-    resource_owner_secret=access_token_secret
-)
+# 2. The working endpoint for US Trends (WOEID: 23424977)
+url = "https://api.x.com/2/trends/by/woeid/23424977"
 
-url = 'https://api.x.com/2/users/personalized_trends'
+# 3. App-Only Authentication (Bearer Token)
+headers = {
+    "Authorization": f"Bearer {bearer_token}"
+}
 
-response = oauth.get(url)
+try:
+    response = requests.get(url, headers=headers)
 
-if response.status_code == 200:
-    raw_data = response.json().get('data', [])
-    print(f"Debug: API returned {len(raw_data)} items total.") # <--- Add this
-    trends_data = raw_data[:20]
-    # trends_data = response.json().get('data', [])[:10]  # Limit to top 10
+    if response.status_code == 200:
+        # Parse JSON
+        response_json = response.json()
+        
+        # Handle v2 structure (usually wrapped in 'data' or a list)
+        # Based on v2 conventions, it typically returns a 'data' key
+        raw_data = response_json.get('data', [])
+        
+        # If raw_data is empty, check if the response is a direct list (v1.1 compatibility)
+        if not raw_data and isinstance(response_json, list):
+             # Some endpoints wrap it as [{"trends": [...]}]
+             raw_data = response_json[0].get('trends', [])
 
-    # Format trends
-    formatted_trends = []
-    for t in trends_data:
-        trend_name = t.get('trend_name', 'N/A')
-        formatted_trends.append({
-            'name': trend_name,
-            'post_count': t.get('post_count') or t.get('tweet_count', 'N/A'),
-            'category': t.get('category', 'N/A'),
-            'trending_since': t.get('trending_since', 'N/A'),
-            'link': f"https://x.com/search?q={quote(trend_name)}"
-        })
+        print(f"Debug: API returned {len(raw_data)} trends.")
+        
+        # Limit to top 20
+        trends_data = raw_data[:10]
 
-    # JSON output
-    # print(json.dumps(formatted_trends, indent=2, ensure_ascii=False))
+        formatted_trends = []
+        for t in trends_data:
+            # v2 'trend_name' vs v1.1 'name'
+            trend_name = t.get('trend_name') or t.get('name', 'N/A')
+            
+            # v2 'tweet_count' vs v1.1 'tweet_volume'
+            count = t.get('tweet_count') or t.get('tweet_volume')
+            
+            # Formatting the count nicely
+            if count:
+                post_count = f"{count:,}"
+            else:
+                post_count = "N/A"
 
-    # Human-readable output
-    print("\nTop Trends (Personalized):")
-    if not formatted_trends:
-        print("No trends available.")
+            formatted_trends.append({
+                'name': trend_name,
+                'post_count': post_count,
+                'link': f"https://x.com/search?q={quote(trend_name)}"
+            })
+
+        # --- Human-readable output ---
+        print("\nTop Trends:")
+        if not formatted_trends:
+            print("No trends available.")
+        else:
+            for i, trend in enumerate(formatted_trends, 1):
+                print(f"{i}. {trend['name']}")
+                print(f"   Volume: {trend['post_count']}")
+                print(f"   Link:   {trend['link']}")
+    
     else:
-        for i, trend in enumerate(formatted_trends, 1):
-            print(f"{i}. {trend['name']}")
-            print(f"   Posts: {trend['post_count']}")
-            print(f"   Category: {trend['category']}")
-            print(f"   Trending Since: {trend['trending_since']}")
-            print(f"   Search Link: {trend['link']}")
-else:
-    print(f"Error {response.status_code}: {response.text}")
+        print(f"Error {response.status_code}: {response.text}")
+
+except Exception as e:
+    print(f"System Error: {e}")
