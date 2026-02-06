@@ -129,7 +129,7 @@ WEATHER_ICONS = {
 }
 
 STOCK_BASELINES = {
-    "S&P 500": {"price": 99.22, "currency": "EUR"},
+    "S&P 500": {"price": 99.22, "currency": "USD"}, # TODO: script hardcodes currency to USD.
     "Tesla": {"price": 339.0, "currency": "USD"},
     "Nvidia": {"price": 152.19, "currency": "USD"},
     "Bitcoin": {"price": 712262.0, "currency": "DKK"},
