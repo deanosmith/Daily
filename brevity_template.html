@@ -18,7 +18,10 @@
                 <div class="weather-item">
                     <div style="font-size: 14px; margin-bottom: 2px; color: white;">Morning</div>
                     <div class="weather-icon">{{ weather.morning.icon }}</div>
-                    <div class="weather-value">{{ weather.morning.temp }}°C</div>
+                    <div class="weather-value">
+                        <span class="temp-main">{{ weather.morning.temp }}°C</span>
+                        <span class="feels-like">{{ weather.morning.feels_like }}°C</span>
+                    </div>
                     <div class="weather-label">
                         <span class="wind-arrow"
                             style="transform: rotate({{ weather.morning.wind_dir }}deg); font-size: {{ 18 + (weather.morning.wind * 0.8) }}px; color: {{ weather.morning.wind_color }};">⬇</span>
@@ -28,7 +31,10 @@
                 <div class="weather-item">
                     <div style="font-size: 14px; margin-bottom: 2px; color: white;">Afternoon</div>
                     <div class="weather-icon">{{ weather.afternoon.icon }}</div>
-                    <div class="weather-value">{{ weather.afternoon.temp }}°C</div>
+                    <div class="weather-value">
+                        <span class="temp-main">{{ weather.afternoon.temp }}°C</span>
+                        <span class="feels-like">{{ weather.afternoon.feels_like }}°C</span>
+                    </div>
                     <div class="weather-label">
                         <span class="wind-arrow"
                             style="transform: rotate({{ weather.afternoon.wind_dir }}deg); font-size: {{ 18 + (weather.afternoon.wind * 0.8) }}px; color: {{ weather.afternoon.wind_color }};">⬇</span>
@@ -38,7 +44,10 @@
                 <div class="weather-item">
                     <div style="font-size: 14px; margin-bottom: 2px; color: white;">Evening</div>
                     <div class="weather-icon">{{ weather.evening.icon }}</div>
-                    <div class="weather-value">{{ weather.evening.temp }}°C</div>
+                    <div class="weather-value">
+                        <span class="temp-main">{{ weather.evening.temp }}°C</span>
+                        <span class="feels-like">{{ weather.evening.feels_like }}°C</span>
+                    </div>
                     <div class="weather-label">
                         <span class="wind-arrow"
                             style="transform: rotate({{ weather.evening.wind_dir }}deg); font-size: {{ 18 + (weather.evening.wind * 0.8) }}px; color: {{ weather.evening.wind_color }};">⬇</span>
@@ -78,11 +87,12 @@
             {% if name != 'average_percent' %}
             <div class="stock-item">
                 <span class="stock-name">{{ name }}</span>
-                <span class="stock-price {{ data.color }}">
-                    {{ "%.2f"|format(data.price) }} : <span style="font-size: 1.2em; font-weight: bold;">{{
-                        "%.2f"|format(data.percent) }}%</span> | <span class="grey"
-                        style="font-size: 1.2em;">{{ "%.2f"|format(data.return_percent) }}%</span>
-                </span>
+                <span class="stock-price-value">{{ "%.2f"|format(data.price) }}</span>
+                <span class="stock-delimiter">:</span>
+                <span class="stock-change {{ data.color }}">{{ "%.2f"|format(data.percent) }}%</span>
+                <span class="stock-delimiter">|</span>
+                <span class="stock-return {{ 'green' if data.return_percent >= 0 else 'red' }}">{{
+                    "%.2f"|format(data.return_percent) }}%</span>
             </div>
             {% endif %}
             {% endfor %}

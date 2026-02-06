@@ -230,6 +230,22 @@ def keyword_style(keyword):
     bg, border, text = KEYWORD_COLOR_PALETTE[index]
     return f"--kw-bg: {bg}; --kw-border: {border}; --kw-text: {text};"
 
+def to_pascal_case(value):
+    """Convert a keyword into PascalCase for display."""
+    if not value:
+        return value
+    parts = re.findall(r"[A-Za-z0-9]+", value)
+    if not parts:
+        return value
+    formatted = []
+    for part in parts:
+        if part.isdigit():
+            formatted.append(part)
+            continue
+        lower = part.lower()
+        formatted.append(lower[0].upper() + lower[1:] if lower else "")
+    return "".join(formatted)
+
 
 def stylize_keywords(text):
     """Wrap leading [keywords] in styled span badges."""
@@ -242,7 +258,7 @@ def stylize_keywords(text):
     if not keywords:
         return text
     badges = "".join(
-        f'<span class="keyword-badge" style="{keyword_style(kw)}">{html.escape(kw)}</span>'
+        f'<span class="keyword-badge" style="{keyword_style(kw)}">{html.escape(to_pascal_case(kw))}</span>'
         for kw in keywords
     )
     rest = text[match.end() :].strip()
@@ -369,6 +385,7 @@ def fetch_weather():
         "longitude": lon,
         "hourly": [
             "temperature_2m",
+            "apparent_temperature",
             "precipitation_probability",
             "wind_speed_10m",
             "wind_direction_10m",
@@ -396,6 +413,7 @@ def fetch_weather():
 
         required_keys = [
             "temperature_2m",
+            "apparent_temperature",
             "precipitation_probability",
             "wind_speed_10m",
             "wind_direction_10m",
@@ -421,12 +439,14 @@ def fetch_weather():
 
         def get_segment_data(start_h, end_h):
             temps = slice_list(hourly.get("temperature_2m"), start_h, end_h)
+            feels = slice_list(hourly.get("apparent_temperature"), start_h, end_h)
             precips = slice_list(hourly.get("precipitation_probability"), start_h, end_h)
             winds = slice_list(hourly.get("wind_speed_10m"), start_h, end_h)
             wind_dirs = slice_list(hourly.get("wind_direction_10m"), start_h, end_h)
             codes = slice_list(hourly.get("weather_code"), start_h, end_h)
 
             avg_temp = safe_avg(temps)
+            avg_feels = safe_avg(feels)
             max_precip = safe_max(precips)
             max_wind = safe_max(winds)
             avg_wind_dir = safe_avg(wind_dirs)
@@ -434,6 +454,7 @@ def fetch_weather():
 
             return {
                 "temp": round(avg_temp) if avg_temp else 0,
+                "feels_like": round(avg_feels) if avg_feels else 0,
                 "precip": max_precip,
                 "wind": round(max_wind) if max_wind else 0,
                 "wind_dir": round(avg_wind_dir) if avg_wind_dir else 0,
@@ -460,7 +481,7 @@ def fetch_stocks():
     """Fetch stock data using yfinance."""
     logger.info("Fetching stocks...")
     tickers = {
-        "S&P 500": "SPY",
+        "S&P 500": "VUSA.AS",
         "Tesla": "TSLA",
         "Nvidia": "NVDA",
         "Bitcoin": "BTC-USD",
